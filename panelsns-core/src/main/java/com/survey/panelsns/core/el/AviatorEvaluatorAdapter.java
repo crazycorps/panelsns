@@ -1,4 +1,4 @@
-package com.panelsns.core.el;
+package com.survey.panelsns.core.el;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import com.googlecode.aviator.Expression;
 /**
  * 针对于表达式采用其本身的缓存策略。
  * 如果内存非常高的话，要具体审核下表达式的缓存策略
- * @author jiong
+ * @author corps
  *
  */
 public class AviatorEvaluatorAdapter extends AbstractEvaluator {

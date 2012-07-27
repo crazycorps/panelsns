@@ -7,9 +7,9 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.panelsns.core.el.AviatorEvaluatorAdapter;
-import com.panelsns.core.el.Evaluator;
-import com.panelsns.core.el.ExpressionConfig;
+import com.survey.panelsns.core.el.AviatorEvaluatorAdapter;
+import com.survey.panelsns.core.el.Evaluator;
+import com.survey.panelsns.core.el.ExpressionConfig;
 
 
 public class EvaluatorTest {

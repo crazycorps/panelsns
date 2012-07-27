@@ -1,4 +1,4 @@
-package com.panelsns.core.el;
+package com.survey.panelsns.core.el;
 
 import java.util.List;
 import java.util.Map;
