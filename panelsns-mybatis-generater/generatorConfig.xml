@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\Users\lenovo\.m2\repository\mysql\mysql-connector-java\5.1.0\mysql-connector-java-5.1.0-bin.jar" />
+	<context id="context1" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.1.200:3309/app_user_center" userId="root"
+			password="jian123" />
+			
+		<javaTypeResolver>  
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+        <javaModelGenerator targetPackage="com.jian.usercenter.model." targetProject="mybatis-mapper">
+			<property name="enableSubPackages" value="true" />  
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.jian.usercenter.sqlmap" targetProject="mybatis-mapper">
+			<property name="enableSubPackages" value="true" />  
+		</sqlMapGenerator>
+		<table  tableName="app">
+		</table>
+		<table  tableName="platform_type">
+		</table>
+		<table  tableName="app_user">
+		</table>
+	</context>
+</generatorConfiguration>
