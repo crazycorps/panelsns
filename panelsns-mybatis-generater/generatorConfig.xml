@@ -6,23 +6,27 @@
 		location="C:\Users\lenovo\.m2\repository\mysql\mysql-connector-java\5.1.0\mysql-connector-java-5.1.0-bin.jar" />
 	<context id="context1" targetRuntime="MyBatis3">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.1.200:3309/app_user_center" userId="root"
-			password="jian123" />
+			connectionURL="jdbc:mysql://127.0.0.1:3306/panelsns-naire" userId="root"
+			password="jiong" />
 			
 		<javaTypeResolver>  
             <property name="forceBigDecimals" value="false" />  
         </javaTypeResolver>  
-        <javaModelGenerator targetPackage="com.jian.usercenter.model." targetProject="mybatis-mapper">
+        <javaModelGenerator targetPackage="com.survey.panelsns.model.entity" targetProject="panelsns-mybatis-generater">
 			<property name="enableSubPackages" value="true" />  
 		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="com.jian.usercenter.sqlmap" targetProject="mybatis-mapper">
+		<sqlMapGenerator targetPackage="com.survey.panelsns.model.mapper.mybatis" targetProject="panelsns-mybatis-generater">
 			<property name="enableSubPackages" value="true" />  
 		</sqlMapGenerator>
-		<table  tableName="app">
-		</table>
-		<table  tableName="platform_type">
-		</table>
-		<table  tableName="app_user">
-		</table>
+		<table  tableName="logic"></table>
+		<table  tableName="logic_condition"></table>
+		<table  tableName="logic_unit"></table>
+		<table  tableName="project"></table>
+		<table  tableName="ques"></table>
+		<table  tableName="ques_naire"></table>
+		<table  tableName="ques_option"></table>
+		<table  tableName="survey"></table>
+		<table  tableName="templates"></table>
+		<table  tableName="users"></table>
 	</context>
 </generatorConfiguration>

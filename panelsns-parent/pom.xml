@@ -7,6 +7,14 @@
 	<packaging>pom</packaging>
 	<name>panelsns-parent</name>
 	<description>panelsns-parent</description>
+	
+	<modules>
+		<module>../panelsns-core</module>
+		<module>../panelsns-model</module>
+		<module>../panelsns-dao</module>
+		<module>../panelsns-service</module>
+		<module>../panelsns-web</module>
+	</modules>
 
 	<properties>
 		<projectName>panelsns-parent</projectName>
