@@ -1,0 +1,125 @@
+@charset "utf-8"; 
+
+fomr {
+	padding: 0;
+	margin: 0
+}
+
+.registerbox {
+	padding: 45px 0;
+	min-height: 450px
+}
+
+.registerbox a {
+	color: #009bfe;
+	text-decoration: underline
+}
+
+.registerbox a:hover {
+	color: #000;
+	text-decoration: underline
+}
+
+.registerbox h2 {
+	font-size: 24px;
+	padding: 0 10px 15px
+}
+
+.registlink {
+	float: right;
+	background: url(/images/register_right_bg.gif) no-repeat;
+	padding-left: 46px;
+	padding-top: 136px;
+	width: 194px;
+	min-height: 360px
+}
+
+button.view_report_btn {
+	width: 96px;
+	height: 33px;
+	line-height: 33px;
+	font-size: 14px;
+	color: #fff;
+	text-decoration: none;
+	margin: 7px 0;
+	background: url(/images/index/bgs.gif) no-repeat 0 -471px;
+	border: 0
+}
+
+button.view_report_btn:hover {
+	background: url(/images/index/bgs.gif) no-repeat 0 -438px
+}
+
+.inputxt {
+	padding: 7px;
+	font-size: 18px;
+	background: #fff;
+	border: 1px solid #c9c9c9;
+	width: 215px;
+	border-radius: 5px
+}
+
+.inputxt:hover {
+	background: #faffbd
+}
+
+.mailinput {
+	width: 370px
+}
+
+.code {
+	width: 105px
+}
+
+.validate-option {
+	padding-left: 7px;
+	color: #999
+}
+
+.validate-error {
+	padding-left: 7px;
+	color: #fe2617
+}
+
+.link_login {
+	background: #f5f8f9;
+	height: 39px;
+	line-height: 39px;
+	padding: 5px 15px
+}
+
+.link_login span {
+	padding: 0 10px
+}
+
+.link_login span.linkimg {
+	padding-top: 10px;
+	margin-top: 10px
+}
+
+.link_login a {
+	width: 85px;
+	height: 23px;
+	display: inline-block;
+	background: url(/images/index/bgs.gif) no-repeat 0 -531px;
+	margin-right: 10px
+}
+
+.link_login a.qqwb {
+	background: url(/images/index/bgs.gif) no-repeat 0 -554px
+}
+
+.link_login a.qqmysl {
+	background: url(/images/index/bgs.gif) no-repeat 0 -577px
+}
+
+.content {
+	width: 700px
+}
+
+.sub_content {
+	width: 900px;
+	margin: 30px auto 0;
+	padding: 0 20px 20px;
+	background: #fff
+}

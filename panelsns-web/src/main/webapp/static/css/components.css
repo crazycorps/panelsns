@@ -1,0 +1,544 @@
+@charset "UTF-8"; 
+
+#upgrade_vip {
+	margin: 0 auto;
+	background: #fefddd url(/images/tips_shadow_bg.gif) repeat-x left bottom;
+	padding: 0 0 15px;
+	min-width: 1024px;
+	color: #bca13f
+}
+
+.detail {
+	width: 1024px;
+	margin: 0 auto
+}
+
+#upgrade_vip .intro {
+	padding: 10px 15px
+}
+
+#upgrade_vip a.blue {
+	color: #019dd6;
+	text-decoration: underline;
+	padding: 0 8px
+}
+
+#upgrade_vip a.upgrade_btn {
+	color: #fb8c20;
+	font-weight: bold;
+	margin: 0 5px;
+	font-size: 14px;
+	text-decoration: underline
+}
+
+#upgrade_vip .intro a.upgrand_text_red {
+	color: #f00
+}
+
+#upgrade_vip .detail h4 {
+	font-size: 14px;
+	padding: 5px;
+	margin: 0
+}
+
+#upgrade_vip .detail h3 {
+	background: 0;
+	padding: 0;
+	font-size: 18px;
+	color: #000
+}
+
+#upgrade_vip .detail table {
+	width: 100%;
+	line-height: 20px
+}
+
+#upgrade_vip .detail span {
+	color: #f00;
+	padding: 0 7px
+}
+
+#upgrade_vip .detail ul {
+	list-style: none;
+	padding: 0 0 0 8px;
+	margin: 0
+}
+
+#upgrade_vip .detail ul li {
+	background: url(/images/icon_ok.gif) no-repeat;
+	padding: 0 0 0 20px;
+	margin: 3px 0
+}
+
+#upgrade_vip button.show,#upgrade_vip button.close {
+	text-decoration: underline;
+	color: #7e7e7e;
+	background: 0;
+	border: 0
+}
+
+#upgrade_vip button.show:hover,#upgrade_vip button.close:hover {
+	color: #f00;
+	text-decoration: underline
+}
+
+.upgrade_dialog {
+	border-radius: 3px;
+	background: #fffeec;
+	padding: 8px;
+	line-height: 25px;
+	width: 520px
+}
+
+.upgrade_dialog ul {
+	padding-left: 15px
+}
+
+.upgrade_dialog ul li {
+	background: url(/images/icon_ok.gif) no-repeat;
+	padding: 0 0 0 20px
+}
+
+.upgrade_dialog h4 {
+	font-size: 14px;
+	padding: 0;
+	margin: 0
+}
+
+.upgrade_dialog p.warming {
+	font-size: 18px;
+	font-weight: bold;
+	color: #f00;
+	padding: 10px 0
+}
+
+.upgrade_dialog p.intro {
+	font-size: 14px
+}
+
+.top_vip {
+	line-height: 42px;
+	background: url(/images/topvip_bg.gif) repeat-x
+}
+
+.title_vip {
+	color: #727272;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px 10px;
+	margin: 0
+}
+
+span.tip_style {
+	font-size: 12px;
+	font-weight: normal;
+	background: url(/images/top_vip_tips.gif) no-repeat left 0;
+	height: 42px;
+	padding-left: 24px;
+	display: inline-block;
+	margin-left: 8px;
+	position: relative;
+	border-right: 3px solid #535353;
+	border-radius: 3px;
+	padding-right: 15px
+}
+
+span.tip_style span {
+	height: 42px;
+	padding: 0 5px
+}
+
+span.tip_style a.close_tips {
+	position: absolute;
+	right: -10px;
+	top: -5px
+}
+
+.tips {
+	background: #fffedf;
+	padding: 10px
+}
+
+.tips a,.tip_style a {
+	color: #009dd9;
+	padding-left: 5px;
+	text-decoration: underline
+}
+
+.tips a:hover,.tip_style a:hover {
+	color: #f00;
+	text-decoration: none
+}
+
+h3.user_name {
+	font-size: 22px
+}
+
+h3.user_name span.vip {
+	margin-left: 5px;
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: url(/images/icon_vip.gif) no-repeat
+}
+
+h3.user_name span.free {
+	margin-left: 5px;
+	background: url(/images/icon_novip.gif) no-repeat;
+	width: 18px;
+	height: 18px;
+	display: inline-block
+}
+
+.account_info {
+	padding: 15px;
+	background: #f2f9fd;
+	border: 1px solid #89bde0;
+	margin: 15px auto 10px
+}
+
+.account_info h4 {
+	font-size: 15px;
+	display: inline;
+	margin-right: 15px
+}
+
+.account_info a.link {
+	color: #019dd6;
+	text-decoration: underline
+}
+
+.gallery_status {
+	padding: 10px 15px 20px;
+	border-bottom: 1px solid #d5d5d5
+}
+
+.gallery_status .font_size {
+	font-size: 20px;
+	padding: 0 8px
+}
+
+.gallery_status h4 {
+	font-size: 18px
+}
+
+.gallery_status h4 span {
+	color: #999;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0 8px
+}
+
+.gallery_status a.link {
+	color: #019dd6;
+	text-decoration: underline
+}
+
+.expire_alert {
+	text-align: center;
+	padding: 10px 20px;
+	background: #fffeec;
+	border-radius: 3px;
+	line-height: 25px
+}
+
+.expire_alert p.font_size {
+	font-size: 23px;
+	font-family: '微软雅黑';
+	margin-bottom: 10px
+}
+
+.expire_alert span.font_color {
+	font-size: 34px;
+	color: #f00;
+	padding: 0 7px
+}
+
+a.pay_btn {
+	width: 100px;
+	display: block;
+	background-color: #fb8c20;
+	background-image: none;
+	border: 1px solid #c75e03;
+	border-radius: 16px 16px 16px 16px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	margin: 10px auto
+}
+
+a:hover.pay_btn {
+	color: #fff;
+	background-color: #45c6f0;
+	border: 1px solid #0694c2
+}
+
+a.upgrade_btn {
+	color: #fb8c20;
+	font-weight: bold;
+	margin: 0 5px;
+	font-size: 14px;
+	text-decoration: underline
+}
+
+.pay_dialog {
+	border-radius: 3px;
+	background: #fffeec;
+	padding: 8px;
+	line-height: 25px;
+	width: 280px
+}
+
+.pay_dialog p {
+	margin: 7px 4px;
+	color: #000
+}
+
+.pay_dialog p.action {
+	font-size: 14px;
+	color: #f00;
+	font-weight: bold
+}
+
+.pay_dialog a.pay_btn {
+	font-size: 12px;
+	padding: 3px;
+	display: inline-block
+}
+
+.invoice {
+	border-radius: 3px;
+	background: #fffeec;
+	padding: 8px;
+	line-height: 25px;
+	width: auto
+}
+
+.invoice span.title {
+	color: #f00;
+	font-size: 14px
+}
+
+.invoice .input_styele {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 7px;
+	font-size: 14px
+}
+
+.bank {
+	padding: 15px
+}
+
+.bank p {
+	text-indent: 2em;
+	font-size: 14px
+}
+
+.bank .bank_style_1 {
+	border: 1px solid #e5e5e5;
+	margin: 10px auto
+}
+
+.bank table {
+	font-size: 14px
+}
+
+.bank table span {
+	color: #f00;
+	font-size: 14px
+}
+
+.input_styele {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 7px;
+	font-size: 14px
+}
+
+.bank_remit {
+	font-size: 32px;
+	font-weight: bold
+}
+
+span.red {
+	color: #F00
+}
+
+.user_status {
+	padding: 20px 0;
+	margin: 10px 0;
+	height: 90px;
+	font-size: 14px;
+	text-align: center
+}
+
+.user_status span.day {
+	font-size: 20px
+}
+
+.user_status span.money {
+	font-size: 20px
+}
+
+.user_status .role {
+	float: left;
+	height: 100px;
+	border: 1px solid #c6c6c6;
+	background: #f9f9f9;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	width: 63%;
+	padding: 5px
+}
+
+.user_status .role p.protext {
+	font-size: 12px;
+	color: #666
+}
+
+.user_status .wallet {
+	float: right;
+	width: 250px;
+	height: 100px;
+	border: 1px solid #c6c6c6;
+	background: #f9f9f9;
+	text-align: left;
+	padding: 5px;
+	width: 33%
+}
+
+.user_status p {
+	text-align: center;
+	margin: 10px 0
+}
+
+.user_status span {
+	margin: 0 10px
+}
+
+.user_status a.redbutton {
+	margin: 0 10px
+}
+
+.user_status a {
+	font-size: 12px;
+	color: #019dd6;
+	text-decoration: underline;
+	margin: 0 8px
+}
+
+.user_status a:hover {
+	text-decoration: none;
+	color: red
+}
+
+a.redbutton {
+	display: inline-block;
+	height: 22px;
+	border: 1px solid #bb0500;
+	color: #FFF;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	background: url(/images/button_red.gif) repeat-x;
+	padding: 5px 10px;
+	line-height: 18px;
+	border-radius: 5px;
+	-moz-border-radius: 5px
+}
+
+a.redbutton:hover {
+	background: url(/images/button_orange.gif) repeat-x;
+	border-color: #d68d1f;
+	color: #fff
+}
+
+a.orangebutton {
+	display: inline-block;
+	height: 22px;
+	border: 1px solid #d68d1f;
+	color: #FFF;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	background: url(/images/button_orange.gif) repeat-x;
+	padding: 5px 10px;
+	line-height: 18px;
+	border-radius: 5px;
+	-moz-border-radius: 5px
+}
+
+a.orangebutton:hover {
+	background: url(/images/button_red.gif) repeat-x;
+	border-color: #d6291f;
+	color: #fff
+}
+
+a.bluebutton {
+	display: block;
+	height: 22px;
+	border: 1px solid #41b6dc;
+	color: #FFF;
+	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	background: url(/images/button_blue.gif) repeat-x;
+	padding: 5px 10px;
+	line-height: 18px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 0 auto;
+	width: 100px
+}
+
+a.bluebutton:hover {
+	background: url(/images/button_green.gif) repeat-x;
+	border-color: #93be0f;
+	text-decoration: none
+}
+
+div.download {
+	width: 420px
+}
+
+.download table {
+	font-size: 14px;
+	line-height: 28px;
+	background: #FFF
+}
+
+p.downtextstyle {
+	border: 1px solid #ccc;
+	width: 400px;
+	line-height: 18px;
+	background: #f0f0f0
+}
+
+.download .button {
+	padding: 20px 0
+}
+
+.download span.red {
+	color: #F00
+}
+
+a#verify_email {
+	color: #019dd6;
+	font-size: 12px;
+	font-weight: none
+}
+
+a#verify_email:hover {
+	color: #F00
+}

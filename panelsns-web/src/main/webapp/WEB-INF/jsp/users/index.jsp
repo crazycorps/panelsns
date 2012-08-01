@@ -4,19 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>panelsns</title>
-<style type="text/css">
-<!--
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	background-color: #1D3647;
-}
--->
-</style>
 </head>
 <body>
-panelsns for survey
+panelsns for survey whin center
 </body>
 </html>

@@ -4,7 +4,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>panelsns</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css" type="text/css" />
 </head>
 <body>
 panelsns for survey

@@ -1,0 +1,634 @@
+@charset "utf-8"; 
+
+.title_vip {
+	width: 980px;
+	margin: 0 auto
+}
+
+.surveysinfo {
+	width: 980px;
+	margin: 0 auto;
+	padding: 10px 0
+}
+
+.actions {
+	width: 964px;
+	margin: 0 auto;
+	clear: both;
+	background: #eee;
+	padding: 8px
+}
+
+.main_mysurvey {
+	width: 980px;
+	margin: 0 auto;
+	height: 400px
+}
+
+.surveysinfo span {
+	font-size: 18px;
+	padding: 0 5px
+}
+
+a.greybutton {
+	display: inline-block;
+	padding: 3px 5px;
+	margin: 0 0 0 5px;
+	background: url(/images/u/survey/button_bg.gif) repeat-x;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	-moz-border-radius: 5px
+}
+
+a.greybutton:hover {
+	border: 1px solid #0089c9;
+	color: #0089c9
+}
+
+.function_url a.greybutton {
+	font-size: 12px
+}
+
+a.creatnew_btn {
+	display: inline-block;
+	height: 18px;
+	border: 1px solid #93be0f;
+	color: #FFF;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	background: url(/images/button_green.gif) repeat-x;
+	padding: 5px 10px;
+	line-height: 18px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	width: 100px;
+	margin-left: 20px
+}
+
+a.creatnew_btn:hover {
+	background: url(/images/button_blue.gif) repeat-x;
+	border-color: #41b6dc
+}
+
+.header_inf .wait_inf {
+	position: absolute;
+	left: 40%;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	background: #FC0
+}
+
+.search {
+	float: right;
+	border: 1px solid #c1c1c1
+}
+
+#key {
+	width: 250px;
+	height: 25px;
+	border: 0;
+	padding: 0
+}
+
+#searchaction {
+	height: 25px;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #c1c1c1;
+	background: url(/images/u/survey/search_butt_bg.jpg);
+	cursor: pointer;
+	padding: 0 5px
+}
+
+#searchaction:hover {
+	background: url(/images/u/survey/search_butt_bg_02.jpg)
+}
+
+.actions div.start_time {
+	width: 72px
+}
+
+.actions div.titl {
+	width: 62px
+}
+
+.actions div.start_time,.actions div.titl {
+	display: inline;
+	height: 24px;
+	padding: 0 10px;
+	margin: 0 0 0 10px;
+	background: url(/images/u/survey/button_bg.gif) repeat-x;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	-moz-border-radius: 5px
+}
+
+.actions div:hover {
+	border: 1px solid #0089c9
+}
+
+.actions a {
+	line-height: 23px;
+	padding: 0 15px 0 0
+}
+
+.actions .down {
+	background: url(/images/u/survey/sort_unsel.gif) no-repeat bottom right
+}
+
+.actions .up {
+	background: url(/images/u/survey/sort_unsel.gif) no-repeat top right
+}
+
+.actions .sort_seling {
+	background-image: url(/images/u/survey/sort_seling.gif)
+}
+
+.main_mysurvey {
+	position: relative
+}
+
+.main_mysurvey .left {
+	width: 640px;
+	float: left
+}
+
+.right_block {
+	width: 320px;
+	float: right;
+	overflow: hidden
+}
+
+.main_mysurvey .right {
+	padding: 10px;
+	background: url(/images/u/survey/rig_bg.jpg) repeat-x left bottom;
+	height: 688px
+}
+
+.search_result {
+	font-size: 14px;
+	padding: 11px 0 0;
+	line-height: 25px
+}
+
+.search_result span {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 0 0 5px
+}
+
+.search_result a {
+	color: #008dd8;
+	text-decoration: underline;
+	font-size: 12px;
+	padding: 0 0 0 5px
+}
+
+.my_survey,.my_survey h1 {
+	margin: 0
+}
+
+.my_survey {
+	min-height: 200px;
+	height: auto !important;
+	height: 200px;
+	overflow: visible
+}
+
+.my_survey h1 {
+	line-height: 18px;
+	height: 20px;
+	overflow: hidden
+}
+
+.my_survey dd h1 a {
+	font-size: 15px
+}
+
+.my_survey dd h1 a:hover {
+	color: #333;
+	text-decoration: underline
+}
+
+.my_survey .survey_inf {
+	padding: 10px 0 0
+}
+
+.my_survey .survey_url {
+	color: #8a8a8a;
+	padding: 3px 0 0
+}
+
+.my_survey .survey_url a span.print {
+	margin-left: 15px;
+	padding-left: 20px;
+	background: url(/images/icon_print.gif) no-repeat 0 center;
+	color: #00acde
+}
+
+.my_survey .survey_url a:hover span.print {
+	background: url(/images/icon_print_b.gif) no-repeat 0 center;
+	color: #666;
+	text-decoration: underline
+}
+
+.my_survey .function_url {
+	padding: 7px 0 0;
+	overflow: hidden
+}
+
+.my_survey .function_url span.actions {
+	margin-left: 15px
+}
+
+.my_survey .function_url a span {
+	padding-left: 20px
+}
+
+.my_survey .function_url a span.download {
+	background: url(/images/u/survey/icon_download_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.download {
+	background: url(/images/u/survey/icon_download.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.edit {
+	background: url(/images/u/survey/icon_edit_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.setup {
+	background: url(/images/u/survey/icon_setup_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.share {
+	background: url(/images/u/survey/icon_share_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.analytics {
+	background: url(/images/u/survey/icon_analytics_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.del {
+	background: url(/images/u/survey/icon_del_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a span.copy {
+	background: url(/images/u/survey/icon_copy_g.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.edit {
+	background: url(/images/u/survey/icon_edit.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.setup {
+	background: url(/images/u/survey/icon_setup.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.share {
+	background: url(/images/u/survey/icon_share.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.analytics {
+	background: url(/images/u/survey/icon_analytics.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.del {
+	background: url(/images/u/survey/icon_del.gif) no-repeat 0 center
+}
+
+.my_survey .function_url a:hover span.copy {
+	background: url(/images/u/survey/icon_copy.gif) no-repeat 0 center
+}
+
+.my_survey dt {
+	color: #969696;
+	line-height: 35px;
+	border-bottom: 1px solid #ededed;
+	margin: 0;
+	height: 35px;
+	font-weight: normal;
+	padding: 0 10px
+}
+
+.my_survey td {
+	color: #ededed;
+	margin: 10px;
+	height: 20px;
+	line-height: 37px
+}
+
+.my_survey dd {
+	border-bottom: 1px solid #ededed;
+	margin: 5px 0;
+	font-weight: normal;
+	height: 90px;
+	position: relative
+}
+
+.my_survey dd .jt {
+	display: none
+}
+
+.my_survey .seling {
+	border-left: none;
+	background: #f1f9ff
+}
+
+.my_survey .seling .jt {
+	width: 9px;
+	height: 72px;
+	background: url(/images/u/survey/jt.gif);
+	position: absolute;
+	right: -9px;
+	top: 9px;
+	display: block;
+	z-index: 10
+}
+
+.my_survey dd:hover {
+	background: #f7f7f7
+}
+
+.my_survey .seling:hover {
+	background: #f1f9ff
+}
+
+.my_survey dd .status {
+	width: 60px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 12px 0 0 10px
+}
+
+.my_survey dd .status input {
+	margin: 0;
+	float: left
+}
+
+.my_survey dd .status a {
+	width: 13px;
+	height: 13px;
+	display: block;
+	background: url(/images/u/survey/running_stop_look_bg.gif);
+	overflow: hidden;
+	float: left;
+	margin: 0 0 0 9px !important;
+	margin: 3px 0 0 6px
+}
+
+.my_survey dd .status .closed {
+	background-position: 0 -13px
+}
+
+.my_survey dd .status .looking {
+	background-position: 0 bottom
+}
+
+.my_survey dd .status .unlook {
+	background-position: 0 -26px;
+	display: none
+}
+
+.my_survey dd .survey_inf {
+	margin: 0 0 0 60px
+}
+
+.my_survey dd .data {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: center;
+	line-height: 25px;
+	padding: 0 10px 0 0;
+	z-index: 10px;
+	color: #939393
+}
+
+.my_survey dd .data span {
+	font-size: 22px;
+	font-weight: bold;
+	color: #939393
+}
+
+.main_mysurvey .page {
+	border-bottom: 1px solid #ededed;
+	padding: 5px 10px;
+	text-align: right;
+	margin-bottom: 10px
+}
+
+.main_mysurvey .page span {
+	margin: 0 5px
+}
+
+.main_mysurvey .page input {
+	border: 1px solid #cfcfcf;
+	padding: 3px
+}
+
+.main_mysurvey .right h1 {
+	margin: 0 0 15px;
+	font-size: 14px;
+	padding: 10px 0
+}
+
+.main_mysurvey .right .survey_url {
+	margin: 0 0 10px
+}
+
+.main_mysurvey .right .time {
+	color: #939393;
+	margin: 0 0 10px
+}
+
+.main_mysurvey .right .time span {
+	display: block
+}
+
+.main_mysurvey .right .time font {
+	font-size: 12px
+}
+
+.main_mysurvey .right .start {
+	padding: 0 0 5px
+}
+
+.main_mysurvey .datashow {
+	background-color: #f9f9f9;
+	height: 330px;
+	padding: 10px
+}
+
+.main_mysurvey .right .more_inf {
+	position: relative;
+	width: 100%;
+	margin-bottom: 10px
+}
+
+.more_inf .b_r {
+	position: absolute;
+	width: 63px;
+	height: 35px;
+	background: url(/images/u/survey/b_r_data.jpg);
+	right: -25px;
+	top: 80px
+}
+
+.main_mysurvey .right .more_inf .data {
+	padding: 10px 0
+}
+
+.main_mysurvey .right .data {
+	margin: 0 0 10px
+}
+
+.main_mysurvey .right .data font {
+	display: inline-block;
+	width: 60px;
+	font-size: 12px;
+	text-align: right
+}
+
+.main_mysurvey .right .data span {
+	padding: 0 0 0 10px;
+	font-size: 18px;
+	font-weight: bold
+}
+
+.main_mysurvey .right .js_pic {
+	margin: 0 0 10px
+}
+
+.main_mysurvey .right .layout_input {
+	height: 24px;
+	border: 0;
+	background: url(/images/u/survey/butt_bg_x.jpg);
+	border-left: 1px solid #cfcfcf;
+	border-right: 1px solid #cfcfcf;
+	float: right;
+	margin: 0 20px 30px
+}
+
+.main_mysurvey .right .layout_input:hover {
+	background: url(/images/u/survey/butt_bg_x_02.jpg);
+	border-left: 1px solid #a3c398;
+	border-right: 1px solid #a3c398
+}
+
+.layout_input input {
+	height: 24px;
+	padding: 0 10px;
+	_padding: 0;
+	*padding: 0;
+	border: 0;
+	background: 0;
+	font-size: 12px;
+	cursor: pointer;
+	width: 100px;
+	_width: 100px;
+	*width: 90px
+}
+
+.right .lab {
+	overflow: hidden;
+	clear: both;
+	margin: 0 0 10px
+}
+
+.right .lab td {
+	vertical-align: top
+}
+
+.right .lab .th_td {
+	width: 40px
+}
+
+.right .lab a {
+	color: #00acde;
+	text-decoration: none;
+	margin: 0 0 0 5px;
+	display: block;
+	float: left
+}
+
+.right .lab a:hover {
+	text-decoration: underline
+}
+
+.running_status {
+	overflow: hidden;
+	width: 100%;
+	margin: 15px 0
+}
+
+.running_status .running {
+	padding: 0 0 0 18px;
+	background: url(/images/u/survey/running_bg.gif) no-repeat
+}
+
+.running_status .closed {
+	padding: 0 0 0 18px;
+	background: url(/images/u/survey/closed_bg.gif) no-repeat
+}
+
+.privacy_status {
+	margin: 0 0 10px
+}
+
+.privacy_status .opening {
+	color: #03ab1c
+}
+
+.privacy_status .sh {
+	color: #f3940c
+}
+
+.privacy_status a {
+	color: #00acde;
+	text-decoration: none
+}
+
+.privacy_status a:hover {
+	text-decoration: underline
+}
+
+.oper_bottom {
+	margin-bottom: 30px
+}
+
+#tagtable td {
+	font-size: 14px;
+	padding: 5px 0 0
+}
+
+#tagtable td span {
+	display: inline-block;
+	padding: 5px;
+	font-size: 12px;
+	border: 1px dashed #ddd;
+	background: #dbf3fa
+}
+
+#tagtable td span:hover {
+	background: #ecf5d1
+}
+
+#systags {
+	color: #999;
+	padding: 5px 0 0
+}
+
+#mytag {
+	border: 1px solid #ccc
+}
+
+.tickLabel {
+	white-space: nowrap
+}
