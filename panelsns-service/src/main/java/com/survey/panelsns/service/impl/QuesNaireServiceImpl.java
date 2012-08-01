@@ -7,18 +7,22 @@ import com.survey.dao.GenericDao;
 import com.survey.panelsns.dao.QuesNaireDao;
 import com.survey.panelsns.model.entity.QuesNaire;
 import com.survey.panelsns.service.QuesNaireService;
-import com.survey.service.impl.GenericServiceImpl;
+import com.survey.panelsns.service.vo.QuesNaireVO;
+import com.survey.service.AbstractGenericServiceImpl;
 
 @Service
-public class QuesNaireServiceImpl extends GenericServiceImpl<QuesNaire, Long>
+public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO,QuesNaire, Long>
 		implements QuesNaireService {
 
 	@Autowired
 	private QuesNaireDao quesNaireDao;
 
-	@Override
-	public GenericDao getGenricDao() {
+	public GenericDao<QuesNaire, Long> getGenricDao() {
 		return this.quesNaireDao;
+	}
+
+	public Class<QuesNaireVO> getClassR() {
+		return QuesNaireVO.class;
 	}
 
 }
