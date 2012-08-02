@@ -6,8 +6,4 @@ import com.survey.service.vo.AbstractObjectVO;
 @SuppressWarnings("serial")
 public class QuesVO extends AbstractObjectVO<Ques> {
 
-	public QuesVO(Ques entity) {
-		super(entity);
-	}
-
 }

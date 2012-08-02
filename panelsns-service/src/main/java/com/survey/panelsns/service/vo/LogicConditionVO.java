@@ -6,8 +6,5 @@ import com.survey.service.vo.AbstractObjectVO;
 @SuppressWarnings("serial")
 public class LogicConditionVO extends AbstractObjectVO<LogicCondition> {
 
-	public LogicConditionVO(LogicCondition entity) {
-		super(entity);
-	}
 
 }

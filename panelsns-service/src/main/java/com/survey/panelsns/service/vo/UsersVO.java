@@ -6,8 +6,4 @@ import com.survey.service.vo.AbstractObjectVO;
 @SuppressWarnings("serial")
 public class UsersVO extends AbstractObjectVO<Users> {
 
-	public UsersVO(Users entity) {
-		super(entity);
-	}
-
 }

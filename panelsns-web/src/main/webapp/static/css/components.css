@@ -542,3 +542,14 @@ a#verify_email {
 a#verify_email:hover {
 	color: #F00
 }
+
+.pager_tag .pager_jump input.no{
+	width:20px;
+	height:16px;
+	margin:0px 2px 0px 0px;
+}
+.pager_tag .pager_jump input.btn{
+	width:35px;
+	height:25px;
+	margin:0px 0px 0px 2px;
+}
