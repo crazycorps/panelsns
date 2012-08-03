@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/taglibs.jsp"%>
+<%@include file="/WEB-INF/jsp/common/taglibs.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,25 +20,7 @@
 </head>
 
 <body>
- <div id="header">
-  <div class="header">
-   <div class="logo">
-    <a href="/"><img alt="" src="/images/logo_diaochapai.gif" /></a>
-   </div>
-   <ul class="menu">
-    <li><a href="/my/survey/generator">新建调查</a></li>
-    <li><a href="/my/survey">我的调查</a></li>
-    <li><a href="/my/profile">welcomejiong@163.com<span class="free"></span> <span class="ico"></span></a>
-     <div class="more">
-      <a href="/my/profile" class="icon_1">我的账户</a> <a href="/my/wallet" class="icon_3">消费记录</a> <a href="/my/gallery"
-       class="icon_4">我的图库</a>
-     </div></li>
-    <li><a href="/upgrade" class="upgrade_li_a_style">升级专业版</a></li>
-    <li><a href="/logout">退出</a></li>
-    <li><a href="http://support.diaochapai.com/" target="_blank">帮助</a></li>
-   </ul>
-  </div>
- </div>
+ <%@include file="/WEB-INF/jsp/common/header.jsp"%>
  <div class="top">
   <div class="title">我的调查表</div>
  </div>
@@ -149,7 +131,7 @@
        <option value="农/林/牧/渔">农/林/牧/渔</option>
        <option value="多元化业务集团公司">多元化业务集团公司</option>
        <option value="其他行业">其他行业</option>
-     </select> <span class="red">*</span></td>
+      </select> <span class="red">*</span></td>
     </tr>
     <tr>
      <td align="right">工作单位：</td>
@@ -173,7 +155,7 @@
        <option value="在校学生">在校学生</option>
        <option value="务农">务农</option>
        <option value="待业">待业</option>
-     </select> <span class="red">*</span></td>
+      </select> <span class="red">*</span></td>
     </tr>
     <tr>
      <td align="right">联系邮箱：</td>
@@ -191,6 +173,9 @@
    <form id="searchForm" action="/u/survey" method="post">
     <input type="text" id="key" name="key" value="" size="30" />
     <input type="hidden" id="toPage" name="toPage" value="1" />
+    <input type="hidden" id="orderCol" name="orderCol" />
+    <input type="hidden" id="orderType" name="orderType" />
+    <input type="hidden" id="status" name="status" value="0" />
     <input id="searchaction" type="submit" value="搜索调查表" />
    </form>
   </div>
@@ -206,26 +191,62 @@
    <option value="close">关闭调查</option>
    <option value="run">开启调查</option>
    <option value="delete">删除</option>
-  </select> 筛选： <select name="surveyStatus">
+  </select>
+  筛选：
+  <select name="surveyStatus">
    <option value="/my/survey">全部</option>
    <option value="" disabled>选择状态</option>
    <optgroup>
-    <option value="/my/survey?status=run">正在运行</option>
-    <option value="/my/survey?status=close">已经结束</option>
-    <option value="/my/survey?status=audit">正在审核</option>
-    <option value="/my/survey?status=public">已经公开</option>
-    <option value="/my/survey?status=unpublic">尚未公开</option>
+    <c:forEach items="${surveyStatus}" var="stat">
+     <option value="${stat.index}" ${selectedStatus==stat.index?'selected':''}>${stat.displayName}</option>
+    </c:forEach>
    </optgroup>
    <option value="" disabled>选择标签</option>
    <optgroup name="surveyTag">
    </optgroup>
-  </select> 排序:
-  <div class="start_time">
-   <a class="down" href="?ordertype=create_time&order=desc">创建时间</a>
-  </div>
-  <div class="titl">
-   <a class="up" href="?ordertype=title&order=asc">标题</a>
-  </div>
+  </select>
+  排序:
+  <c:choose>
+   <c:when test="${orderCol eq 'create_date'}">
+    <div class="order_col create_date" orderCol="create_date" orderType="${orderType eq 'asc' ? 'desc':'asc'}">
+     <c:choose>
+      <c:when test="${orderType eq 'asc'}">
+       <a class="sort_seling down" href="javascript:return false;">创建时间</a>
+      </c:when>
+      <c:otherwise>
+       <a class="sort_seling up" href="javascript:return false;">创建时间</a>
+      </c:otherwise>
+     </c:choose>
+    </div>
+    <div class="order_col name" orderCol="name" orderType="desc">
+     <a class="up" href="javascript:return false;">标题</a>
+    </div>
+   </c:when>
+   <c:when test="${orderCol eq 'name'}">
+    <div class="order_col create_date" orderCol="create_date" orderType="asc">
+     <a class="down" href="javascript:return false;">创建时间</a>
+    </div>
+    <div class="order_col name" orderCol="name" orderType="${orderType eq 'asc' ? 'desc':'asc'}">
+     <c:choose>
+      <c:when test="${orderType eq 'asc'}">
+       <a class="sort_seling down" href="javascript:return false;">标题</a>
+      </c:when>
+      <c:otherwise>
+       <a class="sort_seling up" href="javascript:return false;">标题</a>
+      </c:otherwise>
+     </c:choose>
+    </div>
+   </c:when>
+   <c:otherwise>
+    <div class="order_col create_date" orderCol="create_date" orderType="asc">
+     <a class="down" href="javascript:return false;">创建时间</a>
+    </div>
+    <div class="order_col name" orderCol="name" orderType="desc">
+     <a class="up" href="javascript:return false;">标题</a>
+    </div>
+   </c:otherwise>
+  </c:choose>
+
  </div>
  <div class="main_mysurvey">
   <div class="left">
@@ -235,44 +256,45 @@
    </div>
    <dl class="my_survey">
     <c:if test="${!empty paginationResult.results}">
-     <c:set var="surveyDayMap" value="${paginationResult.results[0]}"></c:set>
-     <c:forEach var="surveyDay" items="${surveyDayMap}">
-      <dt>创建时间： ${surveyDay.key}</dt>
-      <c:forEach var="surveyvo" items="${surveyDay.value}">
-       <dd id="survey_${surveyvo.entity.id}" values="d944a519-b4fa-40d5-aedf-15d1f31f8956">
-        <div class="jt"></div>
-        <div class="status">
-         <input type="checkbox" name="run" value="d944a519-b4fa-40d5-aedf-15d1f31f8956" />
-         <a class="running" href="javascript:void(0);" command="close" values="d944a519-b4fa-40d5-aedf-15d1f31f8956"
-          title="正在运行,点击关闭调查表"></a>
-        </div>
-        <div class="survey_inf">
-         <h1>
-          <a target="_blank" title="${survey.name}" href="/survey624951">${surveyvo.entity.name}</a>
-         </h1>
-         <div class="survey_url">
-          调查表地址：http://www.panelsns.com/survey/${surveyvo.entity.id} <a href="javascript:void(0);" class="need_upgrade"
-           title="生成调查表的可打印pdf文件"><span class="print">打印(PDF)问卷</span></a>
+     <c:forEach var="surveyDayMap" items="${paginationResult.results}">
+      <c:forEach var="surveyDay" items="${surveyDayMap}">
+       <dt>创建时间： ${surveyDay.key}</dt>
+       <c:forEach var="surveyvo" items="${surveyDay.value}">
+        <dd id="survey_${surveyvo.entity.id}" surveyId="${surveyvo.entity.id}" surveyName="${surveyvo.entity.name}">
+         <div class="jt"></div>
+         <div class="status">
+          <input type="checkbox" name="run" value="d944a519-b4fa-40d5-aedf-15d1f31f8956" />
+          <a class="running" href="javascript:void(0);" command="close" values="d944a519-b4fa-40d5-aedf-15d1f31f8956"
+           title="正在运行,点击关闭调查表"></a>
          </div>
-         <div class="function_url">
-          <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956" class="greybutton" title="编辑调查表内容和外观"><span
-           class="edit">编辑</span></a> <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/setup" class="greybutton"
-           title="设置调查表填写规则"><span class="setup">设置</span></a> <a
-           href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/share" class="greybutton" title="获取调查表地址和嵌入代码并分享到微博"><span
-           class="share">分享</span></a> <a href="/report/d944a519-b4fa-40d5-aedf-15d1f31f8956?init=1" class="greybutton"
-           title="实时查看调查表结果统计"><span class="analytics">数据统计</span></a> <a href="javascript:void(0);"
-           class="greybutton download need_upgrade" data-sn="d944a519-b4fa-40d5-aedf-15d1f31f8956"
-           title="自助下载所有原始数据，并可以导入Excel或SPSS进行深入分析"><span class="download">下载数据</span></a> <span class="function">
-           <a href="javascript:void(0);" class="greybutton delete" data-sn="d944a519-b4fa-40d5-aedf-15d1f31f8956"
-           title="删除调查表"><span class="del">删除</span></a> <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/copy"
-           class="greybutton" title="复制调查表"><span class="copy">复制</span></a>
-          </span>
+         <div class="survey_inf">
+          <h1>
+           <a target="_blank" title="${survey.entity.name}" href="/survey624951">${surveyvo.entity.name}</a>
+          </h1>
+          <div class="survey_url">
+           调查表地址：http://www.panelsns.com/survey/${surveyvo.entity.id} <a href="javascript:void(0);" class="need_upgrade"
+            title="生成调查表的可打印pdf文件"><span class="print">打印(PDF)问卷</span></a>
+          </div>
+          <div class="function_url">
+           <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956" class="greybutton" title="编辑调查表内容和外观"><span
+            class="edit">编辑</span></a> <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/setup" class="greybutton"
+            title="设置调查表填写规则"><span class="setup">设置</span></a> <a
+            href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/share" class="greybutton" title="获取调查表地址和嵌入代码并分享到微博"><span
+            class="share">分享</span></a> <a href="/report/d944a519-b4fa-40d5-aedf-15d1f31f8956?init=1" class="greybutton"
+            title="实时查看调查表结果统计"><span class="analytics">数据统计</span></a> <a href="javascript:void(0);"
+            class="greybutton download need_upgrade" data-sn="d944a519-b4fa-40d5-aedf-15d1f31f8956"
+            title="自助下载所有原始数据，并可以导入Excel或SPSS进行深入分析"><span class="download">下载数据</span></a> <span class="function">
+            <a href="javascript:void(0);" class="greybutton delete" data-sn="d944a519-b4fa-40d5-aedf-15d1f31f8956"
+            title="删除调查表"><span class="del">删除</span></a> <a href="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/copy"
+            class="greybutton" title="复制调查表"><span class="copy">复制</span></a>
+           </span>
+          </div>
          </div>
-        </div>
-        <div class="data">
-         数据<br /> <span>0</span>
-        </div>
-       </dd>
+         <div class="data">
+          数据<br /> <span>0</span>
+         </div>
+        </dd>
+       </c:forEach>
       </c:forEach>
      </c:forEach>
     </c:if>
@@ -285,7 +307,7 @@
   <div class="right_block">
    <div class="right" style="" id="r_d944a519-b4fa-40d5-aedf-15d1f31f8956">
     <h1>
-     <a target="_blank" href="/survey624951">xxx</a>
+     <a target="_blank" preHref="http://www.panelsns.com/survey/" href="/survey" class="survey_info_link">xxx</a>
     </h1>
     <div class="datashow">
      <div class="more_inf">
@@ -373,8 +395,6 @@
   </div>
  </div>
 
- <div id="footer">
-  2007-<span class="wid950 copyright">2012</span> 重庆甚为派科技有限公司版权所有 www.diaochapai.com
- </div>
+  <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
 </body>
 </html>

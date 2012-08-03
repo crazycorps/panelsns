@@ -3,6 +3,7 @@ package com.survey.panelsns.model.entity;
 import java.util.Date;
 
 public class Survey {
+	
     private Long id;
 
     private Long projectId;
@@ -35,7 +36,9 @@ public class Survey {
     
     transient private Long userId;
     
-    transient private String clause;
+    transient private String orderCol;
+    
+    transient private String orderType;
 
     public Long getId() {
         return id;
@@ -165,12 +168,20 @@ public class Survey {
 		this.userId = userId;
 	}
 
-	public String getClause() {
-		return clause;
+	public String getOrderCol() {
+		return orderCol;
 	}
 
-	public void setClause(String clause) {
-		this.clause = clause;
+	public void setOrderCol(String orderCol) {
+		this.orderCol = orderCol;
+	}
+
+	public String getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
 	}
     
 }

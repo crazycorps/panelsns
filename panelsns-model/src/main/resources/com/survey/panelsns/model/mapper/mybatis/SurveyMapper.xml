@@ -217,6 +217,12 @@
 
 	<sql id="Pagination_Sql">
 		select entity.* from survey entity,project pro where entity.project_id=pro.id and pro.user_id=#{userId,jdbcType=BIGINT}
+		<if test="name != null">
+			and entity.name = #{name,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null">
+			and entity.status = #{status,jdbcType=INTEGER}
+		</if>
 	</sql>
 
 	<select id="selectCount" parameterType="com.survey.panelsns.model.entity.Survey"
@@ -229,6 +235,39 @@
 	<select id="selectList" parameterType="com.survey.panelsns.model.entity.Survey"
 		resultMap="BaseResultMap">
 		<include refid="Pagination_Sql" />
-		<![CDATA[ ORDER BY entity.id DESC ]]>
+		<choose>
+			<when test="orderCol!=null and orderType!=null">
+				<choose>
+					<when test="orderCol=='create_date'">
+						ORDER BY entity.create_date  
+						<choose>
+							<when test="orderType=='desc'">
+								desc
+							</when>
+							<otherwise>
+								asc
+							</otherwise>
+						</choose>
+						,entity.id DESC
+					</when>
+					<when test="orderCol=='name'">
+						ORDER BY entity.name  
+						<choose>
+							<when test="orderType=='desc'">
+								desc
+							</when>
+							<otherwise>
+								asc
+							</otherwise>
+						</choose>
+						,entity.id DESC
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				ORDER BY entity.id DESC
+			</otherwise>
+		</choose>
+		
 	</select>
 </mapper>

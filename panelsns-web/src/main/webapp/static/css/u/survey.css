@@ -109,15 +109,15 @@ a.creatnew_btn:hover {
 	background: url(/images/u/survey/search_butt_bg_02.jpg)
 }
 
-.actions div.start_time {
+.actions div.create_date {
 	width: 72px
 }
 
-.actions div.titl {
+.actions div.name {
 	width: 62px
 }
 
-.actions div.start_time,.actions div.titl {
+.actions div.create_date,.actions div.name {
 	display: inline;
 	height: 24px;
 	padding: 0 10px;
