@@ -180,7 +180,7 @@
    </form>
   </div>
   <div id="alertdiv" class="wait_inf" style="display: none;"></div>
-  <a href="/u/survey">全部</a>（共<span>${paginationResult.pagination.recordCount}</span>个）调查表 <a href="/u/survey/generator"
+  <a href="/u/survey">全部</a>（共<span>${paginationResult.pagination.recordCount}</span>个）调查表 <a href="/u/naire/"
    class="creatnew_btn">新建调查表</a>
 
  </div>
