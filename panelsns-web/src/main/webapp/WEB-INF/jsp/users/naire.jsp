@@ -9,14 +9,17 @@
 <meta name="description" content="调查派是完全免费的在线调查系统，帮助您简单快速的制作出专业的在线调查问卷，并提供详尽的实时结果报表。适用于学生、公司企业、网站、个人等各类用户。" />
 <meta content="调查派@diaochapai.com" name="author" />
 <meta content="本页版权 www. diaochapai.com调查派所有。All Rights Reserved" name="copyright" />
+<title>调查派 – 简单，好用的在线调查系统</title>
+
 <link type="text/css" rel="stylesheet" href="/css/jq/ui/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="/css/jq/ztree/zTreeStyle.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/users.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/survey.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/naire.css" />
 <link rel="icon" href="/logo.ico" type="image/x-icon" />
-<title>调查派 – 简单，好用的在线调查系统</title>
 <script type="text/javascript" src="/js/jq/jquery.js"></script>
 <script type="text/javascript" src="/js/jq/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/jq/ztree/jquery.ztree.all.js"></script>
 <script type="text/javascript" src="/js/core.js"></script>
 <script type="text/javascript" src="/js/u/naire.js"></script>
 </head>
@@ -74,7 +77,11 @@
        <button type="button" disabled="disabled" id="paste_part">粘贴</button>
        <button type="button" disabled="disabled" id="remove_part">删除</button>
       </div>
-      <div class="tree_panel"></div>
+      <div class="tree_panel">
+      	<ul id="tree_page" class="ztree">
+      		
+      	</ul>
+      </div>
      </td>
      <td id="survey_manager_toggler" class="expand"><img src="/images/blank.gif" /></td>
      <td valign="top" class="right_side">
@@ -88,7 +95,7 @@
         </button>
         <span id="page_list"></span>
        </div>
-       <div id="fake_survey_view">&nbsp;</div>
+       <div id="edit_naire_view">&nbsp;</div>
       </div>
      </td>
     </tr>
@@ -256,118 +263,6 @@
            <option value="/images/bg/10_bg_xmas_01.gif">圣诞背景</option>
            <option value="/images/bg/10_bg_xmas_02.gif">圣诞背景</option>
            <option value="/images/bg/bg_baowen_01.jpg">bg1</option>
-           <option value="/images/bg/bg_baowen_02.jpg">bg2</option>
-           <option value="/images/bg/bg_baowen_03.jpg">bg3</option>
-           <option value="/images/bg/bg_baowen_04.jpg">bg4</option>
-           <option value="/images/bg/bg_baowen_05.jpg">bg5</option>
-           <option value="/images/bg/bg_baowen_06.jpg">bg6</option>
-           <option value="/images/bg/bg_baowen_07.jpg">bg7</option>
-           <option value="/images/bg/bg_cute_01.gif">cute01</option>
-           <option value="/images/bg/bg_cute_02.gif">cute02</option>
-           <option value="/images/bg/bg_cute_03.gif">cute03</option>
-           <option value="/images/bg/bg_cute_04.gif">cute04</option>
-           <option value="/images/bg/bg_cute_05.gif">cute05</option>
-           <option value="/images/bg/bg_cute_07.gif">cute07</option>
-           <option value="/images/bg/bg_cute_08.jpg">cute08</option>
-           <option value="/images/bg/bg_cute_09.jpg">cute09</option>
-           <option value="/images/bg/bg_cute_10.gif">cute10</option>
-           <option value="/images/bg/bg_cute_11.jpg">cute11</option>
-           <option value="/images/bg/bg_cute_12.jpg">cute12</option>
-           <option value="/images/bg/bg_cute_13.jpg">cute13</option>
-           <option value="/images/bg/bg_cute_14.jpg">cute14</option>
-           <option value="/images/bg/bg_cute_15.jpg">cute15</option>
-           <option value="/images/bg/bg_cute_16.jpg">cute16</option>
-           <option value="/images/bg/bg_cute_17.jpg">cute17</option>
-           <option value="/images/bg/bg_cute_18.jpg">cute18</option>
-           <option value="/images/bg/bg_cute_19.gif">cute19</option>
-           <option value="/images/bg/bg_cute_20.gif">cute20</option>
-           <option value="/images/bg/bg_cute_21.jpg">cute21</option>
-           <option value="/images/bg/bg_cute_23.jpg">cute23</option>
-           <option value="/images/bg/bg_cute_24.jpg">cute24</option>
-           <option value="/images/bg/bg_cute_25.jpg">cute25</option>
-           <option value="/images/bg/bg_cute_26.jpg">cute26</option>
-           <option value="/images/bg/bg_cute_27.jpg">cute27</option>
-           <option value="/images/bg/bg_cute_28.jpg">cute28</option>
-           <option value="/images/bg/bg_cute_29.gif">cute29</option>
-           <option value="/images/bg/bg_cute_30.jpg">cute30</option>
-           <option value="/images/bg/bg_cute_31.jpg">cute31</option>
-           <option value="/images/bg/bg_cute_32.jpg">cute32</option>
-           <option value="/images/bg/bg_cute_33.jpg">cute33</option>
-           <option value="/images/bg/bg_cute_34.jpg">cute34</option>
-           <option value="/images/bg/bg_cute_35.jpg">cute35</option>
-           <option value="/images/bg/bg_cute_36.gif">cute36</option>
-           <option value="/images/bg/bg_cute_37.gif">cute37</option>
-           <option value="/images/bg/bg_cute_38.gif">cute38</option>
-           <option value="/images/bg/bg_cute_39.gif">cute39</option>
-           <option value="/images/bg/bg_cute_40.gif">cute40</option>
-           <option value="/images/bg/bg_cute_41.gif">cute41</option>
-           <option value="/images/bg/bg_cute_42.jpg">cute42</option>
-           <option value="/images/bg/bg_cute_43.gif">cute43</option>
-           <option value="/images/bg/bg_cute_44.gif">cute44</option>
-           <option value="/images/bg/bg_cute_45.jpg">cute45</option>
-           <option value="/images/bg/bg_cute_46.jpg">cute46</option>
-           <option value="/images/bg/bg_cute_47.jpg">cute47</option>
-           <option value="/images/bg/bg_cute_48.gif">cute48</option>
-           <option value="/images/bg/bg_cute_49.gif">cute49</option>
-           <option value="/images/bg/bg_cute_50.gif">cute50</option>
-           <option value="/images/bg/bg_cute_51.gif">cute51</option>
-           <option value="/images/bg/bg_cute_52.gif">cute52</option>
-           <option value="/images/bg/bg_cute_53.jpg">cute53</option>
-           <option value="/images/bg/bg_desgin_02.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_03.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_04.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_05.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_06.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_07.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_08.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_09.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_10.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_11.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_12.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_13.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_14.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_15.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_16.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_17.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_18.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_19.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_20.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_21.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_23.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_24.jpg">desgin</option>
-           <option value="/images/bg/bg_desgin_25.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_26.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_27.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_28.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_29.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_30.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_31.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_32.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_33.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_34.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_35.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_36.gif">desgin</option>
-           <option value="/images/bg/bg_desgin_37.gif">desgin</option>
-           <option value="/images/bg/bg_sw_01.jpg">business</option>
-           <option value="/images/bg/bg_sw_02.jpg">business</option>
-           <option value="/images/bg/bg_sw_03.jpg">business</option>
-           <option value="/images/bg/bg_sw_04.gif">business</option>
-           <option value="/images/bg/bg_sw_05.jpg">business</option>
-           <option value="/images/bg/bg_sw_06.jpg">business</option>
-           <option value="/images/bg/bg_sw_10.jpg">business</option>
-           <option value="/images/bg/bg_sw_11.jpg">business</option>
-           <option value="/images/bg/bg_sw_12.jpg">business</option>
-           <option value="/images/bg/bg_sw_13.jpg">business</option>
-           <option value="/images/bg/bg_sw_16.gif">business</option>
-           <option value="/images/bg/bg_sw_17.gif">business</option>
-           <option value="/images/bg/bg_sw_18.jpg">business</option>
-           <option value="/images/bg/bg_sw_20.gif">business</option>
-           <option value="/images/bg/bg_sw_21.gif">business</option>
-           <option value="/images/bg/bg_sw_22.gif">business</option>
-           <option value="/images/bg/bg_sw_23.jpg">business</option>
-           <option value="/images/bg/bg_sw_24.jpg">business</option>
-           <option value="/images/bg/bg_sw_26.jpg">business</option>
-           <option value="/images/bg/bg_sw_27.gif">business</option>
           </select>
          </div>
          <div class="textnotes">自定义背景图片：</div>
@@ -445,101 +340,6 @@
            <option value="/images/bg/none.gif">无背景</option>
            <option value="/images/bg/surveyheader_logo.gif">调查派默认 LOGO</option>
            <option value="/images/bg/logo_xmas_01.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_02.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_03.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_04.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_05.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_06.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_07.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_08.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_09.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_10.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_11.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_12.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_13.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_14.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_15.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_16.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_17.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_18.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_19.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_20.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_21.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_22.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_23.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_24.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_xmas_25.png">欢乐圣诞</option>
-           <option value="/images/bg/logo_desgin_01.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_02.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_03.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_05.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_06.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_07.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_08.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_09.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_12.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_13.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_15.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_16.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_23.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_24.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_25.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_26.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_27.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_28.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_29.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_30.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_31.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_32.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_33.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_34.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_35.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_36.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_39.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_42.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_43.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_44.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_45.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_46.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_47.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_48.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_49.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_50.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_desgin_51.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_01.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_02.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_03.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_04.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_05.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_06.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_07.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_08.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_09.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_10.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_11.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_12.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_13.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_14.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_15.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_16.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_17.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_18.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_19.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_20.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_21.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_22.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_23.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_24.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_25.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_26.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_27.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_28.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_29.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_30.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_31.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_32.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_33.png">系统提供 LOGO</option>
-           <option value="/images/bg/logo_full_34.png">系统提供 LOGO</option>
           </select>
          </div>
          自定义： <input class="widget text" title="background-image" type="text" value="http://" /> <a href="/my/gallery"
@@ -552,9 +352,6 @@
     </dl>
    </div>
   </div>
-  <iframe src="/my/survey/d944a519-b4fa-40d5-aedf-15d1f31f8956/sandbox" width="100%" height="100%" frameborder="0"
-   scrolling="auto" name="survey_frame" id="survey_frame" marginheight="0" marginwidth="0"
-   style="position: absolute; z-index: 100; left: 18px; top: 163px; display: none;"></iframe>
  </div>
 
  <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
