@@ -261,24 +261,24 @@
 	border: 0
 }
 
-#survey_manager .left_side,#skin_manager .left_side,#skin_list,#skin_list .list
+#tabs_survey_manager .left_side,#skin_manager .left_side,#skin_list,#skin_list .list
 	{
 	background-color: #f4f4f4;
 	width: 230px
 }
 
-#survey_manager_toggler,#survey_manager_toggler img,#skin_manager_toggler,#skin_manager_toggler img
+#tabs_survey_manager_toggler,#survey_manager_toggler img,#skin_manager_toggler,#skin_manager_toggler img
 	{
 	width: 10px;
 	cursor: pointer
 }
 
-#survey_manager_toggler.expand,#skin_manager_toggler.expand {
+#tabs_survey_manager_toggler.expand,#skin_manager_toggler.expand {
 	background: url(/images/toggler_leftarrow.gif) no-repeat scroll center
 		center
 }
 
-#survey_manager_toggler.collapse,#skin_manager_toggler.collapse {
+#tabs_survey_manager_toggler.collapse,#skin_manager_toggler.collapse {
 	background: url(/images/toggler_rightarrow.gif) no-repeat scroll center
 		center
 }
@@ -411,7 +411,7 @@
 	border: 2px inset #00aeff
 }
 
-#survey_manager .right_side,#skin_manager .right_side {
+#tabs_survey_manager .right_side,#tabs_skin_manager .right_side {
 	background-color: #ebebeb
 }
 
@@ -938,7 +938,7 @@ a.album:hover {
 	width: 100%
 }
 
-ul.ztree {margin-top: 10px;border: 1px solid #617775;background: #f0f6e4;width:220px;height:520px;overflow-y:scroll;overflow-x:auto;}
+ul.ztree {margin-top: 10px;width:99%;overflow-y:auto;overflow-x:auto;}
 ul.log {border: 1px solid #617775;background: #f0f6e4;width:300px;height:170px;overflow: hidden;}
 ul.log.small {height:45px;}
 ul.log li {color: #666666;list-style: none;padding-left: 10px;}

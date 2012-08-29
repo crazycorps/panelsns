@@ -23,6 +23,7 @@
 					}
 				});
 			});
+			$( "#tabs_main" ).tabs();
 		}
 	};
 	$.naire.edit={

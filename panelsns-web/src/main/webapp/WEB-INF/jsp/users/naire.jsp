@@ -17,6 +17,13 @@
 <link type="text/css" rel="stylesheet" href="/css/u/survey.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/naire.css" />
 <link rel="icon" href="/logo.ico" type="image/x-icon" />
+<style type="text/css">
+ .ui-tabs .ui-tabs-panel {
+     background: none repeat scroll 0 0 transparent;
+     border-width: 0;
+     padding: 2px;
+ }
+</style>
 <script type="text/javascript" src="/js/jq/jquery.js"></script>
 <script type="text/javascript" src="/js/jq/ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/js/jq/ztree/jquery.ztree.all.js"></script>
@@ -26,23 +33,13 @@
 
 <body>
  <%@include file="/WEB-INF/jsp/common/header.jsp"%>
- <div class="editor_toolbar" id="editor_toolbar">
-  <ul class="menu" id="naire_tabs">
-   <li class="on" name="survey" title="轻松问卷调查">编辑内容</li>
-   <li name="skin" title="让问卷变漂亮">设置外观</li>
-   <li name="trigger" title="定义问卷逻辑关联">定义逻辑</li>
+ <div id="tabs_main">
+  <ul>
+   <li><a href="#tabs_survey_manager">编辑内容</a></li>
+   <li><a href="#tabs_skin_manager">设置外观</a></li>
+   <li><a href="#tabs_trigger_manager">定义逻辑</a></li>
   </ul>
-  <div class="notice_bar">
-   <span id="notice_bar" class="notice" style="display: none;"></span>
-  </div>
-  <div class="buttons">
-   <span class="preview">预览</span> <a href="javascript:void(0);" onclick="return false;" class="save"><span>保存</span></a>
-   <a href="javascript:void(0);" onclick="return false;" class="publish">保存并分享</a>
-  </div>
- </div>
-
- <div id="main">
-  <div id="survey_manager">
+  <div id="tabs_survey_manager">
    <div id="part_toolbar">
     <button type="button" id="add_template">模板问题</button>
     <button type="button" id="add_select_radio">
@@ -78,9 +75,9 @@
        <button type="button" disabled="disabled" id="remove_part">删除</button>
       </div>
       <div class="tree_panel">
-      	<ul id="tree_page" class="ztree">
-      		
-      	</ul>
+       <ul id="tree_page" class="ztree">
+
+       </ul>
       </div>
      </td>
      <td id="survey_manager_toggler" class="expand"><img src="/images/blank.gif" /></td>
@@ -101,7 +98,7 @@
     </tr>
    </table>
   </div>
-  <div id="skin_manager" style="display: none;height: 420px;">
+  <div id="tabs_skin_manager" style="display: none; height: 420px;">
    <div id="skin_toolbar">
     <div class="skin_designer">
      <div class="category"></div>
@@ -134,7 +131,7 @@
     </tr>
    </table>
   </div>
-  <div id="trigger_manager" style="display: none;height: 420px;">
+  <div id="tabs_trigger_manager" style="display: none; height: 420px;">
    <div id="trigger_toolbar">
     <select name="parts"></select>
     <button name="add_trigger" type="button">添加逻辑定义</button>
@@ -179,177 +176,6 @@
       </fieldset>
      </div>
     </form>
-   </div>
-  </div>
-  <div style="display: none;" id="template-selector-box">
-   <div class="select-template">
-    选择问题类别：
-    <select id="template-tags-select" name="template-tags-select">
-     <option value="个人娱乐">个人娱乐</option>
-     <option value="互联网与IT类">互联网与IT类</option>
-     <option value="公司企业">公司企业</option>
-     <option value="市场调查">市场调查</option>
-     <option value="政府机构">政府机构</option>
-     <option value="教育和培训">教育和培训</option>
-     <option value="满意度调查">满意度调查</option>
-     <option value="用户基本信息">用户基本信息</option>
-     <option value="网络店铺">网络店铺</option>
-    </select>
-   </div>
-   <div id="template-select-panel">
-    <div class="panel loading" style="display: none;">loading</div>
-    <div class="panel error" style="display: none;">载入失败，请重试</div>
-   </div>
-  </div>
-  <div id="skin_designer_helper" style="display: none;">
-   <div class="skin_designer_widgets">
-    <div id="color_picker_handle"></div>
-    <div id="font_widgets_set">
-     <div>
-      字体
-      <select class="widget select" title="font-family">
-       <option selected="" value="">系统默认</option>
-       <option value="宋体">宋体</option>
-       <option value="黑体">黑体</option>
-       <option value="隶书">隶书</option>
-      </select>
-      大小
-      <select class="widget select" title="font-size">
-       <option selected="" value="">系统默认</option>
-       <option value="9pt">9pt</option>
-       <option value="10pt">10pt</option>
-       <option value="12pt">12pt</option>
-       <option value="14pt">14pt</option>
-       <option value="16pt">16pt</option>
-       <option value="18pt">18pt</option>
-       <option value="24pt">24pt</option>
-       <option value="36pt">36pt</option>
-      </select>
-     </div>
-     <div class="widget radio" title="text-align">
-      <label title="/images/icon/icon_font_align_left.gif"> <input type="radio" name="text-align" value="left" />
-       居左
-      </label> <label title="/images/icon/icon_font_align_center.gif"> <input type="radio" name="text-align"
-       value="center" /> 居中
-      </label> <label title="/images/icon/icon_font_align_right.gif"> <input type="radio" name="text-align"
-       value="right" /> 居右
-      </label>
-     </div>
-     <div class="widget checkbox" title="font-weight">
-      <label title="/images/icon/icon_font_bold.gif"> <input type="checkbox" name="font-weight" value="bolder"
-       off_value="normal" /> 粗体
-      </label>
-     </div>
-     <div class="widget checkbox" title="font-style">
-      <label title="/images/icon/icon_font_italic.gif"> <input type="checkbox" name="font-style" value="italic" />
-       斜体
-      </label>
-     </div>
-     <div class="widget color_picker" title="color"></div>
-    </div>
-    <dl class="skin_designer_define">
-     <dt class="category">背景设置</dt>
-     <dd>
-      <dl>
-       <dt class="selector" title="html body">整页背景</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-         <div class="textnotes">图片：</div>
-         <div class="widget image_selector" title="background-image">
-          <select>
-           <option value="/images/bg/none.gif">无背景</option>
-           <option value="/images/bg/10_bg_xmas_01.gif">圣诞背景</option>
-           <option value="/images/bg/10_bg_xmas_02.gif">圣诞背景</option>
-           <option value="/images/bg/bg_baowen_01.jpg">bg1</option>
-          </select>
-         </div>
-         <div class="textnotes">自定义背景图片：</div>
-         <input class="widget text" title="background-image" type="text" value="http://" /> <a href="/my/gallery"
-          target="_blank" class="album">浏览我的图库</a>
-        </div>
-       </dd>
-       <dt class="selector" title="html .page">调查表</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-        </div>
-       </dd>
-       <dt class="selector" title="html .surveypie .survey_header">调查表头</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-        </div>
-       </dd>
-       <dt class="selector" title="html .surveypie .survey-title">整页标题</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-        </div>
-       </dd>
-       <dt class="selector" title="html .surveypie .part h4.title">题目标题</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-        </div>
-       </dd>
-       <dt class="selector" title="html .surveypie .separator .title">分隔符</dt>
-       <dd>
-        <div>
-         <div class="textnotes">颜色：</div>
-         <div class="widget color_picker" title="background-color"></div>
-        </div>
-       </dd>
-      </dl>
-     </dd>
-     <dt class="category">字体设置</dt>
-     <dd>
-      <dl>
-       <dt class="selector" title="html .surveypie .survey-title">调查表标题</dt>
-       <dd>
-        <div class="font_widgets_set"></div>
-       </dd>
-       <dt class="selector" title="html .surveypie .part h4.title">题目标题</dt>
-       <dd>
-        <div class="font_widgets_set"></div>
-       </dd>
-       <dt class="selector" title="html .surveypie .options">选项文字</dt>
-       <dd>
-        <div class="font_widgets_set"></div>
-       </dd>
-       <dt class="selector" title="html .surveypie .separator .title">分隔符文字</dt>
-       <dd>
-        <div class="font_widgets_set"></div>
-       </dd>
-      </dl>
-     </dd>
-     <dt class="category">LOGO 设置</dt>
-     <dd>
-      <dl>
-       <dt class="selector" title="html .surveypie .survey_header">调查表 LOGO</dt>
-       <dd>
-        <div class="widget_panel">
-         <div class="textnotes">图片：</div>
-         <div class="widget image_selector" title="background-image">
-          <select>
-           <option value="/images/bg/none.gif">无背景</option>
-           <option value="/images/bg/surveyheader_logo.gif">调查派默认 LOGO</option>
-           <option value="/images/bg/logo_xmas_01.png">欢乐圣诞</option>
-          </select>
-         </div>
-         自定义： <input class="widget text" title="background-image" type="text" value="http://" /> <a href="/my/gallery"
-          target="_blank" class="album">浏览我的图库</a> 高度： <input class="widget text" title="height" type="text" value="25"
-          style="width: 32px;" />
-        </div>
-       </dd>
-      </dl>
-     </dd>
-    </dl>
    </div>
   </div>
  </div>
