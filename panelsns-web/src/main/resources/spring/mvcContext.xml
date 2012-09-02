@@ -65,4 +65,6 @@
 		cache-period="31556926" />
 	<mvc:resources mapping="/css/**" location="/static/css/"
 		cache-period="31556926" />
+	<mvc:resources mapping="/templates/**" location="/static/templates/"
+		cache-period="31556926" />
 </beans>
