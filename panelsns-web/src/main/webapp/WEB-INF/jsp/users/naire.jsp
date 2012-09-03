@@ -105,8 +105,7 @@
         </button>
         <span id="page_list"></span>
        </div>
-       <div id="edit_naire_view">
-        <div pageNo="1" class="naire_page"></div>
+       <div id="edit_naire_view" class="surveypie">
        </div>
       </div>
      </td>
@@ -124,6 +123,14 @@
  <div id="naire_editor_con" style="display: none;">
    <div id="single_select_con">
     
+   </div>
+   <div id="naire_page_template">
+    <div pageNo="0" class="naire_page">
+     <ol class="content">
+      <li class="part">
+      </li>
+    </ol>
+    </div>
    </div>
  </div>
 

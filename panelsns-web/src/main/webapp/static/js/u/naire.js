@@ -27,7 +27,8 @@
 		}
 	};
 	$.naire.edit={
-		currentPage:1,
+		treeId:"tree_page",
+		nowPageNo:1,
 		init:function(){
 			$.naire.edit.initDatas();
 			$.naire.edit.initEvents();
@@ -58,9 +59,11 @@
 	 			{ id:2, pId:1, name:"第1页",pageNo:1},
 	 		];
 			$.fn.zTree.init($("#tree_page"), treeSetting, zNodes);
-			var treeObj = $.fn.zTree.getZTreeObj("tree_page");
-			var firstPageNode = treeObj.getNodeByTId("tree_page_2");
+			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
+			var firstPageNode = treeObj.getNodeByTId($.naire.edit.treeId+"_2");
 			treeObj.selectNode(firstPageNode,false);
+			$.naire.edit.addNairePageCon(firstPageNode.pageNo);
+			$.naire.edit.pageSelected($.naire.edit.treeId,firstPageNode.tId,firstPageNode.pageNo);
 		},
 		initNaireEditorTemplate:function(){
 			// 加载单选题编辑模版
@@ -86,10 +89,11 @@
 		},
 		initEditorQuesEvents:function(){
 			$("#add_select_radio").click($.naire.edit.addEditorSingleSelect);
+			
 		},
 		addPage:function(event){
-			var treeObj = $.fn.zTree.getZTreeObj("tree_page");
-			var parentNode = treeObj.getNodeByTId("tree_page_1");
+			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
+			var parentNode = treeObj.getNodeByTId($.naire.edit.treeId+"_1");
 			var nodes = parentNode.children;
 			var maxPageNo=1;
 			$.each(nodes,function(i,node){
@@ -100,24 +104,19 @@
 			var newPageNo=maxPageNo+1;
 			var newNode = {name:"第"+newPageNo+"页",pageNo:newPageNo};
 			newNode = treeObj.addNodes(parentNode, newNode);
-			var treeNewNode = treeObj.getNodeByTId("tree_page_"+(newPageNo+1));
+			var treeNewNode = treeObj.getNodeByTId($.naire.edit.treeId+"_"+(newPageNo+1));
 			treeObj.selectNode(treeNewNode,false);
-			var pageDiv=document.createElement("div");
-			$(pageDiv).attr({
-				"pageNo":newPageNo,
-				"class":"naire_page"
-			});
-			$("#edit_naire_view").append(pageDiv);
-			$("#edit_naire_view div[pageNo!='"+newPageNo+"']").hide();
+			$.naire.edit.addNairePageCon(treeNewNode.pageNo);
+			$.naire.edit.pageSelected($.naire.edit.treeId,treeNewNode.tId,treeNewNode.pageNo);
 		},
 		delPage:function(event){
-			var treeObj = $.fn.zTree.getZTreeObj("tree_page");
+			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
 				$("#edit_naire_view div[pageNo='"+node.pageNo+"']").remove();
 				treeObj.removeNode(node);
 			});
-			var parentNode = treeObj.getNodeByTId("tree_page_1");
+			var parentNode = treeObj.getNodeByTId($.naire.edit.treeId+"_1");
 			var pageNodes = parentNode.children;
 			var maxPageNo=1;
 			$.each(pageNodes,function(i,node){
@@ -127,13 +126,38 @@
 				node.name="第"+node.pageNo+"页";
 				treeObj.updateNode(node);
 			});
+			var firstPageNode = treeObj.getNodeByTId($.naire.edit.treeId+"_2");
+			treeObj.selectNode(firstPageNode,false);
+			$.naire.edit.pageSelected($.naire.edit.treeId,firstPageNode.tId,firstPageNode.pageNo);
+		},
+		pageSelected:function(treeId,treeNodeId,pageNo){
+			$.naire.edit.nowPageNo=pageNo;
+			$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']").show();
+			$("#edit_naire_view div[pageNo!='"+pageNo+"']").hide();
 		},
 		treeNodeClick:function(event,treeId,treeNode,clickFlag){
-			var t=treeId;
+			$.naire.edit.pageSelected(treeId,treeNode.tId,treeNode.pageNo);
+		},
+		addNairePageCon:function(pageNo){
+			var pageDiv=$("#naire_page_template div.naire_page").clone(true);
+			$(pageDiv).attr({
+				"pageNo":pageNo
+			});
+			$("#edit_naire_view").append(pageDiv);
+			$("li.part",pageDiv).hover(
+				function () {
+				    $("div.float_buttons",this).show();
+				},
+				function () {
+					$("div.float_buttons",this).hide();
+				}
+			);
 		},
 		addEditorSingleSelect:function(event){
 			// 单选
-			
+			var cloneSingleSelEle=$("#single_select_con div.single_select_option_template").children().clone();
+			var nowPageCon=$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']");
+			$("li.part",nowPageCon).append(cloneSingleSelEle);
 		}
 	};
 })(jQuery);
