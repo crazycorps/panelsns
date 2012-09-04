@@ -263,7 +263,7 @@
 
 #tabs_survey_manager .left_side,#skin_manager .left_side,#skin_list,#skin_list .list
 	{
-	background-color: #f4f4f4;
+	background-color: #ebebeb;
 	width: 230px
 }
 
@@ -416,43 +416,39 @@
 }
 
 .tree_buttons {
-	background-color: #7d7d7d;
-	height: 30px;
+	background-color: #ebebeb;
 	text-align: center;
-	padding-top: 6px
+	height: 25px;
+    margin: 5px 0;
 }
 
 .tree_buttons button {
 	background-image: url(/images/tree_buttons_bg.gif);
 	background-repeat: repeat-x;
-	border: 1px solid #676767;
+	border-right: 1px solid #8e8e8e;
+	border-bottom: 1px solid #8e8e8e;
 	height: 24px;
 	margin: 0;
 	padding: 2px;
-	cursor: pointer
-}
-
-.tree_buttons button:hover {
-	border: 1px solid #0089c9;
-	color: #0089c9
+	cursor: pointer；
 }
 
 .tree_panel {
+	background: none repeat scroll 0 0 #FFFFFF;
 	overflow-x: hidden;
 	overflow-y: auto;
-	height: 560px;
+	min-height: 560px;
 }
 
 #survey_sandbox {
-	margin: 0 8px;
-	height: 560px;
+	margin: 0 2px;
 }
 
 #page_selector {
 	margin: 5px 0
 }
 
-#page_selector button {
+#page_selector button,.tree_buttons button {
 	background-image: url(/images/tree_buttons_bg.gif);
 	background-repeat: repeat-x;
 	border-right: 1px solid #8e8e8e;
@@ -721,10 +717,10 @@ ol.content .part_editor {
 	background: none repeat scroll 0 0 #FFFFFF;
     font-family: Verdana,Geneva,sans-serif,"宋体";
     font-size: 12px;
+    min-height:560px;
 }
 
-.enabled .survey_body .naire_page .part:hover,.enabled .survey_body .page-header h1:hover,.enabled .survey_body .naire_page .part h2.title:hover
-	{
+.enabled .survey_body .naire_page .part:hover,.enabled .survey_body .page-header h1:hover,.enabled .survey_body .naire_page .part h2.title:hover{
 	background-color: #f0fbde
 }
 
@@ -946,12 +942,11 @@ a.album:hover {
 #edit_naire_view{
 	background:none repeat scroll 0 0 #FFFFFF;
 	width: 100%;
-	height:560px;
 }
 #edit_naire_view .naire_page{
 	width: 100%;
 	overflow-y:auto;
-	overflow-x:auto;
+	overflow-x:hidden;
 }
 
 

@@ -168,14 +168,6 @@ span.ico {
 	margin: 0 5px
 }
 
-#footer {
-	background-color: #686868;
-	color: #CCC;
-	padding: 5px;
-	clear: both;
-	text-align: center
-}
-
 .top {
 	background: url(/images/title_bg.gif) repeat-x;
 	height: 37px
@@ -300,4 +292,27 @@ a:hover.pay_btn {
 .notes a {
 	color: #019dd6;
 	text-decoration: underline
+}
+
+#j-footer {
+    padding-bottom: 30px;
+    text-align: center;
+}
+#j-footer .j-copyright {
+    color: #999999;
+}
+.common-bottom-links {
+    line-height: 24px;
+    padding-top: 10px;
+}
+.common-bottom-links a {
+    border-right: 1px solid #CCCCCC;
+    color: #666666;
+    padding: 0 11px;
+}
+.common-bottom-links a:hover {
+    color: #FF4400;
+}
+.common-bottom-links .last-link {
+    border-right: medium none;
 }

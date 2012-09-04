@@ -39,7 +39,7 @@
 
 <body>
  <%@include file="/WEB-INF/jsp/common/header.jsp"%>
- <div id="tabs_main">
+ <div id="tabs_main" class="clear-fix">
   <ul>
    <li>
     <a href="#tabs_survey_manager">编辑内容</a>
@@ -80,11 +80,11 @@
     <tr>
      <td valign="top" class="left_side">
       <div class="tree_buttons">
-       <button type="button" disabled="disabled" id="moveup_part">上移</button>
-       <button type="button" disabled="disabled" id="movedown_part">下移</button>
-       <button type="button" disabled="disabled" id="copy_part">复制</button>
-       <button type="button" disabled="disabled" id="paste_part">粘贴</button>
-       <button type="button" disabled="disabled" id="remove_part">删除</button>
+       <button type="button"  id="moveup_part">上移</button>
+       <button type="button"  id="movedown_part">下移</button>
+       <button type="button"  id="copy_part">复制</button>
+       <button type="button"  id="paste_part">粘贴</button>
+       <button type="button"  id="remove_part">删除</button>
       </div>
       <div class="tree_panel">
        <ul id="tree_page" class="ztree">
@@ -92,9 +92,7 @@
        </ul>
       </div>
      </td>
-     <td id="survey_manager_toggler" class="expand">
-      <img src="/images/blank.gif" />
-     </td>
+    
      <td valign="top" class="right_side">
       <div id="survey_sandbox">
        <div id="page_selector">
@@ -122,7 +120,7 @@
  </div>
 
  <div id="naire_editor_con" style="display: none;">
-  <div id="single_select_con"></div>
+  <div id="select_template_con"></div>
   <div id="naire_page_template">
    <div pageNo="0" class="naire_page">
     <ol class="content">

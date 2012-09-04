@@ -3,10 +3,15 @@
 		$.naire.init();
 	});
 	$.naire={
+		quesType:{
+			singleSelect:1,
+			multiSelect:2,
+			fillBlank:3,
+			matrixSelect:4
+		},
 		init:function(){
 			$.naire.initLayout();
 			$.naire.edit.init();
-			
 		},
 		initLayout:function(){
 			$("#naire_tabs li[name]").click(function(){
@@ -73,7 +78,7 @@
 			   data: "type=singleSelect",
 			   dataType:"html",
 			   success: function(content){
-				   $("#single_select_con").append(content);
+				   $("#select_template_con").append(content);
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
 				   
@@ -151,17 +156,28 @@
 		},
 		addEditorSingleSelect:function(event){
 			// 单选
-			var cloneSingleSelEle=$("#single_select_con ol.single_select_option_template").children().clone();
-			var nowPageCon=$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']");
+			var cloneSingleSelEle=$("#select_template_con ol.single_select_option_template").children().clone();
+			var nowPageCon=$("#edit_naire_view div.naire_page[pageNo='"+$.naire.edit.nowPageNo+"']");
+			var maxQuesNo=$("li.part",nowPageCon).size();
+			var newQuesNo=maxQuesNo+1;
 			$("ol.content",nowPageCon).append(cloneSingleSelEle);
-			$("li.part",nowPageCon).hover(
+			$(cloneSingleSelEle).attr({
+				qId:newQuesNo,// 一页中题号
+				t:$.naire.quesType.singleSelect//
+			}).hover(
 				function () {
 				    $("div.float_buttons",this).show();
 				},
 				function () {
 					$("div.float_buttons",this).hide();
 				}
-			);
+			).click($.naire.edit.triggerEditorSelect);
+		},
+		triggerEditorSelect:function(event){
+			$("form.part_editor",$(this).parents("div.naire_page")).remove();
+			var editorFormEle=$("#select_template_con form.part_editor").clone(true);
+			$(this).after(editorFormEle);
+			$(this).hide();
 		}
 	};
 })(jQuery);
