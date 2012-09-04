@@ -7,7 +7,7 @@
 	background:url(/images/surveyheader_logo.gif) no-repeat transparent 1% 50%;
 	height:40px;
 }
-.page 
+.naire_page 
 {
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -16,25 +16,25 @@
 	padding-bottom:10px;	
 }
 /* 调查表标题 <h1> */
-.page .survey-title {
+.naire_page  .survey-title {
 	padding:15px 10px;
 	margin:0px;
 }
 /* 调查表简介文字 <div> */
 
-.page .survey-intro {
+.naire_page  .survey-intro {
 }
 /* 页面标题 <h2> */
 
-.page .page-title {
+.naire_page  .page-title {
 }
 /* 页面简介文字 <div> */
 
-.page .page-intro {
+.naire_page  .page-intro {
 }
 /* 页面内容列表 <ol> */
 
-.page ol.content {
+.naire_page  ol.content {
 }
 /* 调查表对象标题行 <div> */
 
@@ -57,7 +57,7 @@ h4.title .error {
 }
 /* 问题简介文字 <div> */
 
-.page .part .intro {
+.naire_page  .part .intro {
 }
 /* 问题简介图片区域 <p> */
 
@@ -67,7 +67,7 @@ h4.title .error {
 
 /* 分隔符标题 <h3> */
 
-.page .separator .title {
+.naire_page  .separator .title {
 	padding-right: 5px;
 	padding-left: 5px;
 	font-weight: bold;
@@ -81,7 +81,7 @@ h4.title .error {
 }
 /* 分隔符简介文字 <div> */
 
-.page .separator .intro {
+.naire_page  .separator .intro {
 }
 /****************************** 填空题 ******************************/
 
@@ -91,96 +91,96 @@ h4.title .error {
 }
 /* 填空题简介文字 <div> */
 
-.page .text .intro {
+.naire_page  .text .intro {
 }
 /* 填空题简介图片 <div> */
 
-.page .text .illustrate {
+.naire_page  .text .illustrate {
 }
 /* 填空题表单 */
 
-.page .text input {
+.naire_page  .text input {
 }
 /* 问答题表单 */
 
-.page .text textarea {
+.naire_page  .text textarea {
 }
 /****************************** 选择题 ******************************/
 
 /* 选择题标题行 <h4> */
 
-.page .select .title {
+.naire_page  .select .title {
 }
 /* 选择题简介文字 <div> */
 
-.page .select .intro {
+.naire_page  .select .intro {
 }
 /* 选择题简介图片区域 <div> */
 
-.page .select .illustrate {
+.naire_page  .select .illustrate {
 }
 /* 选择题选项表格 <table> */
 
-.page .select .options {
+.naire_page  .select .options {
 }
 /* 选择题选项表格奇行 <tr> */
 
-.page .select .options .odd {
+.naire_page  .select .options .odd {
 }
 /* 选择题选项表格偶行 <tr> */
-.page li.error .select .options .even
+.naire_page  li.error .select .options .even
 {
 	background-color:none;
 }
-.page .select .options .even {
+.naire_page  .select .options .even {
 	background-color: #eff6fb;
 }
 /* 单选题表单 */
 
-.page .select .options input[type="radio"] {
+.naire_page  .select .options input[type="radio"] {
 }
 /* 多选题表单 */
 
-.page .select .options input[type="checkbox"] {
+.naire_page  .select .options input[type="checkbox"] {
 }
 /* 选择题 自定义选项表单 */
 
-.page .select .options input[type="text"] {
+.naire_page  .select .options input[type="text"] {
 }
 /****************************** 组合选择题 ******************************/
 
 /* 组合选择题标题 <h4> */
 
-.page .matrix .title {
+.naire_page  .matrix .title {
 }
 /* 组合选择题简介文字 <div> */
 
-.page .matrix .intro {
+.naire_page  .matrix .intro {
 }
 /* 组合选择题简介图片 <div> */
 
-.page .matrix .illustrate {
+.naire_page  .matrix .illustrate {
 }
 /* 组合选择题选项表格 <table> */
 
-.page .matrix .options {
+.naire_page  .matrix .options {
 }
 /* 组合选择题选项表格奇行 <tr> */
 
-.page .matrix .options .odd {
+.naire_page  .matrix .options .odd {
 }
 /* 组合选择题选项表格偶行 <tr> */
 
-.page .matrix .options .even {
+.naire_page  .matrix .options .even {
 	background-color: #eff6fb;
 }
 /* 单选组合选择题表单 */
 
-.page .matrix .options input[type="radio"] {
+.naire_page  .matrix .options input[type="radio"] {
 }
 /* 多选组合选择题表单 */
 
-.page .matrix .options input[type="checkbox"] {
+.naire_page  .matrix .options input[type="checkbox"] {
 }
 .page_progress
 {

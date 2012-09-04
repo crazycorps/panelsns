@@ -111,13 +111,17 @@
 		},
 		delPage:function(event){
 			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
+			var parentNode = treeObj.getNodeByTId($.naire.edit.treeId+"_1");
+			var pageNodes = parentNode.children;
+			if(pageNodes.length==1){
+				alert("至少保留一页");
+				return ;
+			}
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
 				$("#edit_naire_view div[pageNo='"+node.pageNo+"']").remove();
 				treeObj.removeNode(node);
 			});
-			var parentNode = treeObj.getNodeByTId($.naire.edit.treeId+"_1");
-			var pageNodes = parentNode.children;
 			var maxPageNo=1;
 			$.each(pageNodes,function(i,node){
 				var newPageNo=i+1;
@@ -144,7 +148,13 @@
 				"pageNo":pageNo
 			});
 			$("#edit_naire_view").append(pageDiv);
-			$("li.part",pageDiv).hover(
+		},
+		addEditorSingleSelect:function(event){
+			// 单选
+			var cloneSingleSelEle=$("#single_select_con ol.single_select_option_template").children().clone();
+			var nowPageCon=$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']");
+			$("ol.content",nowPageCon).append(cloneSingleSelEle);
+			$("li.part",nowPageCon).hover(
 				function () {
 				    $("div.float_buttons",this).show();
 				},
@@ -152,12 +162,6 @@
 					$("div.float_buttons",this).hide();
 				}
 			);
-		},
-		addEditorSingleSelect:function(event){
-			// 单选
-			var cloneSingleSelEle=$("#single_select_con div.single_select_option_template").children().clone();
-			var nowPageCon=$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']");
-			$("li.part",nowPageCon).append(cloneSingleSelEle);
 		}
 	};
 })(jQuery);

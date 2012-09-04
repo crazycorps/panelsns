@@ -15,6 +15,7 @@
 <link type="text/css" rel="stylesheet" href="/css/jq/ztree/zTreeStyle.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/users.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/survey.css" />
+<link rel="stylesheet" href="/css/skins/default.css" type="text/css" />
 <link type="text/css" rel="stylesheet" href="/css/u/naire.css" />
 <link rel="icon" href="/logo.ico" type="image/x-icon" />
 <style type="text/css">
@@ -105,33 +106,30 @@
         </button>
         <span id="page_list"></span>
        </div>
-       <div id="edit_naire_view" class="surveypie">
+       <div class="enabled">
+        <div class="surveypie">
+         <div class="survey_header"></div>
+         <div id="edit_naire_view" class="survey_body"></div>
+        </div>
        </div>
       </div>
      </td>
     </tr>
    </table>
   </div>
-  <div id="tabs_skin_manager" style="height: 630px;">
-   
-  </div>
-  <div id="tabs_trigger_manager" style="height: 630px;">
-   
-  </div>
+  <div id="tabs_skin_manager" style="height: 630px;"></div>
+  <div id="tabs_trigger_manager" style="height: 630px;"></div>
  </div>
 
  <div id="naire_editor_con" style="display: none;">
-   <div id="single_select_con">
-    
-   </div>
-   <div id="naire_page_template">
-    <div pageNo="0" class="naire_page">
-     <ol class="content">
-      <li class="part">
-      </li>
+  <div id="single_select_con"></div>
+  <div id="naire_page_template">
+   <div pageNo="0" class="naire_page">
+    <ol class="content">
+
     </ol>
-    </div>
    </div>
+  </div>
  </div>
 
  <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
