@@ -124,13 +124,13 @@
 			}
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
-				$("#edit_naire_view div[pageNo='"+node.pageNo+"']").remove();
+				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").remove();
 				treeObj.removeNode(node);
 			});
 			var maxPageNo=1;
 			$.each(pageNodes,function(i,node){
 				var newPageNo=i+1;
-				$("#edit_naire_view div[pageNo='"+node.pageNo+"']").attr("pageNo",newPageNo);
+				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").attr("pageNo",newPageNo);
 				node.pageNo=newPageNo;
 				node.name="第"+node.pageNo+"页";
 				treeObj.updateNode(node);
@@ -141,8 +141,8 @@
 		},
 		pageSelected:function(treeId,treeNodeId,pageNo){
 			$.naire.edit.nowPageNo=pageNo;
-			$("#edit_naire_view div[pageNo='"+$.naire.edit.nowPageNo+"']").show();
-			$("#edit_naire_view div[pageNo!='"+pageNo+"']").hide();
+			$("#edit_naire_view div.naire_page[pageNo='"+$.naire.edit.nowPageNo+"']").show();
+			$("#edit_naire_view div.naire_page[pageNo!='"+pageNo+"']").hide();
 		},
 		treeNodeClick:function(event,treeId,treeNode,clickFlag){
 			$.naire.edit.pageSelected(treeId,treeNode.tId,treeNode.pageNo);
@@ -172,12 +172,19 @@
 					$("div.float_buttons",this).hide();
 				}
 			).click($.naire.edit.triggerEditorSelect);
+			
+			// 初始化数据
+			var subjectEle=$(".title .subject",cloneSingleSelEle);
+			var pqId="p_"+$.naire.edit.nowPageNo+"_q_"+newQuesNo;
+			subjectEle.text(pqId+":"+subjectEle.text());
 		},
 		triggerEditorSelect:function(event){
-			$("form.part_editor",$(this).parents("div.naire_page")).remove();
+			var currnetNairePage=$(this).parents("div.naire_page");
+			$("form.part_editor",currnetNairePage).remove();
 			var editorFormEle=$("#select_template_con form.part_editor").clone(true);
 			$(this).after(editorFormEle);
 			$(this).hide();
+			$("li.part[qid!='"+$(this).attr("qid")+"']",currnetNairePage).show();
 		}
 	};
 })(jQuery);
