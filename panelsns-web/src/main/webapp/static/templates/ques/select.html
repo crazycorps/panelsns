@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
 </head>
 
 <body>
@@ -13,7 +14,7 @@
   <div class="body">
    <input type="text" maxlength="255" style="width: 98%; text-align: start;" name="subject" />
    <div>
-    <input type="checkbox" name="is_require" id="is_require" />
+    <input type="checkbox" name="is_require" id="is_require" checked="checked" />
     <label for="is_require">必填 |</label>
     <input type="checkbox" name="intro_trigger" id="intro_trigger" />
     <label for="intro_trigger">说明 |</label> 类型
@@ -22,17 +23,29 @@
      <option value="checkbox">多选</option>
      <option value="select">下拉菜单</option>
     </select>
-    <span id="set_choice_limit" style="display: none;"> 至少选择 <input type="text" maxlength="2" size="2"
-      name="least_choice" /> 项，最多选择 <input type="text" maxlength="2" size="2" name="most_choice" /> 项
-    </span> <span id="set_options_layout"> 选项排列方向 <select name="direction">
+    <span id="set_choice_limit" style="display: none;">
+     至少选择
+     <input type="text" maxlength="2" size="2" name="least_choice" />
+     项，最多选择
+     <input type="text" maxlength="2" size="2" name="most_choice" />
+     项
+    </span>
+    <span id="set_options_layout">
+     选项排列方向
+     <select name="direction">
       <option value="vertical">竖向</option>
       <option value="horizontal">橫向</option>
       <option value="custom">自定义</option>
-     </select> <span id="set_column_number" style="display: none;"> 每行显示 <input type="text" maxlength="2" size="2"
-       name="column_per_row" /> 列
+     </select>
+     <span id="set_column_number" style="display: none;">
+      每行显示
+      <input type="text" maxlength="2" size="2" name="column_per_row" />
+      列
+     </span>
     </span>
-    </span> <span id="set_shuffle"> <input type="checkbox" name="shuffle_options" id="shuffle_options" /> <label
-     for="shuffle_options">选项随机排序</label>
+    <span id="set_shuffle">
+     <input type="checkbox" name="shuffle_options" id="shuffle_options" />
+     <label for="shuffle_options">选项随机排序</label>
     </span>
    </div>
   </div>
@@ -45,37 +58,31 @@
     <div class="select_option">
      <span class="url_not_set" name="url_status">&nbsp;</span>
      <input type="text" name="label" />
+     <!--  
      <button title="向上移动" class="moveup" type="button">&nbsp;</button>
      <button title="向下移动" class="movedown" type="button">&nbsp;</button>
+     <button title="插入多媒体" class="set_url" type="button">&nbsp;</button>
+     -->
      <button title="添加选项" class="insert" type="button">&nbsp;</button>
      <button title="删除选项" class="remove" type="button">&nbsp;</button>
-     <button title="插入多媒体" class="set_url" type="button">&nbsp;</button>
+     
      <input type="checkbox" name="allow_specify" id="allow_specify" />
-     <label for="allow_specify">可填空</label> <span style="display: none;" class="setup_specify"> 宽 <input
-       type="text" maxlength="2" size="2" name="input_width" /> 字，至少 <input type="text" maxlength="2" size="2"
-       name="least_input" /> 字 <span style="display: none;"> ，最多 <input type="text" maxlength="2" size="2"
-        name="most_input" /> 字
+     <label for="allow_specify">可填空</label>
+     <span style="display: none;" class="setup_specify">
+      宽
+      <input type="text" maxlength="2" size="2" name="input_width" />
+      字，至少
+      <input type="text" maxlength="2" size="2" name="least_input" />
+      字
+      <span style="display: none;">
+       ，最多
+       <input type="text" maxlength="2" size="2" name="most_input" />
+       字
+      </span>
      </span>
-     </span> <span class="setup_exclusive" style="display: none;"> <input type="checkbox" value="1" name="exclusive"
-       id="exclusive" /> <label title="当其他选项都不适用时，可以选择此功能，防止误选。" for="exclusive">与其它选项互斥</label>
-     </span>
-    </div>
-    <div class="select_option">
-     <span class="url_not_set" name="url_status">&nbsp;</span>
-     <input type="text" name="label" />
-     <button title="向上移动" class="moveup" type="button">&nbsp;</button>
-     <button title="向下移动" class="movedown" type="button">&nbsp;</button>
-     <button title="添加选项" class="insert" type="button">&nbsp;</button>
-     <button title="删除选项" class="remove" type="button">&nbsp;</button>
-     <button title="插入多媒体" class="set_url" type="button">&nbsp;</button>
-     <input type="checkbox" name="allow_specify" id="allow_specify" />
-     <label for="allow_specify">可填空</label> <span style="display: none;" class="setup_specify"> 宽 <input
-       type="text" maxlength="2" size="2" name="input_width" /> 字，至少 <input type="text" maxlength="2" size="2"
-       name="least_input" /> 字 <span style="display: none;"> ，最多 <input type="text" maxlength="2" size="2"
-        name="most_input" /> 字
-     </span>
-     </span> <span class="setup_exclusive" style="display: none;"> <input type="checkbox" value="1" name="exclusive"
-       id="exclusive" /> <label title="当其他选项都不适用时，可以选择此功能，防止误选。" for="exclusive">与其它选项互斥</label>
+     <span class="setup_exclusive" style="display: none;">
+      <input type="checkbox" value="1" name="exclusive" id="exclusive" />
+      <label title="当其他选项都不适用时，可以选择此功能，防止误选。" for="exclusive">与其它选项互斥</label>
      </span>
     </div>
    </div>
@@ -102,7 +109,8 @@
     </button>
    </div>
    <h4 class="title">
-    <span class="subject">[新建选择题]</span> <span class="require">*</span>
+    <span class="subject">[新建选择题]</span>
+    <span class="require">*</span>
    </h4>
    <div style="display: none;" class="intro"></div>
    <div class="content">

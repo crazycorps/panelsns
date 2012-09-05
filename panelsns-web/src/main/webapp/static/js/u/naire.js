@@ -3,12 +3,6 @@
 		$.naire.init();
 	});
 	$.naire={
-		quesType:{
-			singleSelect:1,
-			multiSelect:2,
-			fillBlank:3,
-			matrixSelect:4
-		},
 		init:function(){
 			$.naire.initLayout();
 			$.naire.edit.init();
@@ -79,6 +73,7 @@
 			   dataType:"html",
 			   success: function(content){
 				   $("#select_template_con").append(content);
+				   $.editor.select.init();
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
 				   
@@ -163,7 +158,7 @@
 			$("ol.content",nowPageCon).append(cloneSingleSelEle);
 			$(cloneSingleSelEle).attr({
 				qId:newQuesNo,// 一页中题号
-				t:$.naire.quesType.singleSelect//
+				t:$.quesType.singleSelect//
 			}).hover(
 				function () {
 				    $("div.float_buttons",this).show();
@@ -180,11 +175,20 @@
 		},
 		triggerEditorSelect:function(event){
 			var currnetNairePage=$(this).parents("div.naire_page");
+			var qid=$(this).attr("qid");
 			$("form.part_editor",currnetNairePage).remove();
 			var editorFormEle=$("#select_template_con form.part_editor").clone(true);
+			editorFormEle.attr({
+				qid:qid
+			});
 			$(this).after(editorFormEle);
 			$(this).hide();
 			$("li.part[qid!='"+$(this).attr("qid")+"']",currnetNairePage).show();
+			
+			// 初始化编辑form数据
+			var quesTypeOption=$.editor.defaultQuesTypeOption;
+			var quesMess =$.editor.defaultQuesMess;
+			$.editor.select.initDatas(editorFormEle,quesTypeOption,quesMess);
 		}
 	};
 })(jQuery);
