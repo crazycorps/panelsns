@@ -31,6 +31,7 @@
 }
 </style>
 <script type="text/javascript" src="/js/jq/jquery.js"></script>
+<script type="text/javascript" src="/js/jq/jquery.bgiframe.js"></script>
 <script type="text/javascript" src="/js/jq/ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/js/jq/ztree/jquery.ztree.all.js"></script>
 <script type="text/javascript" src="/js/util.js"></script>
