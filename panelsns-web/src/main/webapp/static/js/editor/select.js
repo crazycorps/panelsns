@@ -103,6 +103,8 @@
 			$("button.insert").click($.editor.select.insertOptionEvent);
 			$("button.remove").click($.editor.select.removeOptionEvent);
 			$(":checkbox[name='allow_specify']").click($.editor.select.allowSpecifyEvent);
+			
+			$("div.control button[name='close']").click($.editor.select.editorConfirmEvent);
 		},
 		formTypeChangeEvent:function(event){
 			var typeVal=$(this).val();
@@ -150,7 +152,12 @@
 		},
 		removeOptionEvent:function(event){
 			// 删除选项
-			// 一个一个添加选项
+			var currentEditorForm=$(this).parents("form.part_editor");
+			var optionsEles=$("div.options div.list div.select_option",currentEditorForm);
+			if(optionsEles.length<=2){
+				return ;
+			}
+			
 			var currentSelectOptEle=$(this).parents("div.select_option");
 			currentSelectOptEle.remove();
 		},
@@ -163,6 +170,9 @@
 			}else{
 				$(".setup_specify",currentSelectOptEle).hide();
 			}
+		},
+		editorConfirmEvent:function(event){
+			
 		},
 		initDialogs:function(event){
 			$("#batchAddOptionsDialog").dialog({
