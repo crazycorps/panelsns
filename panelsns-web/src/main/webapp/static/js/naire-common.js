@@ -6,7 +6,13 @@
 	$.quesType={
 		singleSelect:1,
 		multiSelect:2,
-		fillBlank:3,
-		matrixSelect:4
+		select:3,
+		fillBlank:4,
+		matrixSelect:5
+	};
+	$.optionLayout={
+		vertical:1,
+		horizontal:2,
+		custom:3
 	};
 })(jQuery);

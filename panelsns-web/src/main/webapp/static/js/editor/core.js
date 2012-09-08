@@ -1,10 +1,12 @@
-(function($) {
-	
-	$.editor={
-		defaultQuesTypeOption:new QuesTypeOption(true,false,"radio","","","vertical","",false),
-		defaultQuesOptionMess:new QuesOptionMess("",false),
-		defaultQuesMess:new QuesMess("","",[new QuesOptionMess("",false),new QuesOptionMess("",false)])
-	};
+	(function($) {
+		
+		$.editor={
+			defaultQuesTypeOption:new QuesTypeOption(true,false,$.quesType.singleSelect,"","",$.optionLayout.vertical,"",false),
+			defaultQuesOptionMess:new QuesOptionMess("",false),
+			defaultQuesMess:new QuesMess("","",[new QuesOptionMess("",false),new QuesOptionMess("",false)])
+		};
+	})(jQuery);
+
 	/**
 	 * isRequire:是否必填
 	 * isHasIntro：是否有特殊说明
@@ -40,10 +42,11 @@
 	 * content:问题选项内容
 	 * isBlank：是否可以为空
 	 */
-	function QuesOptionMess(content,allowSpecify){
+	function QuesOptionMess(content,allowSpecify,inputWidth,leastInput,mostInput,isExclusive){
 		this.content=content;
 		this.allowSpecify=allowSpecify;
+		this.inputWidth=inputWidth;
+		this.leastInput=leastInput;
+		this.mostInput=mostInput;
+		this.isExclusive=isExclusive;
 	}
-	
-	
-})(jQuery);

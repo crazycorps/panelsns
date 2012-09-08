@@ -19,9 +19,9 @@
     <input type="checkbox" name="intro_trigger" id="intro_trigger" />
     <label for="intro_trigger">说明 |</label> 类型
     <select name="form_type">
-     <option value="radio">单选</option>
-     <option value="checkbox">多选</option>
-     <option value="select">下拉菜单</option>
+     <option value="1">单选</option>
+     <option value="2">多选</option>
+     <option value="3">下拉菜单</option>
     </select>
     <span id="set_choice_limit" style="display: none;">
      至少选择
@@ -33,9 +33,9 @@
     <span id="set_options_layout">
      选项排列方向
      <select name="direction">
-      <option value="vertical">竖向</option>
-      <option value="horizontal">橫向</option>
-      <option value="custom">自定义</option>
+      <option value="1">竖向</option>
+      <option value="2">橫向</option>
+      <option value="3">自定义</option>
      </select>
      <span id="set_column_number" style="display: none;">
       每行显示
@@ -74,7 +74,7 @@
       字，至少
       <input type="text" maxlength="2" size="2" name="least_input" />
       字
-      <span style="display: none;">
+      <span style="">
        ，最多
        <input type="text" maxlength="2" size="2" name="most_input" />
        字
@@ -114,7 +114,15 @@
    </h4>
    <div style="display: none;" class="intro"></div>
    <div class="content">
-    <table class="options">
+    
+   </div>
+  </li>
+ </ol>
+ 
+ <div id="option_template">
+  <!-- 竖向展示 -->
+  <div class="option_radio_vertical">
+   <table class="options">
      <tbody>
       <tr class="odd" valign="top">
        <td>
@@ -130,9 +138,8 @@
       </tr>
      </tbody>
     </table>
-   </div>
-  </li>
- </ol>
+  </div>
+ </div>
 
  <div id="batchAddOptionsDialog" class="container" style="position: relative; height: 300px; width: 400px;">
   <div class="body" style="overflow: hidden; height: 212px;">
@@ -140,5 +147,7 @@
    <textarea cols="48" rows="10"></textarea>
   </div>
  </div>
+ 
+ 
 </body>
 </html>
