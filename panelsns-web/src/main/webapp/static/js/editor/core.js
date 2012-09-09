@@ -1,9 +1,12 @@
 	(function($) {
 		
 		$.editor={
-			defaultQuesTypeOption:new QuesTypeOption(true,false,$.quesType.singleSelect,"","",$.optionLayout.vertical,"",false),
-			defaultQuesOptionMess:new QuesOptionMess("",false),
-			defaultQuesMess:new QuesMess("","",[new QuesOptionMess("",false),new QuesOptionMess("",false)])
+			// 默认单选题
+			defaultQuesTypeOption:new QuesTypeOption(true,false,$.quesType.singleSelect,0,0,$.optionLayout.vertical,0,false),
+			// 多选题
+			multiSelectQuesTypeOption:new QuesTypeOption(true,false,$.quesType.multiSelect,0,0,$.optionLayout.horizontal,0,false),
+			defaultQuesOptionMess:new QuesOptionMess("",false,0,0,0,false),
+			defaultQuesMess:new QuesMess("新建题目","",[new QuesOptionMess("",false,0,0,0,false),new QuesOptionMess("",false,0,0,0,false)])
 		};
 	})(jQuery);
 

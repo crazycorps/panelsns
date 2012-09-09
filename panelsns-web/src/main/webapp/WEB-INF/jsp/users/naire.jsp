@@ -31,6 +31,7 @@
 }
 </style>
 <script type="text/javascript" src="/js/jq/jquery.js"></script>
+<script type="text/javascript" src="/js/jq/jquery.json.js"></script>
 <script type="text/javascript" src="/js/jq/jquery.bgiframe.js"></script>
 <script type="text/javascript" src="/js/jq/ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/js/jq/ztree/jquery.ztree.all.js"></script>
@@ -40,6 +41,7 @@
 <script type="text/javascript" src="/js/u/naire.js"></script>
 <script type="text/javascript" src="/js/editor/core.js"></script>
 <!-- 调试暂且在搁置这里 -->
+<script type="text/javascript" src="/js/editor/render.js"></script>
 <script type="text/javascript" src="/js/editor/select.js"></script>
 </head>
 
@@ -47,25 +49,26 @@
  <%@include file="/WEB-INF/jsp/common/header.jsp"%>
  <div id="tabs_main" class="clear-fix">
   <ul>
-   <li>
-    <a href="#tabs_survey_manager">编辑内容</a>
-   </li>
-   <li>
-    <a href="#tabs_skin_manager">设置外观</a>
-   </li>
-   <li>
-    <a href="#tabs_trigger_manager">定义逻辑</a>
-   </li>
+   <li><a href="#tabs_survey_manager">编辑内容</a></li>
+   <li><a href="#tabs_skin_manager">设置外观</a></li>
+   <li><a href="#tabs_trigger_manager">定义逻辑</a></li>
   </ul>
   <div id="tabs_survey_manager">
    <div id="part_toolbar">
+    <div class="toolbar_left">
+     &nbsp;
+    </div>
+    <div class="toolbar_center">
+     <!--  
     <button type="button" id="add_template">模板问题</button>
-    <button type="button" id="add_select_radio">
-     <img src="/images/icon/16_mchoise.gif" width="16" height="16" />单选题
-    </button>
-    <button type="button" id="add_select_checkbox">
-     <img src="/images/icon/16_checkbox.gif" width="16" height="16" />多选题
-    </button>
+    -->
+     <button type="button" id="add_select_radio">
+      <img src="/images/icon/16_mchoise.gif" width="16" height="16" />单选题
+     </button>
+     <button type="button" id="add_select_checkbox">
+      <img src="/images/icon/16_checkbox.gif" width="16" height="16" />多选题
+     </button>
+     <!--  
     <button type="button" id="add_text_input">
      <img src="/images/icon/16_singletext.gif" width="16" height="16" />填空题
     </button>
@@ -81,16 +84,24 @@
     <button type="button" id="add_html">
      <img src="/images/icon/16_html.gif" width="16" height="16" />自定义内容
     </button>
+    -->
+    </div>
+    <div class="toolbar_right">
+     <span class="preview">预览</span>
+      <a class="save" onclick="return false;" href="javascript:void(0);"><span>保存</span></a>
+    </div>
    </div>
    <table class="main" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
      <td valign="top" class="left_side">
       <div class="tree_buttons">
+       <!--
        <button type="button"  id="moveup_part">上移</button>
        <button type="button"  id="movedown_part">下移</button>
        <button type="button"  id="copy_part">复制</button>
        <button type="button"  id="paste_part">粘贴</button>
        <button type="button"  id="remove_part">删除</button>
+       -->
       </div>
       <div class="tree_panel">
        <ul id="tree_page" class="ztree">
@@ -98,7 +109,7 @@
        </ul>
       </div>
      </td>
-    
+
      <td valign="top" class="right_side">
       <div id="survey_sandbox">
        <div id="page_selector">

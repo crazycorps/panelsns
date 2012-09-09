@@ -44,35 +44,57 @@
 	line-height: 24px
 }
 
-.editor_toolbar .buttons .preview {
-	color: #FFF;
-	padding: 5px;
-	height: 22px;
-	width: 89px
+#part_toolbar{
+	float:left;
+	text-align: left;
+}
+#part_toolbar .toolbar_left{
+	float:left;
+	width:230px;
+}
+#part_toolbar .toolbar_center{
+	float:left;
+	width:900px;
+	text-align: left;
+}
+#part_toolbar .toolbar_right{
+	float:left;
+	text-align: right;
 }
 
-.editor_toolbar .buttons .preview:hover {
+
+#part_toolbar .preview {
+	padding: 5px;
+	height: 22px;
+	width: 89px;
+	cursor: pointer;
+	line-height: 24px;
+}
+
+#part_toolbar .preview:hover {
 	text-decoration: underline
 }
 
-.editor_toolbar .buttons a.save {
+#part_toolbar a.save {
 	background: url(/images/button_blue_24.gif) repeat-x;
 	height: 24px;
 	display: inline-block;
 	border: 1px solid #096fb2;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
-	padding: 0 10px
+	padding: 0 10px;
+	text-align: right;
+	line-height: 24px;
 }
 
-.editor_toolbar .buttons a.save:hover {
+#part_toolbar a.save:hover {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	border: 1px solid #fff;
 	color: #fff
 }
 
-.editor_toolbar .buttons a.save span {
+#part_toolbar a.save span {
 	padding-left: 20px;
 	background: url(/images/icon/16_save.gif) no-repeat
 }

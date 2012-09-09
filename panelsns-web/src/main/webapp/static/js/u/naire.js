@@ -12,6 +12,8 @@
 		}
 	};
 	$.naire.edit={
+		surveyId:0,
+		naireId:0,
 		treeId:"tree_page",
 		nowPageNo:1,
 		pageMess:{
@@ -77,15 +79,25 @@
 			   }
 			});
 		},
-		initDefaultPageMess:function(pid,qid){
+		initDefaultPageMess:function(pid,qid,quesType){
 			var pageMess=$.naire.edit.pageMess["p_"+pid];
 			if(pageMess==null||pageMess==undefined){
 				pageMess={};
 			}
 			var quesAllMess=pageMess["q_"+qid];
 			if(quesAllMess==null||quesAllMess==undefined){
-				var quesTypeOption=$.editor.defaultQuesTypeOption;
-				var quesMess =$.editor.defaultQuesMess;
+				var quesTypeOption=null;
+				var quesMess=null;
+				if($.quesType.singleSelect==quesType){
+					quesTypeOption=$.editor.defaultQuesTypeOption;
+					quesMess =$.editor.defaultQuesMess;
+				}else if($.quesType.multiSelect==quesType){
+					quesTypeOption=$.editor.multiSelectQuesTypeOption;
+					quesMess =$.editor.defaultQuesMess;
+				}else{
+					quesTypeOption=$.editor.defaultQuesTypeOption;
+					quesMess =$.editor.defaultQuesMess;
+				}
 				var quesAllMess={
 					quesTypeOption:quesTypeOption,
 					quesMess:quesMess
@@ -95,16 +107,73 @@
 			$.naire.edit.pageMess["p_"+pid]=pageMess;
 			return pageMess;
 		},
+		removePageMess:function(pid){
+			var pageMess=$.naire.edit.pageMess["p_"+pid];
+			if(pageMess==null||pageMess==undefined){
+				return ;
+			}
+			delete $.naire.edit.pageMess["p_"+pid];
+		},
+		removePageQuesAllMess:function(pid,qid){
+			var pageMess=$.naire.edit.pageMess["p_"+pid];
+			if(pageMess==null||pageMess==undefined){
+				return ;
+			}
+			var quesAllMess=pageMess["q_"+qid];
+			if(quesAllMess==null||quesAllMess==undefined){
+				return ;
+			}
+			delete pageMess["q_"+qid];
+		},
+		replacePageQuesAllMess:function(pid,fromQid,toQid){
+			// 更改题目的时候确保改变到的题号，没有相关信息
+			var pageMess=$.naire.edit.pageMess["p_"+pid];
+			if(pageMess==null||pageMess==undefined){
+				return ;
+			}
+			var fromQuesAllMess=pageMess["q_"+fromQid];
+			if(fromQuesAllMess==null||fromQuesAllMess==undefined){
+				return ;
+			}
+			var toQuesAllMess=pageMess["q_"+toQid];
+			if(toQuesAllMess!=null&&toQuesAllMess!=undfined){
+				var confirmCommand=window.confirm(toQid+"题号数据，将被替换？");
+				if(!confirmCommand){
+					return ;
+				}
+			}
+			pageMess["q_"+toQid]=fromQuesAllMess;
+			delete pageMess["q_"+fromQid];
+		},
+		changePageQuesAllMess:function(pid,fromQid,toQid){
+			// 更改题目的时候确保改变到的题号，没有相关信息
+			var pageMess=$.naire.edit.pageMess["p_"+pid];
+			if(pageMess==null||pageMess==undefined){
+				return ;
+			}
+			var fromQuesAllMess=pageMess["q_"+fromQid];
+			if(fromQuesAllMess==null||fromQuesAllMess==undefined){
+				return ;
+			}
+			var toQuesAllMess=pageMess["q_"+toQid];
+			if(toQuesAllMess==null||toQuesAllMess==undefined){
+				return ;
+			}
+			pageMess["q_"+toQid]=fromQuesAllMess;
+			pageMess["q_"+fromQid]=toQuesAllMess;
+		},
 		initEvents:function(){
 			// 新建页事件
 			$("#add_page").click($.naire.edit.addPage);
 			$("#remove_page").click($.naire.edit.delPage);
 			
+			$("#part_toolbar .save").click($.naire.edit.naireSave);
+			
 			$.naire.edit.initEditorQuesEvents(); 
 		},
 		initEditorQuesEvents:function(){
 			$("#add_select_radio").click($.naire.edit.addEditorSingleSelect);
-			
+			$("#add_select_checkbox").click($.naire.edit.addEditorMultiSelect);
 		},
 		addPage:function(event){
 			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
@@ -135,6 +204,7 @@
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
 				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").remove();
+				$.naire.edit.removePageMess(node.pageNo);
 				treeObj.removeNode(node);
 			});
 			var maxPageNo=1;
@@ -165,6 +235,78 @@
 			$("#edit_naire_view").append(pageDiv);
 		},
 		addEditorSingleSelect:function(event){
+			$.naire.edit.addEditorQues($.quesType.singleSelect);
+		},
+		addEditorMultiSelect:function(event){
+			$.naire.edit.addEditorQues($.quesType.multiSelect);
+		},
+		removeEditor:function(event){
+			var editorLiEle=$(this).parents("li.part[qid][t]");
+			var currnetNairePage=$(this).parents("div.naire_page");
+			var pid=currnetNairePage.attr("pageno");
+			var qid=$(editorLiEle).attr("qid");
+			$.naire.edit.removePageQuesAllMess(pid,qid);
+			editorLiEle.remove();
+			
+			var nowEditorLiEles=$("li.part[qid][t]",currnetNairePage);
+			$.each(nowEditorLiEles,function(i,n){
+				var tempQid=parseInt($(this).attr("qid"));
+				var toQid=i+1;
+				// 如果在删除题目的下方，则需要移动
+				if(tempQid==toQid){
+					return ;
+				}
+				$(this).attr("qid",toQid);
+				$("[qid]",this).attr("qid",toQid);
+				$.naire.edit.replacePageQuesAllMess(pid,tempQid,toQid);
+			});
+		},
+		moveupEditor:function(event){
+			var editorLiEle=$(this).parents("li.part[qid][t]");
+			var currnetNairePage=$(this).parents("div.naire_page");
+			var pid=currnetNairePage.attr("pageno");
+			var qid=$(editorLiEle).attr("qid");
+			// 如果是第一题，则不能向上移动
+			if(qid==1){
+				return ;
+			}
+			var preEditorLiEle=$(editorLiEle).prev("li.part[qid][t]");
+			var prevQid=$(preEditorLiEle).attr("qid");
+			
+			$(editorLiEle).attr("qid",prevQid);
+			$("[qid]",editorLiEle).attr("qid",prevQid);
+			
+			$(preEditorLiEle).attr("qid",qid);
+			$("[qid]",preEditorLiEle).attr("qid",qid);
+			
+			$(preEditorLiEle).before(editorLiEle);
+			
+			$.naire.edit.changePageQuesAllMess(pid,qid,prevQid);
+			
+		},
+		movedownEditor:function(event){
+			var editorLiEle=$(this).parents("li.part[qid][t]");
+			var currnetNairePage=$(this).parents("div.naire_page");
+			var pid=currnetNairePage.attr("pageno");
+			var qid=$(editorLiEle).attr("qid");
+			
+			var nextEditorLiEle=$(editorLiEle).next("li.part[qid][t]");
+			if(nextEditorLiEle.length<1){
+				return;
+			}
+			var nextQid=$(nextEditorLiEle).attr("qid");
+			
+			$(editorLiEle).attr("qid",nextQid);
+			$("[qid]",editorLiEle).attr("qid",nextQid);
+			
+			$(nextEditorLiEle).attr("qid",qid);
+			$("[qid]",nextEditorLiEle).attr("qid",qid);
+			
+			$(nextEditorLiEle).after(editorLiEle);
+			
+			$.naire.edit.changePageQuesAllMess(pid,qid,nextQid);
+		},
+		addEditorQues:function(quesType){
 			// 单选
 			var cloneSingleSelEle=$("#select_template_con ol.single_select_option_template").children().clone();
 			var nowPageCon=$("#edit_naire_view div.naire_page[pageNo='"+$.naire.edit.nowPageNo+"']");
@@ -181,31 +323,37 @@
 				function () {
 					$("div.float_buttons",this).hide();
 				}
-			).click($.naire.edit.triggerEditorSelect);
+			);
+			$("div.float_buttons button[name='edit']",cloneSingleSelEle).click($.naire.edit.triggerEditorSelectForm);
+			$("div.float_buttons button[name='remove']",cloneSingleSelEle).click($.naire.edit.removeEditor);
+			$("div.float_buttons button[name='moveup']",cloneSingleSelEle).click($.naire.edit.moveupEditor);
+			$("div.float_buttons button[name='movedown']",cloneSingleSelEle).click($.naire.edit.movedownEditor);
+			// 渲染默认数据
+			var pid=$.naire.edit.nowPageNo;
+			var qid=newQuesNo;
+			var pageMess=$.naire.edit.initDefaultPageMess(pid,qid,quesType);
+			var quesAllMess=pageMess["q_"+qid];
+			var generatedQuesEle=$.render.render(pid,qid,quesAllMess.quesTypeOption,quesAllMess.quesMess);
+			var partRenderConEle=$("div.ques_render_con",cloneSingleSelEle);
+			// 把之前的删除掉
+			partRenderConEle.empty();
 			
-			// 初始化数据
-			var subjectEle=$(".title .subject",cloneSingleSelEle);
-			var pqId="p_"+$.naire.edit.nowPageNo+"_q_"+newQuesNo;
-			subjectEle.text(pqId+":"+subjectEle.text());
-			
-			// 默认竖向展示
-			var optionLayoutEle=$("div.content",cloneSingleSelEle);
-			var optionRadioVertical=$("#option_template div.option_radio_vertical");
-			$(optionLayoutEle).append(optionRadioVertical.clone(true));
+			$(partRenderConEle).append(generatedQuesEle);
 		},
-		triggerEditorSelect:function(event){
+		triggerEditorSelectForm:function(event){
 			var currnetNairePage=$(this).parents("div.naire_page");
 			var pid=currnetNairePage.attr("pageno");
-			var qid=$(this).attr("qid");
+			var qid=$(this).parents("li.part[qid][t]").attr("qid");
 			$("form.part_editor",currnetNairePage).remove();
 			var editorFormEle=$("#select_template_con form.part_editor").clone(true);
 			editorFormEle.attr({
 				pid:pid,
 				qid:qid
 			});
-			$(this).after(editorFormEle);
-			$(this).hide();
-			$("li.part[qid!='"+$(this).attr("qid")+"']",currnetNairePage).show();
+			var editorLiEle=$(this).parents("li.part[qid][t]");
+			$(editorLiEle).after(editorFormEle);
+			$(editorLiEle).hide();
+			$("li.part[qid!='"+$(editorLiEle).attr("qid")+"']",currnetNairePage).show();
 			
 			// 初始化编辑form数据
 			var pageMess=$.naire.edit.initDefaultPageMess(pid,qid);
@@ -224,74 +372,91 @@
 					quesTypeOption:quesTypeOption,
 					quesMess:quesMess
 				});
-				$.naire.edit.render.render(pid,qid,quesTypeOption,quesMess);
+				$.naire.edit.render(pid,qid,quesTypeOption,quesMess);
 			}
 		},
-		render:{
-			render:function(pid,qid,quesTypeOption,quesMess){
-				var quesType=quesTypeOption.quesType;
-				var directionType=quesTypeOption.directionType;
-				if($.quesType.singleSelect==quesType){
-					if($.optionLayout.vertical==directionType){
-						$.naire.edit.render.renderVerticalRadio(pid,qid,quesTypeOption,quesMess);
-					}
-				}
-			},
-			renderVerticalRadio:function(pid,qid,quesTypeOption,quesMess){
-				var currnetNairePage=$("div.naire_page[pageno='"+pid+"']");
-				if(currnetNairePage.length<1){
-					return ;
-				}
-				var currentEditorForm=$("form.part_editor[qid='"+qid+"']",currnetNairePage);
-				if(currentEditorForm.length<1){
-					return ;
-				}
-				var partEle=$("li.part[qid='"+qid+"']",currnetNairePage);
-				var partConEle=$("div.content",partEle);
-				// 把之前的删除掉
-				partConEle.empty();
-				var radioName="p_"+pid+"_q_"+qid;
-				
-				$(".title .subject",partEle).text(radioName+":["+quesMess.title+"]");
-				var optionRadioVertical=$("#option_template div.option_radio_vertical").clone(true);
-				var nowHaveOptionTrEles=$("table.options tr",optionRadioVertical);
-				var quesOptionMessList=quesMess.quesOptionMessList;
-				var optionLen=quesOptionMessList.length;
-				for(var i=nowHaveOptionTrEles.length;i<optionLen;i++){
-					var cloneTrEle=nowHaveOptionTrEles.first().clone(true);
-					$("table.options tbody",optionRadioVertical).append(cloneTrEle);
-				}
-				nowHaveOptionTrEles=$("table.options tr",optionRadioVertical);
-				$.each(nowHaveOptionTrEles,function(i,n){
-					if(i>optionLen){
-						return false;
-					}
-					var quesOptMess=quesOptionMessList[i];
-					if(quesOptMess==null||quesOptMess==undefined){
-						return false;
-					}
-					var trClass="odd";
-					if(i%2!=0){
-						trClass="even"
-					}
-					$(n).removeClass().addClass(trClass);
-					
-					var inputRadioEle=$(":radio",n);
-					var labelForEle=$("label",n);
-					var radioId="p_"+pid+"_q_"+qid+"_"+i;
-					$(inputRadioEle).attr({
-						id:radioId,
-						name:radioName,
-						value:i
-					});
-					$(labelForEle).attr({
-						"for":radioId
-					}).text(quesOptMess.content);
-				});
-				currentEditorForm.remove();
-				$(partConEle).append(optionRadioVertical);
-				partEle.show();
+		render:function(pid,qid,quesTypeOption,quesMess){
+			
+			var currnetNairePage=$("div.naire_page[pageno='"+pid+"']");
+			if(currnetNairePage.length<1){
+				return ;
 			}
+			var currentEditorForm=$("form.part_editor[qid='"+qid+"']",currnetNairePage);
+			if(currentEditorForm.length<1){
+				return ;
+			}
+			
+			var generatedQuesEle=$.render.render(pid,qid,quesTypeOption,quesMess);
+			if(generatedQuesEle==null||generatedQuesEle==undefined){
+				return ;
+			}
+			
+			var partEle=$("li.part[qid='"+qid+"']",currnetNairePage);
+			var partRenderConEle=$("div.ques_render_con",partEle);
+			// 把之前的删除掉
+			partRenderConEle.empty();
+			
+			currentEditorForm.remove();
+			$(partRenderConEle).append(generatedQuesEle);
+			partEle.show();
+		},
+		naireSave:function(event){
+			// 加载单选题编辑模版
+			$.naire.edit.checkAndRepairPageMess();
+			var datas={
+				surveyId:$.naire.edit.surveyId,
+				naireId:$.naire.edit.naireId,
+				pageMess: $.toJSON({pageMess:$.naire.edit.pageMess})
+			};
+			$.ajax({
+			   type: "POST",
+			   url: "/u/naire/update/",
+			   data: $.param(datas),
+			   dataType:"JSON",
+			   success: function(content){
+				   var con=content;
+			   },
+			   error:function(XMLHttpRequest, textStatus, errorThrown){
+				   
+			   }
+			});
+		},
+		checkAndRepairPageMess:function(){
+			$.each($.naire.edit.pageMess,function(pid,quesList){
+				$.each(quesList,function(qid,quesAllMess){
+					var quesTypeOption=quesAllMess.quesTypeOption;
+					var quesMess=quesAllMess.quesMess;
+					if(quesTypeOption==null||quesMess==null){
+						return true;
+					}
+					if(quesTypeOption.leastChoice==""){
+						quesTypeOption.leastChoice=0;
+					}
+					if(quesTypeOption.mostChoice==""){
+						quesTypeOption.mostChoice=0;
+					}
+					if(quesTypeOption.columnNumber==""){
+						quesTypeOption.columnNumber=0;
+					}
+					
+					if(quesMess.quesOptionMessList==null){
+						return true;
+					}
+					$.each(quesMess.quesOptionMessList,function(i,quesOpt){
+						if(quesOpt.inputWidth==""){
+							quesOpt.inputWidth=0;
+						}
+						if(quesOpt.leastInput==""){
+							quesOpt.leastInput=0;
+						}
+						if(quesOpt.mostInput==""){
+							quesOpt.mostInput=0;
+						}
+					});
+					
+				});
+			});
 		}
+		
 	};
 })(jQuery);

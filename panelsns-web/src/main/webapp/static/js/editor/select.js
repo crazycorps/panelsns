@@ -33,11 +33,11 @@
 				$("select[name='form_type'] option[value='"+quesType+"']",formEle).prop("selected",'selected');
 				
 				var leastChoice=quesTypeOption.leastChoice;
-				if(leastChoice!=null&&leastChoice!=undefined&&leastChoice!=""&&!isNaN(leastChoice)&&quesType=="checkbox"){
+				if(leastChoice!=null&&leastChoice!=undefined&&leastChoice!=""&&!isNaN(leastChoice)&&leastChoice!=0&&quesType=="checkbox"){
 					$("#set_choice_limit input[name='least_choice']",formEle).val(leastChoice);
 				}
 				var mostChoice=quesTypeOption.mostChoice;
-				if(mostChoice!=null&&mostChoice!=undefined&&mostChoice!=""&&!isNaN(mostChoice)&&quesType=="checkbox"){
+				if(mostChoice!=null&&mostChoice!=undefined&&mostChoice!=""&&!isNaN(mostChoice)&&mostChoice!=0&&quesType=="checkbox"){
 					$("#set_choice_limit input[name='most_choice']",formEle).val(mostChoice);
 				}
 			}
@@ -47,8 +47,9 @@
 				$("select[name='direction'] option[value='"+directionType+"']",formEle).prop("selected",'selected');
 				
 				var columnNumber=quesTypeOption.columnNumber;
-				if(columnNumber!=null&&columnNumber!=undefined&&columnNumber!=""&&!isNaN(columnNumber)&&directionType=="custom"){
+				if(columnNumber!=null&&columnNumber!=undefined&&columnNumber!=""&&!isNaN(columnNumber)&&columnNumber!=0&&directionType==$.optionLayout.custom){
 					$("#set_column_number input[name='column_per_row']",formEle).val(columnNumber);
+					$("#set_column_number",formEle).show();
 				}
 			}
 			
@@ -93,15 +94,15 @@
 				if(allowSpecify){
 					$("#allowSpecify",n).prop("checked","checked");
 					var inputWidth=quesOptionMess.inputWidth;
-					if(inputWidth!=null&&inputWidth!=undefined){
+					if(inputWidth!=null&&inputWidth!=undefined&&inputWidth!=0){
 						$("input[name='input_width']",n).val(inputWidth);	
 					}
 					var leastInput=quesOptionMess.leastInput;
-					if(leastInput!=null&&leastInput!=undefined){
+					if(leastInput!=null&&leastInput!=undefined&&leastInput!=0){
 						$("input[name='least_input']",n).val(leastInput);	
 					}
 					var mostInput=quesOptionMess.mostInput;
-					if(mostInput!=null&&mostInput!=undefined){
+					if(mostInput!=null&&mostInput!=undefined&&mostInput!=0){
 						$("input[name='most_input']",n).val(mostInput);	
 					}
 				}
@@ -200,7 +201,7 @@
 			var directionType=$("select[name='direction']",currentEditorForm).val();
 			var columnNumber=$("#set_column_number input[name='column_per_row']",currentEditorForm).val();;
 			var isShuffle=$("#shuffle_options",currentEditorForm).prop("checked");
-			var quesTypeOption= new QuesTypeOption(isRequire,isHasIntro,quesType,leastChoice,mostChoice,directionType,columnNumber,isShuffle);
+			var quesTypeOption= new QuesTypeOption(isRequire,isHasIntro,quesType,$.util.isNotEmpty(leastChoice)?leastChoice:0,$.util.isNotEmpty(mostChoice)?mostChoice:0,directionType,$.util.isNotEmpty(columnNumber)?columnNumber:0,isShuffle);
 			
 			var title=$("input[name='subject']",currentEditorForm).val();
 			var intro=null;
@@ -216,7 +217,7 @@
 				var mostInput=$("input[name='most_input']",n).val();
 				var isExclusive=$("input[name='exclusive']",n).prop("checked");
 				
-				var quesOptionMess=new QuesOptionMess(content,allowSpecify,inputWidth,leastInput,mostInput,isExclusive);
+				var quesOptionMess=new QuesOptionMess(content,allowSpecify,$.util.isNotEmpty(inputWidth)?inputWidth:0,$.util.isNotEmpty(leastInput)?inputWidth:0,$.util.isNotEmpty(mostInput)?inputWidth:0,isExclusive);
 				quesOptionMessList.push(quesOptionMess);
 			});
 			var quesMess=new QuesMess(title,intro,quesOptionMessList);
