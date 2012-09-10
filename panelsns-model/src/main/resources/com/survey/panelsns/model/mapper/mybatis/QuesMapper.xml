@@ -16,10 +16,11 @@
     <result column="update_date" jdbcType="DATE" property="updateDate" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="control_mess" jdbcType="LONGVARCHAR" property="controlMess" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, ques_naire_id, type, page_no, serial_no, busi_no, title, content, descript, must_answer, 
-    create_date, update_date, version, remark
+    id, ques_naire_id, type, page_no, serial_no, busi_no, title, content, descript, must_answer,  
+    create_date, update_date, version, remark,control_mess
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -36,12 +37,12 @@
       serial_no, busi_no, title, 
       content, descript, must_answer, 
       create_date, update_date, version, 
-      remark)
+      remark, control_mess)
     values (#{id,jdbcType=BIGINT}, #{quesNaireId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{pageNo,jdbcType=INTEGER},
       #{serialNo,jdbcType=INTEGER}, #{busiNo,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{descript,jdbcType=VARCHAR}, #{mustAnswer,jdbcType=INTEGER}, 
       #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, #{version,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR}, #{controlMess,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.survey.panelsns.model.entity.Ques">
     insert into ques
@@ -88,6 +89,9 @@
       <if test="remark != null">
         remark,
       </if>
+      <if test="controlMess != null">
+        control_mess,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -131,6 +135,9 @@
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="controlMess != null">
+        #{controlMess,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +183,9 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="controlMess != null">
+        control_mess = #{controlMess,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -193,7 +203,8 @@
       create_date = #{createDate,jdbcType=DATE},
       update_date = #{updateDate,jdbcType=DATE},
       version = #{version,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      control_mess = #{controlMess,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

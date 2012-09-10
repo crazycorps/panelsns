@@ -15,6 +15,9 @@ public class QuesOption {
 
     
     private String content;
+    
+    
+    private String controlMess;
 
     
     private Integer version;
@@ -71,9 +74,19 @@ public class QuesOption {
     public void setContent(String content) {
         this.content = content;
     }
-
     
-    public Integer getVersion() {
+    
+    public String getControlMess() {
+		return controlMess;
+	}
+
+
+	public void setControlMess(String controlMess) {
+		this.controlMess = controlMess;
+	}
+
+
+	public Integer getVersion() {
         return version;
     }
 

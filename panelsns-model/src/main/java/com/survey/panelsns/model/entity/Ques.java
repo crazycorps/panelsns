@@ -25,6 +25,8 @@ public class Ques {
 	
 	private Integer mustAnswer;
 	
+	private String controlMess;
+	
 	private Date createDate;
 	
 	private Date updateDate;
@@ -32,7 +34,7 @@ public class Ques {
 	private Integer version;
 	
 	private String remark;
-
+	
 	
 	public Long getId() {
 		return id;
@@ -132,8 +134,17 @@ public class Ques {
 	public void setMustAnswer(Integer mustAnswer) {
 		this.mustAnswer = mustAnswer;
 	}
-
 	
+	public String getControlMess() {
+		return controlMess;
+	}
+
+
+	public void setControlMess(String controlMess) {
+		this.controlMess = controlMess;
+	}
+
+
 	public Date getCreateDate() {
 		return createDate;
 	}

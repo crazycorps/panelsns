@@ -1,4 +1,4 @@
-package com.survey.panelsns.web.json;
+package com.survey.panelsns.service.json;
 
 import java.util.List;
 import java.util.Map;

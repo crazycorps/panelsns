@@ -38,6 +38,9 @@ public class QuesNaire {
 
     
     private Integer status;
+    
+    
+    private Integer totalPage;
 
     
     private Date createDate;
@@ -172,7 +175,18 @@ public class QuesNaire {
     }
 
     
-    public Date getCreateDate() {
+    
+    public Integer getTotalPage() {
+		return totalPage;
+	}
+
+
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
+	}
+
+
+	public Date getCreateDate() {
         return createDate;
     }
 

@@ -1,6 +1,12 @@
 package com.survey.panelsns.model.entity;
 
 public class Users {
+	
+	public static final Users DEFAULT=new Users(){
+		{
+			this.setId(0L);
+		}
+	};
     
     private Long id;
 

@@ -3,7 +3,10 @@ package com.survey.panelsns.model.entity;
 import java.util.Date;
 
 public class Templates {
-    
+	
+	public static final long DEFAULT_ID=0L;
+	
+	
     private Long id;
 
     

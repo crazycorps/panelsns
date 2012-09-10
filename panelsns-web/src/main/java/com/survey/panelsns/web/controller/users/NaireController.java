@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.survey.panelsns.web.json.NairePageMess;
+import com.survey.panelsns.service.json.NairePageMess;
 import com.survey.tools.util.JSONUtils;
 
 @Controller
@@ -36,6 +36,7 @@ public class NaireController {
 		Map<String,Object> ret=new HashMap<String, Object>();
 		TypeReference<NairePageMess> typeReference=new TypeReference<NairePageMess>(){};
 		NairePageMess nairePageMess=JSONUtils.fromJSON(pageMess, typeReference, true);
+		
 		return ret;
 	}
 	

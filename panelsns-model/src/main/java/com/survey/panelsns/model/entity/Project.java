@@ -1,6 +1,13 @@
 package com.survey.panelsns.model.entity;
 
 public class Project {
+	
+	public static final Project DEFAULT=new Project(){
+		{
+			this.setId(0L);
+			this.setUserId(Users.DEFAULT.getId());
+		}
+	};
     
     private Long id;
 
