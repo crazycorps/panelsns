@@ -33,23 +33,25 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.survey.panelsns.model.entity.Ques">
-    insert into ques (id, ques_naire_id, type,  page_no,
+  	<![CDATA[
+    insert into ques (ques_naire_id, type,  page_no,
       serial_no, busi_no, title, 
       content, descript, must_answer, 
       create_date, update_date, version, 
       remark, control_mess)
-    values (#{id,jdbcType=BIGINT}, #{quesNaireId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{pageNo,jdbcType=INTEGER},
+    values (#{quesNaireId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{pageNo,jdbcType=INTEGER},
       #{serialNo,jdbcType=INTEGER}, #{busiNo,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{descript,jdbcType=VARCHAR}, #{mustAnswer,jdbcType=INTEGER}, 
       #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, #{version,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{controlMess,jdbcType=LONGVARCHAR})
+      ]]>
+      <selectKey resultType="java.lang.Long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+	  </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.survey.panelsns.model.entity.Ques">
     insert into ques
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="quesNaireId != null">
         ques_naire_id,
       </if>
@@ -94,9 +96,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="quesNaireId != null">
         #{quesNaireId,jdbcType=BIGINT},
       </if>
@@ -140,6 +139,10 @@
         #{controlMess,jdbcType=LONGVARCHAR},
       </if>
     </trim>
+    
+     <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+	  </selectKey>
   </insert>
   <update id="updateSelectiveById" parameterType="com.survey.panelsns.model.entity.Ques">
     update ques

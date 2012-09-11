@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import com.survey.panelsns.model.entity.Ques;
 import com.survey.panelsns.model.entity.Ques.QuesType;
@@ -20,23 +21,19 @@ import com.survey.panelsns.service.json.NairePageMess.QuesTypeOption;
 import com.survey.panelsns.service.vo.KV;
 import com.survey.tools.util.JSONUtils;
 
-public class QuesProcesser implements Processer<Object>{
+public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 
-	private long userId;
-	private long surveyId;
 	private long naireId;
 	private NairePageMess nairePageMess;
 	
-	public QuesProcesser(long userId, long surveyId, long naireId, NairePageMess nairePageMess) {
+	public QuesProcesser(long naireId, NairePageMess nairePageMess) {
 		super();
-		this.userId = userId;
-		this.surveyId = surveyId;
 		this.naireId = naireId;
 		this.nairePageMess = nairePageMess;
 	}
 
 	@Override
-	public Object process() {
+	public List<KV<Integer,List<Ques>>> process() {
 		if(nairePageMess==null){
 			return null;
 		}
@@ -45,26 +42,38 @@ public class QuesProcesser implements Processer<Object>{
 			return null;
 		}
 		
+		List<KV<Integer,List<Ques>>> ret=new ArrayList<KV<Integer,List<Ques>>>();
+		
 		Set<String> pageIdentityKeys=pageMess.keySet();
 		List<KV<String,Integer>> sortPageKeyNoList=this.getSortPageKeyNo(pageIdentityKeys);
 		for(KV<String,Integer> pageKeyNoKV:sortPageKeyNoList){
 			Map<String,QuesAllMess> quesAllMessMap=pageMess.get(pageKeyNoKV.getKey());
-			this.processPerPageMess(pageKeyNoKV,quesAllMessMap);
+			List<Ques> quesList=this.processPerPageMess(pageKeyNoKV,quesAllMessMap);
+			if(CollectionUtils.isEmpty(quesList)){
+				continue;
+			}
+			ret.add(new KV<Integer,List<Ques>>(pageKeyNoKV.getVal(),quesList));
 		}
-		return null;
+		return ret;
 	}
 	
 	/**
 	 * 处理每页上所有问题的
 	 * @param quesAllMessMap 每页上包含的所有问题信息
 	 */
-	private void processPerPageMess(KV<String,Integer> pageKeyNoKV,Map<String,QuesAllMess> quesAllMessMap){
+	private List<Ques> processPerPageMess(KV<String,Integer> pageKeyNoKV,Map<String,QuesAllMess> quesAllMessMap){
+		List<Ques> ret=new ArrayList<Ques>();
 		Set<String> quesIdentityKeys=quesAllMessMap.keySet();
 		List<KV<String,Integer>> sortQuesKeyNoList=this.getSortQuesKeyNo(quesIdentityKeys);
 		for(KV<String,Integer> quesKeyNoKV:sortQuesKeyNoList){
 			QuesAllMess quesAllMess=quesAllMessMap.get(quesKeyNoKV.getKey());
-			this.processQuesAllMess(pageKeyNoKV.getVal(),quesKeyNoKV,quesAllMess);
+			Ques ques=this.processQuesAllMess(pageKeyNoKV.getVal(),quesKeyNoKV,quesAllMess);
+			if(ques==null){
+				continue;
+			}
+			ret.add(ques);
 		}
+		return ret;
 	}
 	/**
 	 * 处理单个问题
@@ -73,6 +82,9 @@ public class QuesProcesser implements Processer<Object>{
 	private Ques processQuesAllMess(int pageNo,KV<String,Integer> quesKeyNoKV,QuesAllMess quesAllMess){
 		QuesTypeOption quesTypeOption=quesAllMess.getQuesTypeOption();
 		QuesMess quesMess=quesAllMess.getQuesMess();
+		if(quesTypeOption==null||quesMess==null){
+			return null;
+		}
 		QuesType quesType=QuesType.intanceof(quesTypeOption.getQuesType());
 		Ques ques=new Ques();
 		ques.setQuesNaireId(this.naireId);

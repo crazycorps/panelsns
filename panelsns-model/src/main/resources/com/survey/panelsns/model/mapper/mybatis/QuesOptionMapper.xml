@@ -26,19 +26,18 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.survey.panelsns.model.entity.QuesOption">
-    insert into ques_option (id, ques_id, serial_no, 
-      title, content,control_mess,  version, 
-      remark)
-    values (#{id,jdbcType=BIGINT}, #{quesId,jdbcType=BIGINT}, #{serialNo,jdbcType=INTEGER}, 
+    insert into ques_option (ques_id, serial_no, 
+      title, content,control_mess, version, remark)
+    values (#{quesId,jdbcType=BIGINT}, #{serialNo,jdbcType=INTEGER}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},#{controlMess,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
+      <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+	  </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.survey.panelsns.model.entity.QuesOption">
     insert into ques_option
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="quesId != null">
         ques_id,
       </if>
@@ -62,9 +61,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="quesId != null">
         #{quesId,jdbcType=BIGINT},
       </if>
