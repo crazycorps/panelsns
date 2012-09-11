@@ -1,9 +1,31 @@
 package com.survey.panelsns.model.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Ques {
 
+	public enum QuesType{
+		NULL("无此类型"),SINGLE_SELECT("单选"),MULTI_SELECT("多选"),SELECT("下拉框单选"),FILL_BLANK("填空题(短开放)"),MATRIX_SINGLE_SELECT("无此类型"),MATRIX_MULTI_SELECT("无此类型");
+		
+		private String displayName;
+
+		private QuesType(String displayName) {
+			this.displayName = displayName;
+		}
+
+		public String getDisplayName() {
+			return displayName;
+		}
+		
+		public static QuesType intanceof(int type){
+			if(type<0||type>QuesType.values().length){
+				return QuesType.NULL;
+			}
+			return QuesType.values()[type]; 
+		}
+	}
 	
 	private Long id;
 	
@@ -34,6 +56,8 @@ public class Ques {
 	private Integer version;
 	
 	private String remark;
+	
+	transient private List<QuesOption> quesOptionList;
 	
 	
 	public Long getId() {
@@ -183,4 +207,16 @@ public class Ques {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+
+	public List<QuesOption> getQuesOptionList() {
+		return quesOptionList;
+	}
+
+
+	public void setQuesOptionList(List<QuesOption> quesOptionList) {
+		this.quesOptionList = quesOptionList;
+	}
+	
+	
 }

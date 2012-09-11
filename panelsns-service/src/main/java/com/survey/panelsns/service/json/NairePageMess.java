@@ -3,6 +3,8 @@ package com.survey.panelsns.service.json;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class NairePageMess {
 	
 	private Map<String,Map<String,QuesAllMess>> pageMess;
@@ -122,6 +124,8 @@ public class NairePageMess {
 		private int leastInput;
 		private int mostInput;
 		private boolean isExclusive;
+		
+		@JsonIgnore
 		public String getContent() {
 			return content;
 		}
