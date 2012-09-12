@@ -5,8 +5,8 @@
 			defaultQuesTypeOption:new QuesTypeOption(true,false,$.quesType.singleSelect,0,0,$.optionLayout.vertical,0,false),
 			// 多选题
 			multiSelectQuesTypeOption:new QuesTypeOption(true,false,$.quesType.multiSelect,0,0,$.optionLayout.horizontal,0,false),
-			defaultQuesOptionMess:new QuesOptionMess("",false,0,0,0,false),
-			defaultQuesMess:new QuesMess("新建题目","",[new QuesOptionMess("",false,0,0,0,false),new QuesOptionMess("",false,0,0,0,false)])
+			defaultQuesOptionMess:new QuesOptionMess(null,"",false,0,0,0,false),
+			defaultQuesMess:new QuesMess(null,"新建题目","",[new QuesOptionMess(null,"",false,0,0,0,false),new QuesOptionMess(null,"",false,0,0,0,false)])
 		};
 	})(jQuery);
 
@@ -35,7 +35,8 @@
 	 * intro：问题特殊说明
 	 * quesOptionMessList：问题选项列表
 	 */
-	function QuesMess(title,intro,quesOptionMessList){
+	function QuesMess(sn,title,intro,quesOptionMessList){
+		this.sn=sn;
 		this.title=title;
 		this.intro=intro;
 		this.quesOptionMessList=quesOptionMessList;
@@ -45,7 +46,8 @@
 	 * content:问题选项内容
 	 * isBlank：是否可以为空
 	 */
-	function QuesOptionMess(content,allowSpecify,inputWidth,leastInput,mostInput,isExclusive){
+	function QuesOptionMess(sn,content,allowSpecify,inputWidth,leastInput,mostInput,isExclusive){
+		this.sn=sn;
 		this.content=content;
 		this.allowSpecify=allowSpecify;
 		this.inputWidth=inputWidth;

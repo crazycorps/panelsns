@@ -19,9 +19,11 @@ import com.survey.panelsns.service.json.NairePageMess.QuesMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesOptionMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesTypeOption;
 import com.survey.panelsns.service.vo.KV;
+import com.survey.panelsns.service.vo.QuesOptionVO;
+import com.survey.panelsns.service.vo.QuesVO;
 import com.survey.tools.util.JSONUtils;
 
-public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
+public class QuesProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
 
 	private long naireId;
 	private NairePageMess nairePageMess;
@@ -33,7 +35,7 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 	}
 
 	@Override
-	public List<KV<Integer,List<Ques>>> process() {
+	public List<KV<Integer,List<QuesVO>>> process() {
 		if(nairePageMess==null){
 			return null;
 		}
@@ -42,17 +44,17 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 			return null;
 		}
 		
-		List<KV<Integer,List<Ques>>> ret=new ArrayList<KV<Integer,List<Ques>>>();
+		List<KV<Integer,List<QuesVO>>> ret=new ArrayList<KV<Integer,List<QuesVO>>>();
 		
 		Set<String> pageIdentityKeys=pageMess.keySet();
 		List<KV<String,Integer>> sortPageKeyNoList=this.getSortPageKeyNo(pageIdentityKeys);
 		for(KV<String,Integer> pageKeyNoKV:sortPageKeyNoList){
 			Map<String,QuesAllMess> quesAllMessMap=pageMess.get(pageKeyNoKV.getKey());
-			List<Ques> quesList=this.processPerPageMess(pageKeyNoKV,quesAllMessMap);
+			List<QuesVO> quesList=this.processPerPageMess(pageKeyNoKV,quesAllMessMap);
 			if(CollectionUtils.isEmpty(quesList)){
 				continue;
 			}
-			ret.add(new KV<Integer,List<Ques>>(pageKeyNoKV.getVal(),quesList));
+			ret.add(new KV<Integer,List<QuesVO>>(pageKeyNoKV.getVal(),quesList));
 		}
 		return ret;
 	}
@@ -61,17 +63,17 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 	 * 处理每页上所有问题的
 	 * @param quesAllMessMap 每页上包含的所有问题信息
 	 */
-	private List<Ques> processPerPageMess(KV<String,Integer> pageKeyNoKV,Map<String,QuesAllMess> quesAllMessMap){
-		List<Ques> ret=new ArrayList<Ques>();
+	private List<QuesVO> processPerPageMess(KV<String,Integer> pageKeyNoKV,Map<String,QuesAllMess> quesAllMessMap){
+		List<QuesVO> ret=new ArrayList<QuesVO>();
 		Set<String> quesIdentityKeys=quesAllMessMap.keySet();
 		List<KV<String,Integer>> sortQuesKeyNoList=this.getSortQuesKeyNo(quesIdentityKeys);
 		for(KV<String,Integer> quesKeyNoKV:sortQuesKeyNoList){
 			QuesAllMess quesAllMess=quesAllMessMap.get(quesKeyNoKV.getKey());
-			Ques ques=this.processQuesAllMess(pageKeyNoKV.getVal(),quesKeyNoKV,quesAllMess);
-			if(ques==null){
+			QuesVO quesVo=this.processQuesAllMess(pageKeyNoKV.getVal(),quesKeyNoKV,quesAllMess);
+			if(quesVo==null){
 				continue;
 			}
-			ret.add(ques);
+			ret.add(quesVo);
 		}
 		return ret;
 	}
@@ -79,7 +81,7 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 	 * 处理单个问题
 	 * @param quesAllMess
 	 */
-	private Ques processQuesAllMess(int pageNo,KV<String,Integer> quesKeyNoKV,QuesAllMess quesAllMess){
+	private QuesVO processQuesAllMess(int pageNo,KV<String,Integer> quesKeyNoKV,QuesAllMess quesAllMess){
 		QuesTypeOption quesTypeOption=quesAllMess.getQuesTypeOption();
 		QuesMess quesMess=quesAllMess.getQuesMess();
 		if(quesTypeOption==null||quesMess==null){
@@ -101,10 +103,12 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 		ques.setUpdateDate(now);
 		ques.setVersion(1);
 		ques.setControlMess(JSONUtils.toJSON(quesTypeOption));
+		QuesVO quesVo=new QuesVO(ques);
+		quesMess.setSnKey(quesVo.snKey());
 		
 		List<QuesOptionMess> quesOptionMessList=quesMess.getQuesOptionMessList();
 		if(quesOptionMessList!=null&&!quesOptionMessList.isEmpty()){
-			List<QuesOption> quesOptionList=new ArrayList<QuesOption>();
+			List<QuesOptionVO> quesOptionVoList=new ArrayList<QuesOptionVO>();
 			int i=1;
 			for(QuesOptionMess quesOptionMess:quesOptionMessList){
 				QuesOption quesOption=new QuesOption();
@@ -114,11 +118,13 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<Ques>>>>{
 				quesOption.setSerialNo(i++);
 				quesOption.setControlMess(JSONUtils.toJSON(quesOptionMess));
 				quesOption.setVersion(1);
-				quesOptionList.add(quesOption);
+				QuesOptionVO quesOptionVO=new QuesOptionVO(quesOption);
+				quesOptionMess.setSnKey(quesVo.snKey()+"_"+quesOptionVO.snKey());
+				quesOptionVoList.add(quesOptionVO);
 			}
-			ques.setQuesOptionList(quesOptionList);
+			quesVo.setQuesOptionVoList(quesOptionVoList);
 		}
-		return ques;
+		return quesVo;
 	}
 	
 	/**

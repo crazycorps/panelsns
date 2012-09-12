@@ -94,9 +94,20 @@ public class NairePageMess {
 	}
 	
 	public static class QuesMess{
+		private String sn;
 		private String title;
 		private String intro;
 		private List<QuesOptionMess> quesOptionMessList;
+		
+		@JsonIgnore
+		private String snKey;
+		
+		public String getSn() {
+			return sn;
+		}
+		public void setSn(String sn) {
+			this.sn = sn;
+		}
 		public String getTitle() {
 			return title;
 		}
@@ -115,9 +126,16 @@ public class NairePageMess {
 		public void setQuesOptionMessList(List<QuesOptionMess> quesOptionMessList) {
 			this.quesOptionMessList = quesOptionMessList;
 		}
+		public String getSnKey() {
+			return snKey;
+		}
+		public void setSnKey(String snKey) {
+			this.snKey = snKey;
+		}
 	}
 	
 	public static class QuesOptionMess{
+		private String sn;
 		private String content;
 		private boolean allowSpecify;
 		private int inputWidth;
@@ -126,6 +144,14 @@ public class NairePageMess {
 		private boolean isExclusive;
 		
 		@JsonIgnore
+		private String snKey;
+		
+		public String getSn() {
+			return sn;
+		}
+		public void setSn(String sn) {
+			this.sn = sn;
+		}
 		public String getContent() {
 			return content;
 		}
@@ -162,7 +188,12 @@ public class NairePageMess {
 		public void setExclusive(boolean isExclusive) {
 			this.isExclusive = isExclusive;
 		}
-		
+		public String getSnKey() {
+			return snKey;
+		}
+		public void setSnKey(String snKey) {
+			this.snKey = snKey;
+		}
 	}
 }
 

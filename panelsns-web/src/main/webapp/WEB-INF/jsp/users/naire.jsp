@@ -38,8 +38,8 @@
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/core.js"></script>
 <script type="text/javascript" src="/js/naire-common.js"></script>
-<script type="text/javascript" src="/js/u/naire.js"></script>
 <script type="text/javascript" src="/js/editor/core.js"></script>
+<script type="text/javascript" src="/js/u/naire.js"></script>
 <!-- 调试暂且在搁置这里 -->
 <script type="text/javascript" src="/js/editor/render.js"></script>
 <script type="text/javascript" src="/js/editor/select.js"></script>

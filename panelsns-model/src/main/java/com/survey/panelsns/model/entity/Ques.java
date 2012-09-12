@@ -56,9 +56,6 @@ public class Ques {
 	
 	private String remark;
 	
-	transient private List<QuesOption> quesOptionList;
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -206,16 +203,5 @@ public class Ques {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-
-	public List<QuesOption> getQuesOptionList() {
-		return quesOptionList;
-	}
-
-
-	public void setQuesOptionList(List<QuesOption> quesOptionList) {
-		this.quesOptionList = quesOptionList;
-	}
-	
 	
 }

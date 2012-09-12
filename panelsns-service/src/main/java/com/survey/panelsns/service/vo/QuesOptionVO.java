@@ -8,6 +8,14 @@ public class QuesOptionVO extends AbstractObjectVO<QuesOption> {
 
 	private static final byte[] SECRET_KEY=new byte[]{-83, -122, -45, 86, -126, 78, 8, 1, -44, 50, 127, -26, -92, -47, 73, -27};
 
+	public QuesOptionVO() {
+		super();
+	}
+
+	public QuesOptionVO(QuesOption entity) {
+		super(entity);
+	}
+
 	public String getSn(){
 		if(this.entity==null||this.entity.getId()==null){
 			return null;
@@ -15,5 +23,8 @@ public class QuesOptionVO extends AbstractObjectVO<QuesOption> {
 		return toSn(this.entity.getId(),SECRET_KEY);
 	}
 	
+	public String snKey(){
+		return "qo_"+this.entity.getSerialNo();
+	}
 	
 }

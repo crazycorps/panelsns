@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.survey.panelsns.model.entity.Users;
 import com.survey.panelsns.service.QuesNaireService;
 import com.survey.panelsns.service.json.NairePageMess;
+import com.survey.panelsns.web.controller.AbstractPanelSnsController;
 import com.survey.tools.util.JSONUtils;
 
 @Controller
 @RequestMapping("/u/naire")
-public class NaireController {
+public class NaireController extends AbstractPanelSnsController{
 	
 	@Autowired
 	private QuesNaireService quesNaireService;
@@ -44,9 +45,11 @@ public class NaireController {
 			TypeReference<NairePageMess> typeReference=new TypeReference<NairePageMess>(){};
 			NairePageMess nairePageMess=JSONUtils.fromJSON(pageMess, typeReference, true);
 			this.quesNaireService.processNairePageMess(Users.DEFAULT.getId(), surveyId, naireId, nairePageMess);
+			ret.put("pageMess", nairePageMess);
+			ret.put(process_status_key, process_status_success);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			ret.put(process_status_key, process_status_fail);
 		}
 		return ret;
 	}

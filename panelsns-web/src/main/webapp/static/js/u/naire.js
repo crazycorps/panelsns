@@ -17,10 +17,10 @@
 		treeId:"tree_page",
 		nowPageNo:1,
 		pageMess:{
-			p_0:{
-				q_0:{
-					quesTypeOption:null,
-					quesMess:null
+			p_1:{
+				q_1:{
+					quesTypeOption:$.editor.defaultQuesTypeOption,
+					quesMess:$.editor.defaultQuesMess
 				}
 			}
 		},
@@ -413,8 +413,14 @@
 			   url: "/u/naire/update/",
 			   data: $.param(datas),
 			   dataType:"JSON",
-			   success: function(content){
-				   var con=content;
+			   success: function(ret){
+				   var proStatus=ret.p_s;
+				   if(proStatus==0){
+					   var pageMess=ret.pageMess.pageMess;
+					   $.naire.edit.pageMess=pageMess;
+				   }else{
+					   
+				   }
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
 				   

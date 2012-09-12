@@ -32,18 +32,23 @@
 			if(quesType!=null&&quesType!=undefined){
 				$("select[name='form_type'] option[value='"+quesType+"']",formEle).prop("selected",'selected');
 				
-				var leastChoice=quesTypeOption.leastChoice;
-				if(leastChoice!=null&&leastChoice!=undefined&&leastChoice!=""&&!isNaN(leastChoice)&&leastChoice!=0&&quesType=="checkbox"){
-					$("#set_choice_limit input[name='least_choice']",formEle).val(leastChoice);
+				if(quesType==$.quesType.multiSelect){
+					$("#set_choice_limit",formEle).show();
+					var leastChoice=quesTypeOption.leastChoice;
+					if(leastChoice!=null&&leastChoice!=undefined&&leastChoice!=""&&!isNaN(leastChoice)&&leastChoice!=0){
+						$("#set_choice_limit input[name='least_choice']",formEle).val(leastChoice);
+						
+					}
+					var mostChoice=quesTypeOption.mostChoice;
+					if(mostChoice!=null&&mostChoice!=undefined&&mostChoice!=""&&!isNaN(mostChoice)&&mostChoice!=0){
+						$("#set_choice_limit input[name='most_choice']",formEle).val(mostChoice);
+					}
 				}
-				var mostChoice=quesTypeOption.mostChoice;
-				if(mostChoice!=null&&mostChoice!=undefined&&mostChoice!=""&&!isNaN(mostChoice)&&mostChoice!=0&&quesType=="checkbox"){
-					$("#set_choice_limit input[name='most_choice']",formEle).val(mostChoice);
-				}
+				
 			}
 			
 			var directionType=quesTypeOption.directionType;
-			if(quesType!=null&&quesType!=undefined){
+			if(directionType!=null&&directionType!=undefined){
 				$("select[name='direction'] option[value='"+directionType+"']",formEle).prop("selected",'selected');
 				
 				var columnNumber=quesTypeOption.columnNumber;
@@ -63,9 +68,11 @@
 			if(quesMess==null||quesMess==undefined){
 				return ;
 			}
+			var subjectEle=$("input[name='subject']",formEle);
+			subjectEle.attr("sn",quesMess.sn);
 			var title=quesMess.title;
 			if($.util.isNotEmpty(title)){
-				$("input[name='subject']",formEle).val(title);
+				subjectEle.val(title);
 			}
 			var intro=quesMess.intro;
 			var isIntro=$("#intro_trigger",formEle).prop("checked");
@@ -84,11 +91,15 @@
 				optionsEles.append(firstOptionEle.clone(true));
 			}
 			
+			var quesType=quesTypeOption.quesType;
+			
 			$.each($("div.select_option",optionsEles),function(i,n){
 				var quesOptionMess=quesOptionMessList[i];
 				var content=quesOptionMess.content;
+				var quesOptEle=$(":text[name='label']",n);
+				quesOptEle.attr("sn",quesOptionMess.sn);
 				if($.util.isNotEmpty(content)){
-					$(":text[name='label']",n).val(content);
+					quesOptEle.val(content);
 				}
 				var allowSpecify=quesOptionMess.allowSpecify;
 				if(allowSpecify){
@@ -105,6 +116,9 @@
 					if(mostInput!=null&&mostInput!=undefined&&mostInput!=0){
 						$("input[name='most_input']",n).val(mostInput);	
 					}
+				}
+				if(quesType==$.quesType.multiSelect){
+					$(".setup_exclusive",n).show();
 				}
 				var isExclusive=quesOptionMess.isExclusive;
 				if(isExclusive){
@@ -217,10 +231,10 @@
 				var mostInput=$("input[name='most_input']",n).val();
 				var isExclusive=$("input[name='exclusive']",n).prop("checked");
 				
-				var quesOptionMess=new QuesOptionMess(content,allowSpecify,$.util.isNotEmpty(inputWidth)?inputWidth:0,$.util.isNotEmpty(leastInput)?inputWidth:0,$.util.isNotEmpty(mostInput)?inputWidth:0,isExclusive);
+				var quesOptionMess=new QuesOptionMess(null,content,allowSpecify,$.util.isNotEmpty(inputWidth)?inputWidth:0,$.util.isNotEmpty(leastInput)?inputWidth:0,$.util.isNotEmpty(mostInput)?inputWidth:0,isExclusive);
 				quesOptionMessList.push(quesOptionMess);
 			});
-			var quesMess=new QuesMess(title,intro,quesOptionMessList);
+			var quesMess=new QuesMess(null,title,intro,quesOptionMessList);
 			
 			var callBack=event.data.callBack;
 			if(callBack!=null&&callBack!=undefined&&$.isFunction(callBack)){
