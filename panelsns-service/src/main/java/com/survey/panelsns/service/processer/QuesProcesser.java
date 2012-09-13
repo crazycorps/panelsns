@@ -105,6 +105,14 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
 		ques.setControlMess(JSONUtils.toJSON(quesTypeOption));
 		QuesVO quesVo=new QuesVO(ques);
 		quesMess.setSnKey(quesVo.snKey());
+		// 通过sn判断是否是更新还是新建
+		if(StringUtils.isNotEmpty(quesMess.getSn())){
+			quesVo.setSn(quesMess.getSn());
+			long tempId=quesVo.parseSn();
+			if(QuesVO.isValidFromSn(tempId)){
+				ques.setId(tempId);
+			}
+		}
 		
 		List<QuesOptionMess> quesOptionMessList=quesMess.getQuesOptionMessList();
 		if(quesOptionMessList!=null&&!quesOptionMessList.isEmpty()){
@@ -120,6 +128,13 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
 				quesOption.setVersion(1);
 				QuesOptionVO quesOptionVO=new QuesOptionVO(quesOption);
 				quesOptionMess.setSnKey(quesVo.snKey()+"_"+quesOptionVO.snKey());
+				if(StringUtils.isNotEmpty(quesOptionMess.getSn())){
+					quesOptionVO.setSn(quesOptionMess.getSn());
+					long tempId=quesOptionVO.parseSn();
+					if(QuesOptionVO.isValidFromSn(tempId)){
+						quesOption.setId(tempId);
+					}
+				}
 				quesOptionVoList.add(quesOptionVO);
 			}
 			quesVo.setQuesOptionVoList(quesOptionVoList);

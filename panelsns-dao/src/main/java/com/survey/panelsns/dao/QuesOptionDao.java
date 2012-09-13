@@ -6,4 +6,5 @@ import com.survey.panelsns.model.entity.QuesOption;
 
 public interface QuesOptionDao extends GenericDao<QuesOption, Long> {
 
+	void deleteByQuesId(long quesId);
 }

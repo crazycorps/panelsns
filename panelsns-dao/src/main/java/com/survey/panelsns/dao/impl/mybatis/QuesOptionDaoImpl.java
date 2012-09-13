@@ -14,4 +14,9 @@ public class QuesOptionDaoImpl extends AbstractGenericDaoImpl<QuesOption, Long> 
 		return QuesOption.class.getName();
 	}
 
+	@Override
+	public void deleteByQuesId(long quesId) {
+		this.getSqlSessionTemplate().update(this.namespace()+".deleteByQuesId", quesId);
+	}
+
 }

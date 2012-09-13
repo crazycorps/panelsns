@@ -25,6 +25,10 @@
     delete from ques_option
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteByQuesId" parameterType="java.lang.Long">
+    delete from ques_option
+    where ques_id = #{quesId,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="com.survey.panelsns.model.entity.QuesOption">
     insert into ques_option (ques_id, serial_no, 
       title, content,control_mess, version, remark)

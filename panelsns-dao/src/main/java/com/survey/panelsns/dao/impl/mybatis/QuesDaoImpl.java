@@ -14,4 +14,15 @@ public class QuesDaoImpl extends AbstractGenericDaoImpl<Ques, Long> implements Q
 		return Ques.class.getName();
 	}
 
+	@Override
+	public void deleteQuesByPageNo(long naireId,int pageNo) {
+		if(pageNo<=0){
+			return ;
+		}
+		Ques ques=new Ques();
+		ques.setQuesNaireId(naireId);
+		ques.setPageNo(pageNo);
+		this.getSqlSessionTemplate().update(this.namespace()+".deleteByPageNo", ques);
+	}
+
 }

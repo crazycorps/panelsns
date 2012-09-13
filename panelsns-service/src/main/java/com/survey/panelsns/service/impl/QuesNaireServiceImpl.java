@@ -16,6 +16,7 @@ import com.survey.panelsns.model.entity.Ques;
 import com.survey.panelsns.model.entity.QuesNaire;
 import com.survey.panelsns.model.entity.QuesOption;
 import com.survey.panelsns.service.QuesNaireService;
+import com.survey.panelsns.service.json.NaireDeleteMess;
 import com.survey.panelsns.service.json.NairePageMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesAllMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesMess;
@@ -51,9 +52,11 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 	}
 
 	@Override
-	public void processNairePageMess(long userId, long surveyId, long naireId, NairePageMess nairePageMess) throws Exception {
+	public void processNairePageMess(long userId, long surveyId, long naireId, NairePageMess nairePageMess,NaireDeleteMess naireDeleteMess) throws Exception {
 		Processer<List<KV<Integer,List<QuesVO>>>> processer=new QuesProcesser(naireId, nairePageMess);
 		List<KV<Integer,List<QuesVO>>> processResult=processer.process();
+		
+		this.processDeleteMess(naireDeleteMess);
 		
 		// 由于数据存储在此发生，而sn是通过id来生成的
 		Map<String,String> quesSnMap=new HashMap<String,String>();
@@ -61,7 +64,11 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 		for(KV<Integer,List<QuesVO>> pageQuesList:processResult){
 			for(QuesVO quesVo:pageQuesList.getVal()){
 				Ques ques=quesVo.getEntity();
-				this.quesDao.insertEntity(ques);
+				if(quesVo.isNew()){
+					this.quesDao.insertEntity(ques);
+				}else{
+					this.quesDao.updateEntitySelectiveById(ques);
+				}
 				quesSnMap.put(quesVo.snKey(), quesVo.getSn());
 				List<QuesOptionVO> quesOptionVoList=quesVo.getQuesOptionVoList();
 				if(CollectionUtils.isEmpty(quesOptionVoList)){
@@ -70,7 +77,11 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 				for(QuesOptionVO quesOptionVo:quesOptionVoList){
 					QuesOption quesOption=quesOptionVo.getEntity();
 					quesOption.setQuesId(ques.getId());
-					this.quesOptionDao.insertEntity(quesOption);
+					if(quesOptionVo.isNew()){
+						this.quesOptionDao.insertEntity(quesOption);
+					}else{
+						this.quesOptionDao.updateEntitySelectiveById(quesOption);
+					}
 					QuesOptionVO quesOptionVO=new QuesOptionVO(quesOption);
 					quesOptMap.put(quesVo.snKey()+"_"+quesOptionVO.snKey(), quesOptionVO.getSn());
 				}
@@ -96,6 +107,56 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 			}
 		}
 		
+	}
+	
+	/**
+	 * 执行删除数据库操作
+	 * @param naireDeleteMess
+	 * @throws Exception 
+	 */
+	private void processDeleteMess(NaireDeleteMess naireDeleteMess) throws Exception{
+		if(naireDeleteMess==null){
+			return ;
+		}
+		
+		this.processQuesDeleteMess(naireDeleteMess.getQuesList());
+		
+		this.processQuesOptDeleteMess(naireDeleteMess.getQuesOptList());
+	}
+	/**
+	 * 删除问题
+	 * @param quesDeleteMessList
+	 * @throws Exception
+	 */
+	private void processQuesDeleteMess(List<String> quesDeleteMessList) throws Exception{
+		if(CollectionUtils.isEmpty(quesDeleteMessList)){
+			return ;
+		}
+		for(String sn:quesDeleteMessList){
+			long quesId=QuesVO.parseSn(sn);
+			if(!QuesVO.isValidFromSn(quesId)){
+				continue;
+			}
+			this.quesOptionDao.deleteByQuesId(quesId);
+			this.quesDao.deleteById(quesId);
+		}
+	}
+	/**
+	 * 删除问题选项
+	 * @param quesOptDeleteMessList
+	 * @throws Exception
+	 */
+	private void processQuesOptDeleteMess(List<String> quesOptDeleteMessList) throws Exception{
+		if(CollectionUtils.isEmpty(quesOptDeleteMessList)){
+			return ;
+		}
+		for(String sn:quesOptDeleteMessList){
+			long quesOptId=QuesOptionVO.parseSn(sn);
+			if(!QuesOptionVO.isValidFromSn(quesOptId)){
+				continue;
+			}
+			this.quesOptionDao.deleteById(quesOptId);
+		}
 	}
 	
 }

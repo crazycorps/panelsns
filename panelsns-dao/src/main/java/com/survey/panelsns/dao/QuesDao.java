@@ -6,4 +6,6 @@ import com.survey.panelsns.model.entity.Ques;
 
 public interface QuesDao extends GenericDao<Ques, Long> {
 
+	void deleteQuesByPageNo(long naireId,int pageNo);
+	
 }

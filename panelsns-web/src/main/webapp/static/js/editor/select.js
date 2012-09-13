@@ -5,6 +5,7 @@
 	
 	$.editor.select={
 		currentEditorForm:null,
+		deleteQuesOpt:new Array(),
 		init:function(editorCallBack){
 			$.editor.select.initDialogs();
 			$.editor.select.initEvents(editorCallBack);
@@ -13,6 +14,7 @@
 			if(formEle==null||formEle==undefined){
 				return ;
 			}
+			$.editor.select.deleteQuesOpt=new Array();
 			$.editor.select.initQuesTypeOptionData(formEle,quesTypeOption);
 			$.editor.select.initQuesMess(formEle,quesTypeOption,quesMess);
 		},
@@ -127,6 +129,12 @@
 			});
 			
 		},
+		addDeleteQuesOptMess:function(sn){
+			if($.util.isEmpty(sn)||$.inArray($.editor.select.deleteQuesOpt,sn)!=-1){
+				return ;
+			}
+			$.editor.select.deleteQuesOpt.push(sn);
+		},
 		initEvents:function(editorCallBack){
 			$("select[name='form_type']").change($.editor.select.formTypeChangeEvent);
 			$("select[name='direction']").change($.editor.select.directionChangeEvent);
@@ -190,6 +198,9 @@
 			}
 			
 			var currentSelectOptEle=$(this).parents("div.select_option");
+			var quesOptEle=$(":text[name='label']",currentSelectOptEle);
+			var sn=quesOptEle.attr("sn");
+			$.editor.select.addDeleteQuesOptMess(sn);
 			currentSelectOptEle.remove();
 		},
 		allowSpecifyEvent:function(event){
@@ -238,7 +249,7 @@
 			
 			var callBack=event.data.callBack;
 			if(callBack!=null&&callBack!=undefined&&$.isFunction(callBack)){
-				callBack(pid,qid,quesTypeOption,quesMess);
+				callBack(pid,qid,quesTypeOption,quesMess,$.editor.select.deleteQuesOpt);
 			}
 		},
 		initDialogs:function(event){

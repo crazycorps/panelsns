@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.survey.panelsns.model.entity.Users;
 import com.survey.panelsns.service.QuesNaireService;
+import com.survey.panelsns.service.json.NaireDeleteMess;
 import com.survey.panelsns.service.json.NairePageMess;
 import com.survey.panelsns.web.controller.AbstractPanelSnsController;
 import com.survey.tools.util.JSONUtils;
@@ -39,12 +40,13 @@ public class NaireController extends AbstractPanelSnsController{
 	public Map<String,Object> update(HttpServletRequest request,HttpServletResponse response,
 			@RequestParam(value="surveyId",required=true) long surveyId,
 			@RequestParam(value="naireId",required=true) long naireId,
-			@RequestParam(value="pageMess",required=true) String pageMess) throws Exception {
+			@RequestParam(value="pageMess",required=true) String pageMess,
+			@RequestParam(value="deleteMess",required=true) String deleteMess) throws Exception {
 		Map<String,Object> ret=new HashMap<String, Object>();
 		try {
-			TypeReference<NairePageMess> typeReference=new TypeReference<NairePageMess>(){};
-			NairePageMess nairePageMess=JSONUtils.fromJSON(pageMess, typeReference, true);
-			this.quesNaireService.processNairePageMess(Users.DEFAULT.getId(), surveyId, naireId, nairePageMess);
+			NairePageMess nairePageMess=JSONUtils.fromJSON(pageMess, new TypeReference<NairePageMess>(){}, true);
+			NaireDeleteMess naireDeleteMess=JSONUtils.fromJSON(deleteMess, new TypeReference<NaireDeleteMess>(){}, true);
+			this.quesNaireService.processNairePageMess(Users.DEFAULT.getId(), surveyId, naireId, nairePageMess,naireDeleteMess);
 			ret.put("pageMess", nairePageMess);
 			ret.put(process_status_key, process_status_success);
 		} catch (Exception e) {

@@ -32,6 +32,11 @@
     delete from ques
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteByPageNo" parameterType="com.survey.panelsns.model.entity.Ques">
+    delete from ques
+    where ques_naire_id = #{quesNaireId,jdbcType=BIGINT} 
+    	and page_no= #{pageNo,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.survey.panelsns.model.entity.Ques">
   	<![CDATA[
     insert into ques (ques_naire_id, type,  page_no,

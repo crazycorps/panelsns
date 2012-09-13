@@ -24,6 +24,10 @@
 				}
 			}
 		},
+		deleteMess:{//问题、问题选项
+			quesList:new Array(),
+			quesOptList:new Array()
+		},
 		init:function(){
 			$.naire.edit.initDatas();
 			$.naire.edit.initEvents();
@@ -107,6 +111,13 @@
 			$.naire.edit.pageMess["p_"+pid]=pageMess;
 			return pageMess;
 		},
+		getPageMess:function(pid){
+			var pageMess=$.naire.edit.pageMess["p_"+pid];
+			if(pageMess==null||pageMess==undefined){
+				return null;
+			}
+			return $.naire.edit.pageMess["p_"+pid];
+		},
 		removePageMess:function(pid){
 			var pageMess=$.naire.edit.pageMess["p_"+pid];
 			if(pageMess==null||pageMess==undefined){
@@ -162,6 +173,22 @@
 			pageMess["q_"+toQid]=fromQuesAllMess;
 			pageMess["q_"+fromQid]=toQuesAllMess;
 		},
+		resetDeleteMess:function(){
+			$.naire.edit.deleteMess.quesList=new Array();
+			$.naire.edit.deleteMess.quesOptList=new Array();
+		},
+		addQuesDeleteMess:function(quesNo,sn){
+			if($.util.isEmpty(sn)||$.inArray($.naire.edit.deleteMess.q,sn)!=-1){
+				return ;
+			}
+			$.naire.edit.deleteMess.quesList.push(sn);
+		},
+		addQuesOptDeleteMess:function(quesOptNo,sn){
+			if($.util.isEmpty(sn)||$.inArray($.naire.edit.deleteMess.qo,sn)!=-1){
+				return ;
+			}
+			$.naire.edit.deleteMess.quesOptList.push(sn);
+		},
 		initEvents:function(){
 			// 新建页事件
 			$("#add_page").click($.naire.edit.addPage);
@@ -204,7 +231,12 @@
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
 				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").remove();
+				var pageMess=$.naire.edit.getPageMess(node.pageNo);
+				$.each(pageMess,function(i,quesAllMess){
+					$.naire.edit.addQuesDeleteMess(i,quesAllMess.quesMess.sn);
+				});
 				$.naire.edit.removePageMess(node.pageNo);
+				
 				treeObj.removeNode(node);
 			});
 			var maxPageNo=1;
@@ -245,7 +277,11 @@
 			var currnetNairePage=$(this).parents("div.naire_page");
 			var pid=currnetNairePage.attr("pageno");
 			var qid=$(editorLiEle).attr("qid");
+			var pageMess=$.naire.edit.initDefaultPageMess(pid,qid);
+			var quesAllMess=pageMess["q_"+qid];
+			$.naire.edit.addQuesDeleteMess(qid,quesAllMess.quesMess.sn);
 			$.naire.edit.removePageQuesAllMess(pid,qid);
+			
 			editorLiEle.remove();
 			
 			var nowEditorLiEles=$("li.part[qid][t]",currnetNairePage);
@@ -362,7 +398,7 @@
 			$.editor.select.initDatas(editorFormEle,quesAllMess.quesTypeOption,quesAllMess.quesMess);
 		},
 		editorCallback:{
-			select:function(pid,qid,quesTypeOption,quesMess){
+			select:function(pid,qid,quesTypeOption,quesMess,deleteQuesOpts){
 				var pageMess=$.naire.edit.pageMess["p_"+pid];
 				if(pageMess==null||pageMess==undefined){
 					pageMess=$.naire.edit.initDefaultPageMess(pid,qid);
@@ -371,6 +407,9 @@
 				$(quesAllMess).attr({
 					quesTypeOption:quesTypeOption,
 					quesMess:quesMess
+				});
+				$.each(deleteQuesOpts,function(i,n){
+					$.naire.edit.addQuesOptDeleteMess(i,n);
 				});
 				$.naire.edit.render(pid,qid,quesTypeOption,quesMess);
 			}
@@ -406,7 +445,8 @@
 			var datas={
 				surveyId:$.naire.edit.surveyId,
 				naireId:$.naire.edit.naireId,
-				pageMess: $.toJSON({pageMess:$.naire.edit.pageMess})
+				pageMess: $.toJSON({pageMess:$.naire.edit.pageMess}),
+				deleteMess:$.toJSON($.naire.edit.deleteMess)
 			};
 			$.ajax({
 			   type: "POST",
@@ -418,6 +458,7 @@
 				   if(proStatus==0){
 					   var pageMess=ret.pageMess.pageMess;
 					   $.naire.edit.pageMess=pageMess;
+					   $.naire.edit.resetDeleteMess();
 				   }else{
 					   
 				   }
