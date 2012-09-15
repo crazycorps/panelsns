@@ -49,6 +49,12 @@
 	function QuesOptionMess(sn,content,allowSpecify,inputWidth,leastInput,mostInput,isExclusive){
 		this.sn=sn;
 		this.content=content;
+		this.quesOptionControlMess=new QuesOptionControlMess(allowSpecify,inputWidth,leastInput,mostInput,isExclusive);
+	}
+	/**
+	 * 跟问题的QuesTypeOption是一个类型
+	 */
+	function QuesOptionControlMess(allowSpecify,inputWidth,leastInput,mostInput,isExclusive){
 		this.allowSpecify=allowSpecify;
 		this.inputWidth=inputWidth;
 		this.leastInput=leastInput;

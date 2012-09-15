@@ -1,4 +1,4 @@
-package com.survey.panelsns.service.processer;
+package com.survey.panelsns.service.processer.ques;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,19 +16,24 @@ import com.survey.panelsns.model.entity.QuesOption;
 import com.survey.panelsns.service.json.NairePageMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesAllMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesMess;
+import com.survey.panelsns.service.json.NairePageMess.QuesOptionControlMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesOptionMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesTypeOption;
+import com.survey.panelsns.service.processer.Processer;
 import com.survey.panelsns.service.vo.KV;
 import com.survey.panelsns.service.vo.QuesOptionVO;
 import com.survey.panelsns.service.vo.QuesVO;
 import com.survey.tools.util.JSONUtils;
 
-public class QuesProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
+/**
+ * 通过json转化后的数据，转化为对应的问题类型
+ */
+public class QuesDecodeProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
 
 	private long naireId;
 	private NairePageMess nairePageMess;
 	
-	public QuesProcesser(long naireId, NairePageMess nairePageMess) {
+	public QuesDecodeProcesser(long naireId, NairePageMess nairePageMess) {
 		super();
 		this.naireId = naireId;
 		this.nairePageMess = nairePageMess;
@@ -119,12 +124,13 @@ public class QuesProcesser implements Processer<List<KV<Integer,List<QuesVO>>>>{
 			List<QuesOptionVO> quesOptionVoList=new ArrayList<QuesOptionVO>();
 			int i=1;
 			for(QuesOptionMess quesOptionMess:quesOptionMessList){
+				QuesOptionControlMess quesOptionControlMess=quesOptionMess.getQuesOptionControlMess();
 				QuesOption quesOption=new QuesOption();
 				quesOption.setQuesId(ques.getId());
 				quesOption.setTitle(quesOptionMess.getContent());
 				quesOption.setContent(quesOptionMess.getContent());
 				quesOption.setSerialNo(i++);
-				quesOption.setControlMess(JSONUtils.toJSON(quesOptionMess));
+				quesOption.setControlMess(JSONUtils.toJSON(quesOptionControlMess));
 				quesOption.setVersion(1);
 				QuesOptionVO quesOptionVO=new QuesOptionVO(quesOption);
 				quesOptionMess.setSnKey(quesVo.snKey()+"_"+quesOptionVO.snKey());

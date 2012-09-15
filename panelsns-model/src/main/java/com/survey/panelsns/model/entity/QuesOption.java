@@ -1,6 +1,8 @@
 package com.survey.panelsns.model.entity;
 
-public class QuesOption {
+import java.util.Comparator;
+
+public class QuesOption{
     
     private Long id;
 
@@ -104,4 +106,5 @@ public class QuesOption {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

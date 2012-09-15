@@ -1,5 +1,7 @@
 package com.survey.panelsns.service;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,4 +18,5 @@ public interface QuesNaireService extends GenericService<QuesNaireVO,QuesNaire, 
 	@Transactional(propagation = Propagation.REQUIRED)
 	void processNairePageMess(long userId,long surveyId,long naireId,NairePageMess nairePageMess,NaireDeleteMess naireDeleteMess) throws Exception ;
 	
+	NairePageMess getNairePageMess(long naireId,List<Integer> pageNoList) throws Exception ;
 }

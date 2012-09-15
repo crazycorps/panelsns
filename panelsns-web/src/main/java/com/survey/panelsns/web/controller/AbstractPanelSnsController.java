@@ -8,11 +8,11 @@ import com.survey.tools.util.ServletUtils;
 
 public abstract class AbstractPanelSnsController {
 
-	protected static final String process_status_key="p_s";
+	protected static final String PROCESS_STATUS_KEY="p_s";
 	
-	protected static final int process_status_success=0;
+	protected static final int PROCESS_STATUS_SUCCESS=0;
 	
-	protected static final int process_status_fail=-1;
+	protected static final int PROCESS_STATUS_FAIL=-1;
 	/**
 	 * panel_sns_session_user_key
 	 */

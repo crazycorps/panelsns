@@ -24,12 +24,44 @@
     id, survey_id, template_id, type, name, code, header, title, footer, priority, descript, 
     status, total_page, create_date, updaet_date, version, remark
   </sql>
+  <sql id="query_where_clause">
+	<where>
+		1=1
+		<if test="surveyId != null">
+			and survey_id = #{surveyId,jdbcType=BIGINT}
+		</if>
+		<if test="templateId != null">
+			and template_id = #{templateId,jdbcType=BIGINT}
+		</if>
+		<if test="type != null">
+			and type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="name != null">
+			and name = #{name,jdbcType=VARCHAR}
+		</if>
+		<if test="code != null">
+			and code = #{code,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null">
+			and status = #{status,jdbcType=INTEGER}
+		</if>
+	</where>
+</sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from ques_naire
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectOne" parameterType="com.survey.panelsns.model.entity.QuesNaire"
+	resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from ques_naire
+	<if test="_parameter != null">
+		<include refid="query_where_clause" />
+	</if>
+</select>
   <delete id="delete" parameterType="java.lang.Long">
     delete from ques_naire
     where id = #{id,jdbcType=BIGINT}

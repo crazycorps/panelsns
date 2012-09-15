@@ -16,6 +16,7 @@ import com.survey.panelsns.model.entity.Ques;
 import com.survey.panelsns.model.entity.QuesNaire;
 import com.survey.panelsns.model.entity.QuesOption;
 import com.survey.panelsns.service.QuesNaireService;
+import com.survey.panelsns.service.QuesService;
 import com.survey.panelsns.service.json.NaireDeleteMess;
 import com.survey.panelsns.service.json.NairePageMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesAllMess;
@@ -23,7 +24,8 @@ import com.survey.panelsns.service.json.NairePageMess.QuesMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesOptionMess;
 import com.survey.panelsns.service.json.NairePageMess.QuesTypeOption;
 import com.survey.panelsns.service.processer.Processer;
-import com.survey.panelsns.service.processer.QuesProcesser;
+import com.survey.panelsns.service.processer.ques.QuesDecodeProcesser;
+import com.survey.panelsns.service.processer.ques.QuesEncodeProcesser;
 import com.survey.panelsns.service.vo.KV;
 import com.survey.panelsns.service.vo.QuesNaireVO;
 import com.survey.panelsns.service.vo.QuesOptionVO;
@@ -42,6 +44,9 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 	
 	@Autowired
 	private QuesOptionDao quesOptionDao;
+	
+	@Autowired
+	private QuesService quesService;
 
 	public GenericDao<QuesNaire, Long> getGenricDao() {
 		return this.quesNaireDao;
@@ -53,7 +58,7 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 
 	@Override
 	public void processNairePageMess(long userId, long surveyId, long naireId, NairePageMess nairePageMess,NaireDeleteMess naireDeleteMess) throws Exception {
-		Processer<List<KV<Integer,List<QuesVO>>>> processer=new QuesProcesser(naireId, nairePageMess);
+		Processer<List<KV<Integer,List<QuesVO>>>> processer=new QuesDecodeProcesser(naireId, nairePageMess);
 		List<KV<Integer,List<QuesVO>>> processResult=processer.process();
 		
 		this.processDeleteMess(naireDeleteMess);
@@ -157,6 +162,18 @@ public class QuesNaireServiceImpl extends AbstractGenericServiceImpl<QuesNaireVO
 			}
 			this.quesOptionDao.deleteById(quesOptId);
 		}
+	}
+
+	@Override
+	public NairePageMess getNairePageMess(long naireId, List<Integer> pageNoList) throws Exception {
+		Map<Integer,List<QuesVO>> pageQuesMap=new HashMap<Integer, List<QuesVO>>();
+		for(int pageNo:pageNoList){
+			List<QuesVO> quesVoList=this.quesService.getQueses(naireId, pageNo);
+			pageQuesMap.put(pageNo, quesVoList);
+		}
+		Processer<NairePageMess> processer=new QuesEncodeProcesser(pageQuesMap);
+		NairePageMess ret=processer.process();
+		return ret;
 	}
 	
 }

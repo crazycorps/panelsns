@@ -9,6 +9,16 @@ public class NairePageMess {
 	
 	private Map<String,Map<String,QuesAllMess>> pageMess;
 	
+	public NairePageMess() {
+		super();
+	}
+
+	public NairePageMess(Map<String, Map<String, QuesAllMess>> pageMess) {
+		super();
+		this.pageMess = pageMess;
+	}
+
+
 	public Map<String, Map<String, QuesAllMess>> getPageMess() {
 		return pageMess;
 	}
@@ -20,6 +30,17 @@ public class NairePageMess {
 	public static class QuesAllMess{
 		private QuesTypeOption quesTypeOption;
 		private QuesMess quesMess;
+		
+		public QuesAllMess() {
+			super();
+		}
+		
+		public QuesAllMess(QuesTypeOption quesTypeOption, QuesMess quesMess) {
+			super();
+			this.quesTypeOption = quesTypeOption;
+			this.quesMess = quesMess;
+		}
+
 		public QuesTypeOption getQuesTypeOption() {
 			return quesTypeOption;
 		}
@@ -99,9 +120,20 @@ public class NairePageMess {
 		private String intro;
 		private List<QuesOptionMess> quesOptionMessList;
 		
-		@JsonIgnore
 		private String snKey;
 		
+		public QuesMess() {
+			super();
+		}
+		
+		public QuesMess(String sn, String title, String intro, List<QuesOptionMess> quesOptionMessList) {
+			super();
+			this.sn = sn;
+			this.title = title;
+			this.intro = intro;
+			this.quesOptionMessList = quesOptionMessList;
+		}
+
 		public String getSn() {
 			return sn;
 		}
@@ -126,6 +158,7 @@ public class NairePageMess {
 		public void setQuesOptionMessList(List<QuesOptionMess> quesOptionMessList) {
 			this.quesOptionMessList = quesOptionMessList;
 		}
+		@JsonIgnore
 		public String getSnKey() {
 			return snKey;
 		}
@@ -137,15 +170,21 @@ public class NairePageMess {
 	public static class QuesOptionMess{
 		private String sn;
 		private String content;
-		private boolean allowSpecify;
-		private int inputWidth;
-		private int leastInput;
-		private int mostInput;
-		private boolean isExclusive;
+		private QuesOptionControlMess quesOptionControlMess;
 		
-		@JsonIgnore
 		private String snKey;
 		
+		public QuesOptionMess() {
+			super();
+		}
+		
+		public QuesOptionMess(String sn, String content, QuesOptionControlMess quesOptionControlMess) {
+			super();
+			this.sn = sn;
+			this.content = content;
+			this.quesOptionControlMess = quesOptionControlMess;
+		}
+
 		public String getSn() {
 			return sn;
 		}
@@ -158,6 +197,28 @@ public class NairePageMess {
 		public void setContent(String content) {
 			this.content = content;
 		}
+		
+		public QuesOptionControlMess getQuesOptionControlMess() {
+			return quesOptionControlMess;
+		}
+		public void setQuesOptionControlMess(QuesOptionControlMess quesOptionControlMess) {
+			this.quesOptionControlMess = quesOptionControlMess;
+		}
+		@JsonIgnore
+		public String getSnKey() {
+			return snKey;
+		}
+		public void setSnKey(String snKey) {
+			this.snKey = snKey;
+		}
+	}
+	
+	public static class QuesOptionControlMess{
+		private boolean allowSpecify;
+		private int inputWidth;
+		private int leastInput;
+		private int mostInput;
+		private boolean isExclusive;
 		public boolean isAllowSpecify() {
 			return allowSpecify;
 		}
@@ -187,12 +248,6 @@ public class NairePageMess {
 		}
 		public void setExclusive(boolean isExclusive) {
 			this.isExclusive = isExclusive;
-		}
-		public String getSnKey() {
-			return snKey;
-		}
-		public void setSnKey(String snKey) {
-			this.snKey = snKey;
 		}
 	}
 }

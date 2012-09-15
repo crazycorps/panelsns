@@ -15,12 +15,59 @@
     id, ques_id, serial_no, title, content, control_mess,version, remark
   </sql>
   
+   <sql id="query_where_clause">
+		<where>
+			1=1
+			<if test="id != null">
+				and id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="quesId != null">
+				and ques_id = #{quesId,jdbcType=BIGINT}
+			</if>
+			<if test="serialNo != null">
+				and serial_no = #{serialNo,jdbcType=INTEGER}
+			</if>
+		</where>
+	</sql>
+  
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from ques_option
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+   <select id="selectMatchList" parameterType="com.survey.panelsns.model.entity.QuesOption" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ques_option
+   <choose>
+    	<when test="_parameter != null">
+    		<include refid="query_where_clause" />	
+    	</when>
+    	<otherwise>
+    		where 1!=1
+    	</otherwise>
+    </choose>
+  </select>
+  
+  <select id="selectByQuesIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ques_option
+   <choose>
+    	<when test="_parameter != null">
+    		where  ques_id in 
+    		<foreach  item="qid" index="index" collection="list"   open="(" separator="," close=")">
+    			#{qid} 
+    		</foreach>
+    	</when>
+    	<otherwise>
+    		where 1!=1
+    	</otherwise>
+    </choose>
+  </select>
+  
   <delete id="delete" parameterType="java.lang.Long">
     delete from ques_option
     where id = #{id,jdbcType=BIGINT}
@@ -108,7 +155,7 @@
         control_mess = #{controlMess,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
+        version = version +  #{version,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -123,7 +170,7 @@
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       control_mess = #{controlMess,jdbcType=VARCHAR},
-      version = #{version,jdbcType=INTEGER},
+      version = version + #{version,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

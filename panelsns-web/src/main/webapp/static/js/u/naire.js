@@ -12,8 +12,8 @@
 		}
 	};
 	$.naire.edit={
-		surveyId:0,
-		naireId:0,
+		surveyId:-1,
+		naireId:-1,
 		treeId:"tree_page",
 		nowPageNo:1,
 		pageMess:{
@@ -28,13 +28,29 @@
 			quesList:new Array(),
 			quesOptList:new Array()
 		},
+		cacheLoadPageMess:{
+			p_0:{
+				isLoad:true
+			}
+		},
 		init:function(){
 			$.naire.edit.initDatas();
 			$.naire.edit.initEvents();
 		},
 		initDatas:function(){
+			var surveyIdEle=$("#surveyId");
+			if(surveyIdEle.length>0){
+				$.naire.edit.surveyId=surveyIdEle.val();
+			}
+			var naireIdEle=$("#naireId");
+			if(naireIdEle.length>0){
+				$.naire.edit.naireId=naireIdEle.val();
+			}
+			
 			$.naire.edit.initTreePanel();
 			$.naire.edit.initNaireEditorTemplate();
+			$.naire.edit.loadNairePageMess(1);
+			
 		},
 		initTreePanel:function(){
 			var treeSetting={
@@ -59,10 +75,22 @@
 	 		];
 			$.fn.zTree.init($("#tree_page"), treeSetting, zNodes);
 			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
+			
 			var firstPageNode = treeObj.getNodeByTId($.naire.edit.treeId+"_2");
 			treeObj.selectNode(firstPageNode,false);
+			$.naire.edit.addCacheLoadPageMess("p_1");
 			$.naire.edit.addNairePageCon(firstPageNode.pageNo);
 			$.naire.edit.pageSelected($.naire.edit.treeId,firstPageNode.tId,firstPageNode.pageNo);
+			
+			var totalPageEle =$("#totalPage")
+			if($.util.isNotEmpty(totalPageEle.val())){
+				var totalPage=parseInt(totalPageEle.val());
+				for(var i=1;i<totalPage;i++){
+					var pageNo =$.naire.edit.addPage();
+					$.naire.edit.addCacheLoadPageMess("p_"+pageNo);
+				}
+			}
+			
 		},
 		initNaireEditorTemplate:function(){
 			// 加载单选题编辑模版
@@ -189,6 +217,67 @@
 			}
 			$.naire.edit.deleteMess.quesOptList.push(sn);
 		},
+		addCacheLoadPageMess:function(pid){
+			var pLoadMess=$.naire.edit.cacheLoadPageMess[pid];
+			if(pLoadMess==null||pLoadMess==undefined){
+				pLoadMess={
+					isLoad:false
+				};
+			}
+			$.naire.edit.cacheLoadPageMess[pid]=pLoadMess;
+		},
+		haveLoadedPageMess:function(pid){
+			var pLoadMess=$.naire.edit.cacheLoadPageMess[pid];
+			if(pLoadMess==null||pLoadMess==undefined){
+				return ;
+			}
+			pLoadMess.isLoad=true;
+		},
+		isLoadPageMess:function(pid){
+			var pLoadMess=$.naire.edit.cacheLoadPageMess[pid];
+			if(pLoadMess==null||pLoadMess==undefined){
+				return true;
+			}
+			return pLoadMess.isLoad;
+		},
+		loadNairePageMess:function(pageNo){
+			if($.naire.edit.surveyId==-1||$.naire.edit.naireId==-1){
+				return ;
+			}
+			var pageIsLoad=$.naire.edit.isLoadPageMess("p_"+pageNo);
+			if(pageIsLoad){
+				return ;
+			}
+			var datas={
+				naireId:$.naire.edit.naireId,
+				pageNo: pageNo
+			};
+			$.ajax({
+			   type: "POST",
+			   url: "/u/naire/mess/",
+			   data: $.param(datas),
+			   dataType:"JSON",
+			   success: function(ret){
+				   var proStatus=ret.p_s;
+				   if(proStatus==0){
+					   var pageMess=ret.pageMess.pageMess;
+					   $.each(pageMess,function(pid,perPageMess){
+						   $($.naire.edit.pageMess).attr(pid,perPageMess);
+						   var pageNo=pid.substr(2);
+						   $.each(perPageMess,function(qid,quesAllMess){
+							   $.naire.edit.generateEditorQues(pageNo,quesAllMess.quesTypeOption.quesType);
+						   });
+					   });
+					   $.naire.edit.haveLoadedPageMess("p_"+pageNo);
+				   }else{
+					   
+				   }
+			   },
+			   error:function(XMLHttpRequest, textStatus, errorThrown){
+				   
+			   }
+			});
+		},
 		initEvents:function(){
 			// 新建页事件
 			$("#add_page").click($.naire.edit.addPage);
@@ -219,6 +308,7 @@
 			treeObj.selectNode(treeNewNode,false);
 			$.naire.edit.addNairePageCon(treeNewNode.pageNo);
 			$.naire.edit.pageSelected($.naire.edit.treeId,treeNewNode.tId,treeNewNode.pageNo);
+			return treeNewNode.pageNo;
 		},
 		delPage:function(event){
 			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
@@ -230,13 +320,14 @@
 			}
 			var nodes = treeObj.getSelectedNodes();
 			$.each(nodes,function(i,node){
-				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").remove();
 				var pageMess=$.naire.edit.getPageMess(node.pageNo);
-				$.each(pageMess,function(i,quesAllMess){
-					$.naire.edit.addQuesDeleteMess(i,quesAllMess.quesMess.sn);
-				});
-				$.naire.edit.removePageMess(node.pageNo);
-				
+				if(pageMess!=null){
+					$.each(pageMess,function(i,quesAllMess){
+						$.naire.edit.addQuesDeleteMess(i,quesAllMess.quesMess.sn);
+					});
+					$.naire.edit.removePageMess(node.pageNo);
+				}
+				$("#edit_naire_view div.naire_page[pageNo='"+node.pageNo+"']").remove();
 				treeObj.removeNode(node);
 			});
 			var maxPageNo=1;
@@ -257,6 +348,7 @@
 			$("#edit_naire_view div.naire_page[pageNo!='"+pageNo+"']").hide();
 		},
 		treeNodeClick:function(event,treeId,treeNode,clickFlag){
+			$.naire.edit.loadNairePageMess(treeNode.pageNo);
 			$.naire.edit.pageSelected(treeId,treeNode.tId,treeNode.pageNo);
 		},
 		addNairePageCon:function(pageNo){
@@ -343,9 +435,12 @@
 			$.naire.edit.changePageQuesAllMess(pid,qid,nextQid);
 		},
 		addEditorQues:function(quesType){
+			$.naire.edit.generateEditorQues($.naire.edit.nowPageNo,quesType);
+		},
+		generateEditorQues:function(pageNo,quesType){
 			// 单选
 			var cloneSingleSelEle=$("#select_template_con ol.single_select_option_template").children().clone();
-			var nowPageCon=$("#edit_naire_view div.naire_page[pageNo='"+$.naire.edit.nowPageNo+"']");
+			var nowPageCon=$("#edit_naire_view div.naire_page[pageNo='"+pageNo+"']");
 			var maxQuesNo=$("li.part",nowPageCon).size();
 			var newQuesNo=maxQuesNo+1;
 			$("ol.content",nowPageCon).append(cloneSingleSelEle);
@@ -365,7 +460,7 @@
 			$("div.float_buttons button[name='moveup']",cloneSingleSelEle).click($.naire.edit.moveupEditor);
 			$("div.float_buttons button[name='movedown']",cloneSingleSelEle).click($.naire.edit.movedownEditor);
 			// 渲染默认数据
-			var pid=$.naire.edit.nowPageNo;
+			var pid=pageNo;
 			var qid=newQuesNo;
 			var pageMess=$.naire.edit.initDefaultPageMess(pid,qid,quesType);
 			var quesAllMess=pageMess["q_"+qid];
@@ -440,7 +535,9 @@
 			partEle.show();
 		},
 		naireSave:function(event){
-			// 加载单选题编辑模版
+			if(!$.naire.edit.isNeedToSave()){
+				return ;
+			}
 			$.naire.edit.checkAndRepairPageMess();
 			var datas={
 				surveyId:$.naire.edit.surveyId,
@@ -467,6 +564,32 @@
 				   
 			   }
 			});
+		},
+		isNeedToSave:function(){
+			var pNum=0;
+			var qNum=0;
+			$.each($.naire.edit.pageMess,function(pid,quesList){
+				pNum++;
+				if(pNum>1){
+					// 退出循环
+					return false;
+				}
+				$.each(quesList,function(qid,quesAllMess){
+					qNum++;
+					if(qNum>1){
+						// 退出循环
+						return false;
+					}	
+				});
+				if(qNum>1){
+					// 退出循环
+					return false;
+				}
+			});
+			if(pNum>1||(pNum==1 &&　qNum>1)){
+				return true;
+			}
+			return false;
 		},
 		checkAndRepairPageMess:function(){
 			$.each($.naire.edit.pageMess,function(pid,quesList){

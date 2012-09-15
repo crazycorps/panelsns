@@ -103,18 +103,19 @@
 				if($.util.isNotEmpty(content)){
 					quesOptEle.val(content);
 				}
-				var allowSpecify=quesOptionMess.allowSpecify;
+				var quesOptionControlMess=quesOptionMess.quesOptionControlMess;
+				var allowSpecify=quesOptionControlMess.allowSpecify;
 				if(allowSpecify){
 					$("#allowSpecify",n).prop("checked","checked");
-					var inputWidth=quesOptionMess.inputWidth;
+					var inputWidth=quesOptionControlMess.inputWidth;
 					if(inputWidth!=null&&inputWidth!=undefined&&inputWidth!=0){
 						$("input[name='input_width']",n).val(inputWidth);	
 					}
-					var leastInput=quesOptionMess.leastInput;
+					var leastInput=quesOptionControlMess.leastInput;
 					if(leastInput!=null&&leastInput!=undefined&&leastInput!=0){
 						$("input[name='least_input']",n).val(leastInput);	
 					}
-					var mostInput=quesOptionMess.mostInput;
+					var mostInput=quesOptionControlMess.mostInput;
 					if(mostInput!=null&&mostInput!=undefined&&mostInput!=0){
 						$("input[name='most_input']",n).val(mostInput);	
 					}
@@ -122,7 +123,7 @@
 				if(quesType==$.quesType.multiSelect){
 					$(".setup_exclusive",n).show();
 				}
-				var isExclusive=quesOptionMess.isExclusive;
+				var isExclusive=quesOptionControlMess.isExclusive;
 				if(isExclusive){
 					$("input[name='exclusive']",n).prop("checked","checked");
 				}

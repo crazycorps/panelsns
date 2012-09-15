@@ -146,6 +146,14 @@
    </div>
   </div>
  </div>
+ 
+ <div id="data_cache" style="display:none;">
+  <div class="field_cache">
+   <input type="hidden" name="surveyId" id="surveyId" value="${naire.surveyId}"/>
+   <input type="hidden" name="naireId" id="naireId" value="${naire.id}"/>
+   <input type="hidden" name="totalPage" id="totalPage" value="${naire.totalPage}"/>
+  </div>
+ </div>
 
  <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
 </body>
