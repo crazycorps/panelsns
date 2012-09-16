@@ -35,6 +35,7 @@
 		},
 		init:function(){
 			$.naire.edit.initDatas();
+			$.naire.edit.initDialog();
 			$.naire.edit.initEvents();
 		},
 		initDatas:function(){
@@ -49,8 +50,6 @@
 			
 			$.naire.edit.initTreePanel();
 			$.naire.edit.initNaireEditorTemplate();
-			$.naire.edit.loadNairePageMess(1);
-			
 		},
 		initTreePanel:function(){
 			var treeSetting={
@@ -77,10 +76,8 @@
 			var treeObj = $.fn.zTree.getZTreeObj($.naire.edit.treeId);
 			
 			var firstPageNode = treeObj.getNodeByTId($.naire.edit.treeId+"_2");
-			treeObj.selectNode(firstPageNode,false);
 			$.naire.edit.addCacheLoadPageMess("p_1");
 			$.naire.edit.addNairePageCon(firstPageNode.pageNo);
-			$.naire.edit.pageSelected($.naire.edit.treeId,firstPageNode.tId,firstPageNode.pageNo);
 			
 			var totalPageEle =$("#totalPage")
 			if($.util.isNotEmpty(totalPageEle.val())){
@@ -90,7 +87,9 @@
 					$.naire.edit.addCacheLoadPageMess("p_"+pageNo);
 				}
 			}
-			
+			// 默认选择第一页
+			treeObj.selectNode(firstPageNode,false);
+			$.naire.edit.pageSelected($.naire.edit.treeId,firstPageNode.tId,firstPageNode.pageNo);
 		},
 		initNaireEditorTemplate:function(){
 			// 加载单选题编辑模版
@@ -105,10 +104,32 @@
 					   select:$.naire.edit.editorCallback.select
 				   };
 				   $.editor.select.init(editorCallBack);
+				   // 加载第一页数据
+				   $.naire.edit.loadNairePageMess(1);
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
 				   
 			   }
+			});
+		},
+		initDialog:function(){
+			$("#loading_dialog").dialog({
+				title:"提示",
+				dialogClass:"loading_dialog",
+				draggable:false,
+				bgiframe: true,
+				autoOpen: false,
+				resizable:false,
+				minWidth:150,
+				minHeight:50,
+				hide: { effect: 'drop', direction: "down" } ,
+				position:"center",
+				modal: true,
+				buttons: [],
+				close: function() {},
+				open:function(){
+					$("div.loading_dialog div.ui-dialog-titlebar").hide();
+				}
 			});
 		},
 		initDefaultPageMess:function(pid,qid,quesType){
@@ -248,6 +269,7 @@
 			if(pageIsLoad){
 				return ;
 			}
+			$.naire.edit.loadingDialogOpen("正在获取第"+pageNo+"页问卷信息...");
 			var datas={
 				naireId:$.naire.edit.naireId,
 				pageNo: pageNo
@@ -272,11 +294,25 @@
 				   }else{
 					   
 				   }
+				   $.naire.edit.loadingDialogClose("获取第"+pageNo+"页问卷信息成功...",500);
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
-				   
+				   $.naire.edit.loadingDialogClose("获取第"+pageNo+"页问卷信息失败...",2000);
 			   }
 			});
+		},
+		loadingDialogOpen:function(tips){
+			$("#loading_dialog .loading_tips").html(tips);
+			$("#loading_dialog").dialog("open");
+		},
+		loadingDialogClose:function(tips,timeoutMills){
+			if(timeoutMills==undefined){
+				timeoutMills=3000;
+			}
+			$("#loading_dialog .loading_tips").html(tips);
+			setTimeout(function(){
+				$("#loading_dialog").dialog("close");
+			},timeoutMills);
 		},
 		initEvents:function(){
 			// 新建页事件
@@ -443,7 +479,7 @@
 			var nowPageCon=$("#edit_naire_view div.naire_page[pageNo='"+pageNo+"']");
 			var maxQuesNo=$("li.part",nowPageCon).size();
 			var newQuesNo=maxQuesNo+1;
-			$("ol.content",nowPageCon).append(cloneSingleSelEle);
+			$("ol.survey_page_content",nowPageCon).append(cloneSingleSelEle);
 			$(cloneSingleSelEle).attr({
 				qId:newQuesNo,// 一页中题号
 				t:$.quesType.singleSelect//
@@ -538,6 +574,7 @@
 			if(!$.naire.edit.isNeedToSave()){
 				return ;
 			}
+			$.naire.edit.loadingDialogOpen("正在保存...");
 			$.naire.edit.checkAndRepairPageMess();
 			var datas={
 				surveyId:$.naire.edit.surveyId,
@@ -559,9 +596,10 @@
 				   }else{
 					   
 				   }
+				   $.naire.edit.loadingDialogClose("保存成功...",2000);
 			   },
 			   error:function(XMLHttpRequest, textStatus, errorThrown){
-				   
+				   $.naire.edit.loadingDialogClose("保存失败...",3000);
 			   }
 			});
 		},

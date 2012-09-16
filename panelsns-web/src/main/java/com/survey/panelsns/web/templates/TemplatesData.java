@@ -43,4 +43,11 @@ public class TemplatesData {
 		return templateDocs.get(DEFAULT_TEMPLATE_ID).clone();
 	}
 	
+	public Document getTemplateDoc(long templateId){
+		if(!templateDocs.containsKey(templateId)){
+			throw new RuntimeException("there is no this template id:"+templateId);
+		}
+		return templateDocs.get(templateId).clone();
+	}
+	
 }

@@ -15,7 +15,7 @@
 <link type="text/css" rel="stylesheet" href="/css/jq/ztree/zTreeStyle.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/users.css" />
 <link type="text/css" rel="stylesheet" href="/css/u/survey.css" />
-<link rel="stylesheet" href="/css/skins/default.css" type="text/css" />
+<link rel="stylesheet" href="/css/templates/default.css" type="text/css" />
 <link type="text/css" rel="stylesheet" href="/css/u/naire.css" />
 <link rel="icon" href="/logo.ico" type="image/x-icon" />
 <style type="text/css">
@@ -37,11 +37,10 @@
 <script type="text/javascript" src="/js/jq/ztree/jquery.ztree.all.js"></script>
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/core.js"></script>
-<script type="text/javascript" src="/js/naire-common.js"></script>
-<script type="text/javascript" src="/js/editor/core.js"></script>
+<script type="text/javascript" src="/js/naire-core.js"></script>
 <script type="text/javascript" src="/js/u/naire.js"></script>
 <!-- 调试暂且在搁置这里 -->
-<script type="text/javascript" src="/js/editor/render.js"></script>
+<script type="text/javascript" src="/js/render/render.js"></script>
 <script type="text/javascript" src="/js/editor/select.js"></script>
 </head>
 
@@ -87,7 +86,7 @@
     -->
     </div>
     <div class="toolbar_right">
-     <span class="preview">预览</span>
+     <a href="/render/${naire.surveyId}/" target="_blank"><span class="preview">预览</span></a>
       <a class="save" onclick="return false;" href="javascript:void(0);"><span>保存</span></a>
     </div>
    </div>
@@ -122,7 +121,7 @@
         <span id="page_list"></span>
        </div>
        <div class="enabled">
-        <div class="surveypie">
+        <div class="survey">
          <div class="survey_header"></div>
          <div id="edit_naire_view" class="survey_body"></div>
         </div>
@@ -140,9 +139,14 @@
   <div id="select_template_con"></div>
   <div id="naire_page_template">
    <div pageNo="0" class="naire_page">
-    <ol class="content">
+    <ol class="survey_page_content">
 
     </ol>
+   </div>
+  </div>
+  <div id="loading_dialog">
+   <div class="loading_tips">
+           正在加载.....
    </div>
   </div>
  </div>

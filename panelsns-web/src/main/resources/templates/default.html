@@ -6,55 +6,58 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="在线调查系统" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" href="/css/skins/layout.css" type="text/css" />
-<link rel="stylesheet" href="/css/skins/default.css" type="text/css" />
+<link rel="stylesheet" href="/css/templates/default.css" type="text/css" />
 </head>
 
 <body>
  <noscript>浏览器Javascript未开启，请在启用Javascript功能后刷新浏览器</noscript>
+ <div class="render_header">
+  <div class="logo">
+   <img src="/images/logo_panelsns.png" alt="简单购物网" />
+  </div>
+  
+ </div>
  <div id="loading" style="display: none;">Loading ...</div>
- <div id="main">
+ <div class="render_body">
   <h1 class="test_mode_notice">此问卷正在运行在预览状态，提交的数据将不会被保存</h1>
-  <div class="surveypie">
-   <div class="survey_header"></div>
-   <table class="page_progress" id="page_progress">
-    <tr>
-     <td width="100%" id="page_progress_bar">
-      <div class="loaded" style="width: 33%">&nbsp;</div>
-      <div class="wait" style="width: 33%">&nbsp;</div>
-      <div class="wait" style="width: 33%">&nbsp;</div>
-     </td>
-     <td nowrap="nowrap"><span id="current_page"></span>/<span id="total_page">3</span></td>
-    </tr>
-   </table>
-   <form method="post" id="survey">
-    <div class="survey_body">
-     <div class="page">
-      <div class="page-header">
-       <h1 class="survey-title"></h1>
+  <div class="survey">
+   <div class="survey_header dashed_line"></div>
+   <div class="survey_body dashed_line">
+    <div class="survey_mess">
+    </div>
+    <div class="survey_title"></div>
+    <div class="survey_page_body">
+     <ol class="survey_page_content">
+      
+     </ol>
+     <div class="survey_page_submit">
+      <div class="button">
+       <button type="button" class="survey_prev" style="display: none;">上一页</button>
+       <button type="button" class="survey_next">下一页</button>
+       <button type="button" class="survey_submit" style="display: none;">提交</button>
       </div>
-      <ol class="content">
-
-      </ol>
      </div>
     </div>
-   </form>
-  </div>
-  <div class="submit">
-   <div class="button">
-    <button type="button" id="survey_prev" class="prev" style="display: none;">上一页</button>
-    <button type="button" id="survey_next" class="next">下一页</button>
-    <button type="button" id="survey_submit" class="submit" style="display: none;">提交</button>
    </div>
+   <div class="survey_footer"></div>
+  </div>
+  <div style="display: none;">
+   <input type="hidden" name="surveyId" id="surveyId" value="-1" />
+   <input type="hidden" name="naireId" id="naireId" value="-1" />
+   <input type="hidden" name="nowPageNo" id="nowPageNo" value="-1" />
+  </div>
+ </div>
+ <div class="render_footer">
+  <div class="poweredby">
+   powered by <a href="/" target="_blank">全球大调查</a>
   </div>
  </div>
 
- <div class="poweredby">
-  powered by <a href="/" target="_blank">全球大调查</a>
- </div>
- <div style="margin: 10px auto 10px auto; width: 728px; border: 1px solid #CCC;" id="show_ads"></div>
 
  <script type="text/javascript" src="/js/jq/jquery.js"></script>
-
+ <script type="text/javascript" src="/js/util.js"></script>
+ <script type="text/javascript" src="/js/naire-core.js"></script>
+ <script type="text/javascript" src="/js/render/render.js"></script>
+ <script type="text/javascript" src="/js/render/data.transfer.js"></script>
 </body>
 </html>

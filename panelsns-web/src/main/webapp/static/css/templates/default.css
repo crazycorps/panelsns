@@ -1,0 +1,353 @@
+@charset "utf-8";
+
+body {
+	background: #fff;
+	font-size: 12px;
+	font-family: Verdana, Geneva, sans-serif, "宋体";
+}
+
+.clear-fix:after {
+	content: "020";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clear-fix {
+	*zoom: 1;
+}
+
+.dashed_line{
+	border-bottom: 1px dashed #E6E6E6;
+    color: #3A3A3A;
+    padding: 2px 4px 2px 6px;
+} 
+
+.render_header,.render_body,.render_footer {
+	min-width: 1024px;
+	margin: 5px auto;
+}
+
+.render_header .logo{
+	width: 760px;
+	margin: 0 auto;
+}
+
+.render_body {
+	min-height: 450px;
+}
+
+.render_body .test_mode_notice {
+	padding: 0px;
+	font-size: 12px;
+	font-weight: normal;
+	width: 760px;
+	margin: 0 auto;
+	background: #FF9 url(/images/icon/32_warm.gif) no-repeat 5px 5px;
+	padding: 2px;
+	height: 27px;
+	color: #F00;
+	font-size: 14px;
+}
+
+.survey {
+	width: 760px;
+	margin: 0 auto;
+}
+
+.survey .survey_header {
+	line-height: 25px;
+}
+
+.survey .survey_body {
+	min-height: 300px;
+}
+
+.survey .survey_body .survey_title {
+	font-size: 20px;
+	font-weight: normal;
+    padding: 5px 2px;
+	line-height: 25px;
+	text-align:center;
+}
+
+.survey .survey_body .survey_page_body {
+	
+}
+
+.survey .survey_body .survey_page_body .survey_page_content {
+	margin: 0px auto;
+	padding: 2px;
+	list-style: none;
+	min-height: 200px;
+}
+
+.survey .survey_page_content .options {
+	margin: 10px;
+	width: 96%;
+}
+
+.survey .survey_page_content  .options td {
+	padding: 5px;
+}
+
+.survey .survey_page_content  .options .even {
+	background-color: #eff6fb;
+}
+
+.survey .survey_page_content  .part {
+	margin: 2px 0;
+}
+
+.survey .survey_page_content  .part h2 {
+	padding: 5px;
+	margin: 0 0 10px 0;
+	font-size: 14px;
+}
+
+.survey .survey_page_content  .part h4 {
+	padding: 5px;
+	margin: 0 0 10px 0;
+	font-size: 14px;
+}
+
+.survey  .survey_page_content .require {
+	color: #F00;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0 10px;
+}
+
+.survey .survey_page_content  li.error {
+	background-color: #fff3f3;
+	border: 1px solid #ff2f2f;
+	color: #000;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.survey .survey_page_content li.error .options tr.even {
+	background: none;
+}
+
+.survey .survey_page_content li.error h4.title {
+	background: none;
+}
+
+.survey .survey_body .survey_page_body .survey_page_submit .button {
+	padding: 10px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.survey .survey_footer {
+	line-height: 25px;
+}
+
+.render_footer .poweredby {
+	width: 760px;
+	text-align: right;
+	margin: 0 auto;
+}
+
+.render_footer .poweredby a {
+	font-size: 16px;
+	color: #000;
+	font-weight: bold;
+}
+
+.render_footer .poweredby a:hover {
+	color: #009bfe;
+}
+
+h4.title .error {
+	color: #F00;
+	font-size: 16px;
+}
+
+.naire_page {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: #FFF;
+	border: 1px solid #E3E3E3;
+	padding-bottom: 10px;
+}
+/* 调查表标题 <h1> */
+.naire_page  .survey-title {
+	padding: 15px 10px;
+	margin: 0px;
+}
+/* 调查表简介文字 <div> */
+.naire_page  .survey-intro {
+	
+}
+/* 页面标题 <h2> */
+.naire_page  .page-title {
+	
+}
+/* 页面简介文字 <div> */
+.naire_page  .page-intro {
+	
+}
+/* 页面内容列表 <ol> */
+.naire_page  ol.content {
+	list-style: none outside none;
+    margin: 0 auto;
+    padding: 18px;
+}
+/* 调查表对象标题行 <div> */
+h4.title {
+	padding: 3px;
+	font-weight: bold;
+	color: #599200;
+}
+/* 问题题目 <span> */
+.page .part .subject {
+	
+}
+/* 问题提示信息 <span> */
+h4.title .notice {
+	color: #818181;
+}
+/* 填写时错误信息 <span> */
+h4.title .error {
+	color: #FF0000;
+}
+/* 问题简介文字 <div> */
+.naire_page  .part .intro {
+	
+}
+/* 问题简介图片区域 <p> */
+.page .part .illustrate {
+	
+}
+/****************************** 分隔符 ******************************/
+
+/* 分隔符标题 <h3> */
+.naire_page  .separator .title {
+	padding-right: 5px;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 15px;
+	background-image: none;
+	padding-bottom: 5px;
+	color: rgb(0, 0, 0);
+	padding-top: 5px;
+	background-color: #c1eb80;
+	text-align: left
+}
+/* 分隔符简介文字 <div> */
+.naire_page  .separator .intro {
+	
+}
+/****************************** 填空题 ******************************/
+
+/* 填空题标题行 <h4> */
+.page .text .title {
+	
+}
+/* 填空题简介文字 <div> */
+.naire_page  .text .intro {
+	
+}
+/* 填空题简介图片 <div> */
+.naire_page  .text .illustrate {
+	
+}
+/* 填空题表单 */
+.naire_page  .text input {
+	
+}
+/* 问答题表单 */
+.naire_page  .text textarea {
+	
+}
+/****************************** 选择题 ******************************/
+
+/* 选择题标题行 <h4> */
+.naire_page  .select .title {
+	
+}
+/* 选择题简介文字 <div> */
+.naire_page  .select .intro {
+	
+}
+/* 选择题简介图片区域 <div> */
+.naire_page  .select .illustrate {
+	
+}
+/* 选择题选项表格 <table> */
+.naire_page  .select .options {
+	
+}
+/* 选择题选项表格奇行 <tr> */
+.naire_page  .select .options .odd {
+	
+}
+/* 选择题选项表格偶行 <tr> */
+.naire_page  li.error .select .options .even {
+	background-color: none;
+}
+
+.naire_page  .select .options .even {
+	background-color: #eff6fb;
+}
+/* 单选题表单 */
+.naire_page  .select .options input[type="radio"] {
+	
+}
+/* 多选题表单 */
+.naire_page  .select .options input[type="checkbox"] {
+	
+}
+/* 选择题 自定义选项表单 */
+.naire_page  .select .options input[type="text"] {
+	
+}
+/****************************** 组合选择题 ******************************/
+
+/* 组合选择题标题 <h4> */
+.naire_page  .matrix .title {
+	
+}
+/* 组合选择题简介文字 <div> */
+.naire_page  .matrix .intro {
+	
+}
+/* 组合选择题简介图片 <div> */
+.naire_page  .matrix .illustrate {
+	
+}
+/* 组合选择题选项表格 <table> */
+.naire_page  .matrix .options {
+	
+}
+/* 组合选择题选项表格奇行 <tr> */
+.naire_page  .matrix .options .odd {
+	
+}
+/* 组合选择题选项表格偶行 <tr> */
+.naire_page  .matrix .options .even {
+	background-color: #eff6fb;
+}
+/* 单选组合选择题表单 */
+.naire_page  .matrix .options input[type="radio"] {
+	
+}
+/* 多选组合选择题表单 */
+.naire_page  .matrix .options input[type="checkbox"] {
+	
+}
+
+.page_progress {
+	background: #fff;
+}
+
+.page_grogress table {
+	padding: 0px;
+}
+
+.page_progress .loaded {
+	background-color: #bde8b3;
+}

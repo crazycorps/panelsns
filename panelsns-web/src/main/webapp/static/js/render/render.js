@@ -58,7 +58,7 @@
 			
 			// 问题title
 			var quesTitleConEle=document.createElement("h4");
-			$(quesTitleConEle).addClass("title");
+			$(quesTitleConEle).addClass("title dashed_line");
 			var quesTitleSubjectEle=document.createElement("span");
 			$(quesTitleSubjectEle).text(quesMess.title).addClass("subject");
 			var quesTitleRequireEle=document.createElement("span");
@@ -110,10 +110,10 @@
 					$(quesOptTableTrEle).attr({
 						valign:"top"
 					});
-					if(i%2!=0){
-						$(n).removeClass().addClass("odd");
+					if(i%2==0){
+						$(quesOptTableTrEle).removeClass().addClass("odd");
 					}else{
-						$(n).removeClass().addClass("even");
+						$(quesOptTableTrEle).removeClass().addClass("even");
 					}	
 				}
 				var quesOptTableTrTdEle=document.createElement("td");
@@ -177,7 +177,7 @@
 			
 			// 问题title
 			var quesTitleConEle=document.createElement("h4");
-			$(quesTitleConEle).addClass("title");
+			$(quesTitleConEle).addClass("title dashed_line");
 			var quesTitleSubjectEle=document.createElement("span");
 			$(quesTitleSubjectEle).text(quesMess.title).addClass("subject");
 			var quesTitleRequireEle=document.createElement("span");
@@ -229,10 +229,10 @@
 					$(quesOptTableTrEle).attr({
 						valign:"top"
 					});
-					if(i%2!=0){
-						$(n).removeClass().addClass("odd");
+					if(i%2==0){
+						$(quesOptTableTrEle).removeClass().addClass("odd");
 					}else{
-						$(n).removeClass().addClass("even");
+						$(quesOptTableTrEle).removeClass().addClass("even");
 					}	
 				}
 				var quesOptTableTrTdEle=document.createElement("td");
@@ -294,7 +294,7 @@
 			
 			// 问题title
 			var quesTitleConEle=document.createElement("h4");
-			$(quesTitleConEle).addClass("title");
+			$(quesTitleConEle).addClass("title dashed_line");
 			var quesTitleSubjectEle=document.createElement("span");
 			$(quesTitleSubjectEle).text(quesMess.title).addClass("subject");
 			var quesTitleRequireEle=document.createElement("span");

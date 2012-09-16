@@ -519,17 +519,17 @@
 	overflow-y: auto
 }
 
-.surveypie .part,.surveypie .page-header {
+.survey .part,.survey .page-header {
 	position: relative
 }
 
-.surveypie .float_buttons {
+.survey .float_buttons {
 	position: absolute;
 	top: 5px;
 	right: 5px
 }
 
-.surveypie .float_buttons button {
+.survey .float_buttons button {
 	background-image: url(/images/tree_buttons_bg.gif);
 	background-repeat: repeat-x;
 	border-right: 1px solid #8e8e8e;
@@ -542,6 +542,12 @@
 	padding-bottom: 3px;
 	cursor: pointer;
 	margin: 0 2px
+}
+
+.naire_page  ol.content {
+	list-style: none outside none;
+    margin: 0 auto;
+    padding: 18px;
 }
 
 .part_editor {
