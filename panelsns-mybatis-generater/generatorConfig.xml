@@ -28,5 +28,7 @@
 		<table  tableName="survey"></table>
 		<table  tableName="templates"></table>
 		<table  tableName="users"></table>
+		<table  tableName="answer_mess"></table>
+		<table  tableName="answer"></table>
 	</context>
 </generatorConfiguration>

@@ -65,7 +65,17 @@
 			$(quesTitleRequireEle).text("*").css({
 				"margin-left": "5px"
 			}).addClass("require");
-			$(quesTitleConEle).append(quesTitleSubjectEle).append(quesTitleRequireEle);
+			
+			var quesOptName="p_"+pid+"_q_"+qid;
+			var quesHiddenEle=document.createElement("input");
+			$(quesHiddenEle).attr({
+				type:"hidden",
+				id:quesOptName,
+				pid:pid,
+				qid:qid,
+				sn:quesMess.sn
+			});
+			$(quesTitleConEle).append(quesTitleSubjectEle).append(quesTitleRequireEle).append(quesHiddenEle);
 			$(quesConEle).append(quesTitleConEle);
 			// 问题说明
 			var quesIntroEle=document.createElement("div");
@@ -102,7 +112,7 @@
 			}
 			$(quesOptTableEle).append(quesOptTableColGroupEle);
 			
-			var quesOptName="p_"+pid+"_q_"+qid;
+			
 			var quesOptTableTrEle=null;
 			$.each(quesOptionMessList,function(i,n){
 				if(i%colNum==0){
@@ -124,11 +134,14 @@
 				}else{
 					quesOptEle = document.createElement("input");
 					$(quesOptEle).attr({
-						id:quesOptId,
 						name:quesOptName,
 						type:"radio"
 					})
 				}
+				$(quesOptEle).attr({
+					id:quesOptId,
+					sn:n.sn
+				});
 				var quesOptLabelEle=document.createElement("label");
 				$(quesOptLabelEle).attr("for",quesOptId).text(n.content);
 				
