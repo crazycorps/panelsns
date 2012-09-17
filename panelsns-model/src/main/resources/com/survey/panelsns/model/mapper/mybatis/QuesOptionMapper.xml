@@ -3,6 +3,7 @@
 <mapper namespace="com.survey.panelsns.model.entity.QuesOption">
   <resultMap id="BaseResultMap" type="com.survey.panelsns.model.entity.QuesOption">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="naire_id" jdbcType="BIGINT" property="naireId" />
     <result column="ques_id" jdbcType="BIGINT" property="quesId" />
     <result column="serial_no" jdbcType="INTEGER" property="serialNo" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -12,7 +13,7 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, ques_id, serial_no, title, content, control_mess,version, remark
+    id, naire_id, ques_id, serial_no, title, content, control_mess,version, remark
   </sql>
   
    <sql id="query_where_clause">
@@ -20,6 +21,9 @@
 			1=1
 			<if test="id != null">
 				and id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="naireId != null">
+				and naire_id = #{naireId,jdbcType=BIGINT}
 			</if>
 			<if test="quesId != null">
 				and ques_id = #{quesId,jdbcType=BIGINT}
@@ -77,9 +81,9 @@
     where ques_id = #{quesId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.survey.panelsns.model.entity.QuesOption">
-    insert into ques_option (ques_id, serial_no, 
+    insert into ques_option (naire_id,ques_id, serial_no, 
       title, content,control_mess, version, remark)
-    values (#{quesId,jdbcType=BIGINT}, #{serialNo,jdbcType=INTEGER}, 
+    values ( #{naireId,jdbcType=BIGINT},#{quesId,jdbcType=BIGINT}, #{serialNo,jdbcType=INTEGER}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},#{controlMess,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
       <selectKey resultType="long" keyProperty="id">
@@ -89,6 +93,9 @@
   <insert id="insertSelective" parameterType="com.survey.panelsns.model.entity.QuesOption">
     insert into ques_option
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="naireId != null">
+        naire_id,
+      </if>
       <if test="quesId != null">
         ques_id,
       </if>
@@ -112,6 +119,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+       <if test="naireId != null">
+        #{naireId,jdbcType=BIGINT},
+      </if>
       <if test="quesId != null">
         #{quesId,jdbcType=BIGINT},
       </if>
@@ -139,6 +149,9 @@
   <update id="updateSelectiveById" parameterType="com.survey.panelsns.model.entity.QuesOption">
     update ques_option
     <set>
+       <if test="naireId != null">
+        naire_id = #{naireId,jdbcType=BIGINT},
+      </if>
       <if test="quesId != null">
         ques_id = #{quesId,jdbcType=BIGINT},
       </if>
@@ -165,7 +178,8 @@
   </update>
   <update id="update" parameterType="com.survey.panelsns.model.entity.QuesOption">
     update ques_option
-    set ques_id = #{quesId,jdbcType=BIGINT},
+    set naire_id = #{naireId,jdbcType=BIGINT}, 
+      ques_id = #{quesId,jdbcType=BIGINT},
       serial_no = #{serialNo,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},

@@ -1,11 +1,11 @@
 package com.survey.panelsns.model.entity;
 
-import java.util.Comparator;
 
 public class QuesOption{
     
     private Long id;
 
+    private Long naireId;
     
     private Long quesId;
 
@@ -38,7 +38,17 @@ public class QuesOption{
     }
 
     
-    public Long getQuesId() {
+    public Long getNaireId() {
+		return naireId;
+	}
+
+
+	public void setNaireId(Long naireId) {
+		this.naireId = naireId;
+	}
+
+
+	public Long getQuesId() {
         return quesId;
     }
 

@@ -126,6 +126,7 @@ public class QuesDecodeProcesser implements Processer<List<KV<Integer,List<QuesV
 			for(QuesOptionMess quesOptionMess:quesOptionMessList){
 				QuesOptionControlMess quesOptionControlMess=quesOptionMess.getQuesOptionControlMess();
 				QuesOption quesOption=new QuesOption();
+				quesOption.setNaireId(this.naireId);
 				quesOption.setQuesId(ques.getId());
 				quesOption.setTitle(quesOptionMess.getContent());
 				quesOption.setContent(quesOptionMess.getContent());
