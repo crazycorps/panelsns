@@ -13,7 +13,7 @@
 
 	<properties>
 		<projectName>panelsns-web</projectName>
-		<spring.version>3.1.0.RELEASE</spring.version>
+		<spring.version>5.2.20.RELEASE</spring.version>
 	</properties>
 
 	<build>
